@@ -1007,35 +1007,44 @@
   letter-spacing: 0.24em;
 }
 
-/* Headline — three left-aligned lines, sensible scale */
+/* Headline — three left-aligned lines, tightly stacked */
 .concept-blueprint .hero-type .ceg-h1-mega {
   text-align: left;
   font-size: clamp(56px, 9vw, 132px);
-  line-height: 0.94;
+  line-height: 0.92;
   letter-spacing: -0.025em;
   align-self: start;
   margin: 0;
 }
-.concept-blueprint .hero-type .ceg-h1-line { display: block; text-align: left; }
+.concept-blueprint .hero-type .ceg-h1-line {
+  display: block;
+  text-align: left;
+  line-height: 0.92;          /* override inherited 108px line-box on giant lines */
+}
+/* "for the" connector — small label, tight line-box, no big gaps */
 .concept-blueprint .hero-type .ceg-h1-thinline {
+  display: block;
   text-align: left;
   padding-right: 0;
-  margin: 6px 0 2px;
+  margin: 14px 0 10px;        /* deliberate breathing room above + below */
+  line-height: 1;             /* collapse the inherited huge line-height */
+  font-size: 0;               /* neutralize any baseline inherited from .ceg-h1-mega */
 }
 .concept-blueprint .hero-type .ceg-h1-thin {
-  font-size: 0.28em;
-  letter-spacing: 0.04em;
+  font-size: 13px;
+  letter-spacing: 0.28em;
   font-style: normal;
-  font-weight: 400;
-  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+  color: rgba(255,255,255,0.62);
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   gap: 14px;
+  line-height: 1;
 }
 .concept-blueprint .hero-type .ceg-h1-thin::before {
   content: "";
-  width: 48px;
+  width: 56px;
   height: 1px;
   background: rgba(255,255,255,0.45);
   display: inline-block;
@@ -1056,15 +1065,37 @@
   justify-content: flex-start;
 }
 
-/* Stat tickers — ensure they sit cleanly in the constrained column */
+/* Stat tickers — even 4-up grid with consistent rules + spacing */
 .concept-blueprint .hero-type .ceg-hero-type-tickers {
-  margin-top: 8px;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  border-bottom: 1px solid rgba(255,255,255,0.18);
 }
 .concept-blueprint .hero-type .ceg-hero-type-tick {
-  padding: 22px 24px 0 0;
+  padding: 24px 24px 24px 24px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.concept-blueprint .hero-type .ceg-hero-type-tick:first-child {
+  border-left: 0;
+  padding-left: 0;
 }
 .concept-blueprint .hero-type .ceg-hero-type-tick-v {
   font-size: clamp(36px, 3.6vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.concept-blueprint .hero-type .ceg-hero-type-tick-l {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
 }
 
 @media (max-width: 880px) {
