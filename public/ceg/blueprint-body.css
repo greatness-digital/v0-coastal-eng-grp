@@ -1021,12 +1021,12 @@
   text-align: left;
   line-height: 0.92;          /* override inherited 108px line-box on giant lines */
 }
-/* "for the" connector — small label, tight line-box, no big gaps */
+/* "for the" connector — small label, tight line-box, balanced gaps */
 .concept-blueprint .hero-type .ceg-h1-thinline {
   display: block;
   text-align: left;
   padding-right: 0;
-  margin: 14px 0 10px;        /* deliberate breathing room above + below */
+  margin: 10px 0;             /* match top + bottom gap to the WATERLINE seam */
   line-height: 1;             /* collapse the inherited huge line-height */
   font-size: 0;               /* neutralize any baseline inherited from .ceg-h1-mega */
 }
@@ -1037,17 +1037,8 @@
   font-weight: 500;
   color: rgba(255,255,255,0.62);
   text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  line-height: 1;
-}
-.concept-blueprint .hero-type .ceg-h1-thin::before {
-  content: "";
-  width: 56px;
-  height: 1px;
-  background: rgba(255,255,255,0.45);
   display: inline-block;
+  line-height: 1;
 }
 
 /* Lede + CTAs row */
