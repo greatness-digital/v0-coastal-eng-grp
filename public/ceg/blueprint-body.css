@@ -1031,14 +1031,14 @@
   font-size: 0;               /* neutralize any baseline inherited from .ceg-h1-mega */
 }
 .concept-blueprint .hero-type .ceg-h1-thin {
-  font-size: 13px;
-  letter-spacing: 0.28em;
+  font-size: clamp(36px, 6vw, 132px);
+  letter-spacing: -0.025em;
   font-style: normal;
-  font-weight: 500;
-  color: rgba(255,255,255,0.62);
+  font-weight: 700;
+  color: rgba(255,255,255,1);
   text-transform: uppercase;
   display: inline-block;
-  line-height: 1;
+  line-height: 0.92;
 }
 
 /* Lede + CTAs row */
