@@ -1,0 +1,972 @@
+/* ============================================================
+   BLUEPRINT BODY — engineering spec sheet aesthetic.
+   Dark-mode sections, blueprint grid, schematic linework,
+   mono numerals, condensed display type, safety-amber accent.
+   All selectors scoped under .concept-blueprint to avoid leaks.
+   ============================================================ */
+
+/* ── Body font swap (Blueprint only) ──────────────────────────
+   Heading font (Archivo / Archivo Narrow) is preserved via theme;
+   only swap the prose body face. */
+.concept-blueprint {
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+}
+.concept-blueprint,
+.concept-blueprint p,
+.concept-blueprint li,
+.concept-blueprint a,
+.concept-blueprint button,
+.concept-blueprint input,
+.concept-blueprint textarea,
+.concept-blueprint span:not(.ceg-mono):not(.bp-mono):not([class*="display"]):not([class*="-name"]):not([class*="-h"]):not([class*="-title"]) {
+  font-family: var(--font-body);
+}
+
+/* ── Hero photo band (above the type hero) ────────────────────── */
+.concept-blueprint .bp-herobandwrap {
+  position: relative;
+  height: 62vh;
+  min-height: 460px;
+  max-height: 640px;
+  background: #0a1828;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+.concept-blueprint .bp-herobandwrap-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  z-index: 1;
+  pointer-events: none;
+}
+.concept-blueprint .bp-herobandwrap-photo {
+  position: absolute; inset: 0;
+  z-index: 0;
+}
+.concept-blueprint .bp-herobandwrap-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.35) contrast(1.05);
+}
+.concept-blueprint .bp-herobandwrap-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,24,40,0.55) 0%, rgba(10,24,40,0.65) 50%, rgba(10,24,40,0.85) 100%),
+    linear-gradient(90deg, rgba(10,24,40,0.6) 0%, rgba(10,24,40,0.2) 50%, rgba(10,24,40,0.6) 100%);
+}
+.concept-blueprint .bp-herobandwrap-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "tl tr"
+    ".  ."
+    "bl br";
+  padding: 28px 0;
+  color: #fff;
+  align-items: start;
+}
+.concept-blueprint .bp-herobandwrap-tl,
+.concept-blueprint .bp-herobandwrap-tr,
+.concept-blueprint .bp-herobandwrap-bl,
+.concept-blueprint .bp-herobandwrap-br {
+  display: flex;
+  align-items: center;
+}
+.concept-blueprint .bp-herobandwrap-tl { grid-area: tl; gap: 24px; color: rgba(255,255,255,0.78); }
+.concept-blueprint .bp-herobandwrap-tr { grid-area: tr; color: rgba(255,255,255,0.78); }
+.concept-blueprint .bp-herobandwrap-bl {
+  grid-area: bl;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 18px;
+  align-self: end;
+}
+.concept-blueprint .bp-herobandwrap-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.concept-blueprint .bp-herobandwrap-caption {
+  font-family: var(--font-display-cond, 'Archivo Narrow', sans-serif);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 32px);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #fff;
+}
+.concept-blueprint .bp-herobandwrap-meta {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.72);
+}
+.concept-blueprint .bp-herobandwrap-br {
+  grid-area: br;
+  align-self: end;
+  justify-self: end;
+}
+.concept-blueprint .bp-herobandwrap-stamp {
+  width: 88px;
+  height: 88px;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+/* ── Section frame ──────────────────────────────────────────── */
+.concept-blueprint .bp-section {
+  padding: 96px 0;
+  position: relative;
+  background: var(--bg);
+  color: var(--ink);
+}
+.concept-blueprint .bp-section.is-dark {
+  background:
+    linear-gradient(180deg, #0a1828 0%, #0a1828 100%);
+  color: #ffffff;
+}
+.concept-blueprint .bp-section.is-dark::before {
+  /* blueprint grid */
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.concept-blueprint .bp-section.is-dark .ceg-container { position: relative; z-index: 1; }
+.concept-blueprint .bp-section.has-hairline { border-top: 1px solid var(--rule); }
+
+/* ── Section header ─────────────────────────────────────────── */
+.concept-blueprint .bp-section-head {
+  margin-bottom: 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+  gap: 40px 64px;
+  align-items: end;
+  padding-bottom: 24px;
+  border-bottom: 1px solid currentColor;
+  border-bottom-color: rgba(0,0,0,0.18);
+}
+.concept-blueprint .bp-section.is-dark .bp-section-head {
+  border-bottom-color: rgba(255,255,255,0.22);
+}
+.concept-blueprint .bp-spec-tag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  grid-column: 1 / -1;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.concept-blueprint .bp-spec-num {
+  background: var(--accent);
+  color: #0a1828;
+  padding: 4px 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.concept-blueprint .bp-section.is-dark .bp-spec-kicker { color: rgba(255,255,255,0.7); }
+.concept-blueprint .bp-spec-kicker { color: var(--ink-mute); }
+
+.concept-blueprint .bp-h2 {
+  font-family: var(--font-display-cond, 'Archivo Narrow', 'Inter Tight', sans-serif);
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+.concept-blueprint .bp-section-intro {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.concept-blueprint .bp-section.is-dark .bp-section-intro { color: rgba(255,255,255,0.78); }
+
+.concept-blueprint .bp-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.concept-blueprint .bp-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+.concept-blueprint .bp-link:hover { color: #ffffff; border-color: #ffffff; }
+
+/* ── §02 Sectors ───────────────────────────────────────────── */
+.concept-blueprint .bp-sectors {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.concept-blueprint .bp-sectors-list {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,0.18);
+}
+.concept-blueprint .bp-sector-row {
+  all: unset;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.72);
+  font-family: var(--font-body);
+  transition: background 120ms, color 120ms;
+}
+.concept-blueprint .bp-sector-row:last-child { border-bottom: 0; }
+.concept-blueprint .bp-sector-row:hover { background: rgba(255,255,255,0.04); color: #fff; }
+.concept-blueprint .bp-sector-row.is-active {
+  background: var(--accent);
+  color: #0a1828;
+}
+.concept-blueprint .bp-sector-idx {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+.concept-blueprint .bp-sector-row.is-active .bp-sector-idx { opacity: 1; color: #0a1828; }
+.concept-blueprint .bp-sector-name {
+  font-family: var(--font-display-cond);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.concept-blueprint .bp-sector-count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* sector display panel */
+.concept-blueprint .bp-sector-display {
+  position: relative;
+  padding: 40px 44px 32px;
+  background: rgba(255,255,255,0.02);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "meta meta"
+    "name name"
+    "detail stat"
+    "schem schem"
+    "foot foot";
+  gap: 24px 32px;
+  align-items: start;
+}
+.concept-blueprint .bp-display-corners > span {
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 1px solid var(--accent);
+}
+.concept-blueprint .bp-display-corners > :nth-child(1) { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.concept-blueprint .bp-display-corners > :nth-child(2) { top: 8px; right: 8px; border-left: 0; border-bottom: 0; }
+.concept-blueprint .bp-display-corners > :nth-child(3) { bottom: 8px; left: 8px; border-right: 0; border-top: 0; }
+.concept-blueprint .bp-display-corners > :nth-child(4) { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+.concept-blueprint .bp-display-meta {
+  grid-area: meta;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,255,255,0.6);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+}
+.concept-blueprint .bp-display-name {
+  grid-area: name;
+  font-family: var(--font-display-cond);
+  font-weight: 700;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.concept-blueprint .bp-display-detail {
+  grid-area: detail;
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.82);
+  text-wrap: pretty;
+  max-width: 52ch;
+}
+.concept-blueprint .bp-display-stat {
+  grid-area: stat;
+  align-self: end;
+  text-align: right;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  padding-left: 24px;
+}
+.concept-blueprint .bp-display-stat-v {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.concept-blueprint .bp-display-stat-l {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 6px;
+  max-width: 28ch;
+  margin-left: auto;
+}
+.concept-blueprint .bp-schematic {
+  grid-area: schem;
+  width: 100%;
+  height: auto;
+  color: rgba(255,255,255,0.55);
+  border-top: 1px dashed rgba(255,255,255,0.2);
+  padding-top: 20px;
+}
+.concept-blueprint .bp-display-foot {
+  grid-area: foot;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 18px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── §03 Project register ──────────────────────────────────── */
+.concept-blueprint .bp-register {
+  border-top: 2px solid var(--ink);
+}
+.concept-blueprint .bp-register-head,
+.concept-blueprint .bp-register-row {
+  display: grid;
+  grid-template-columns:
+    minmax(120px, 0.5fr) minmax(0, 2.4fr) minmax(0, 1.2fr)
+    minmax(60px, 0.3fr) minmax(60px, 0.3fr) minmax(80px, 0.4fr);
+  gap: 24px;
+  align-items: baseline;
+  padding: 16px 12px;
+}
+.concept-blueprint .bp-register-head {
+  background: var(--ink);
+  color: #fff;
+  padding: 14px 12px;
+}
+.concept-blueprint .bp-register-row {
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 120ms;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+.concept-blueprint .bp-register-row:hover { background: var(--surface); }
+.concept-blueprint .bp-register-jobid { color: var(--ink-mute); padding-top: 6px; }
+.concept-blueprint .bp-register-name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-display-cond);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.concept-blueprint .bp-register-blurb {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  line-height: 1.5;
+}
+.concept-blueprint .bp-register-award {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.concept-blueprint .bp-register-client {
+  color: var(--ink-soft);
+  padding-top: 6px;
+}
+
+/* ── §04 Capability readout ────────────────────────────────── */
+.concept-blueprint .bp-capacity-grid {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255,255,255,0.22);
+}
+.concept-blueprint .bp-capacity-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.4fr) minmax(0, 2.6fr);
+  gap: 32px;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+.concept-blueprint .bp-capacity-num {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+}
+.concept-blueprint .bp-capacity-name-h {
+  font-family: var(--font-display-cond);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.concept-blueprint .bp-capacity-name-s {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.concept-blueprint .bp-capacity-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.concept-blueprint .bp-capacity-bar-track {
+  position: relative;
+  flex: 1;
+  height: 22px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.concept-blueprint .bp-capacity-bar-fill {
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      var(--accent) 0px, var(--accent) 6px,
+      #c9871b 6px, #c9871b 12px
+    );
+}
+.concept-blueprint .bp-capacity-tick {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 1px;
+  background: rgba(255,255,255,0.25);
+}
+.concept-blueprint .bp-capacity-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 130px;
+  gap: 4px;
+}
+.concept-blueprint .bp-capacity-readout .bp-mono:first-child {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.concept-blueprint .bp-capacity-readout-h {
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── §05 Personnel ──────────────────────────────────────────── */
+.concept-blueprint .bp-roster {
+  border-top: 2px solid var(--ink);
+  margin-bottom: 56px;
+}
+.concept-blueprint .bp-roster-head,
+.concept-blueprint .bp-roster-row {
+  display: grid;
+  grid-template-columns:
+    minmax(110px, 0.5fr) minmax(0, 2.4fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(80px, 0.5fr);
+  gap: 24px;
+  align-items: center;
+  padding: 18px 12px;
+}
+.concept-blueprint .bp-roster-head {
+  background: var(--ink);
+  color: #fff;
+}
+.concept-blueprint .bp-roster-row {
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--ink);
+  padding: 22px 12px;
+  transition: background 120ms;
+}
+.concept-blueprint .bp-roster-row:hover { background: var(--surface); }
+.concept-blueprint .bp-roster-id { color: var(--ink-mute); }
+.concept-blueprint .bp-roster-title {
+  font-family: var(--font-display-cond);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.concept-blueprint .bp-roster-div { color: var(--ink-soft); }
+.concept-blueprint .bp-roster-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1a7a3c;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.concept-blueprint .bp-roster-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #1a7a3c;
+  box-shadow: 0 0 0 3px rgba(26,122,60,0.18);
+}
+
+.concept-blueprint .bp-personnel-perks {
+  border: 1px solid var(--rule);
+  padding: 32px;
+  background: var(--surface);
+}
+.concept-blueprint .bp-personnel-perks-h {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+.concept-blueprint .bp-perk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 32px;
+}
+.concept-blueprint .bp-perk {
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 14px;
+}
+.concept-blueprint .bp-perk-h {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 6px;
+}
+.concept-blueprint .bp-perk-v {
+  font-family: var(--font-display-cond);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+/* ── §06 Compliance ─────────────────────────────────────────── */
+.concept-blueprint .bp-compliance {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.concept-blueprint .bp-compliance > * {
+  padding: 36px;
+  border-right: 1px solid rgba(255,255,255,0.18);
+}
+.concept-blueprint .bp-compliance > :last-child { border-right: 0; }
+
+.concept-blueprint .bp-compliance-eyebrow {
+  color: var(--accent);
+  letter-spacing: 0.22em;
+  display: block;
+  margin-bottom: 16px;
+}
+.concept-blueprint .bp-compliance-vosb {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.concept-blueprint .bp-vosb-mark {
+  width: 96px;
+  height: 96px;
+  color: var(--accent);
+}
+.concept-blueprint .bp-compliance-h {
+  font-family: var(--font-display-cond);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+}
+.concept-blueprint .bp-compliance-vosb p {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.78);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.concept-blueprint .bp-cert-grid,
+.concept-blueprint .bp-client-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.concept-blueprint .bp-cert-grid li {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.18);
+  align-items: baseline;
+}
+.concept-blueprint .bp-cert-grid li:last-child { border-bottom: 0; }
+.concept-blueprint .bp-cert-abbr {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.concept-blueprint .bp-cert-full {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.45;
+}
+.concept-blueprint .bp-client-grid li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.14);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.4;
+}
+.concept-blueprint .bp-client-grid li:last-child { border-bottom: 0; }
+.concept-blueprint .bp-client-dash { color: var(--accent); }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .concept-blueprint .bp-section-head { grid-template-columns: 1fr; }
+  .concept-blueprint .bp-sectors { grid-template-columns: 1fr; }
+  .concept-blueprint .bp-sectors-list { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .concept-blueprint .bp-sector-display { padding: 32px 24px; }
+  .concept-blueprint .bp-compliance { grid-template-columns: 1fr; }
+  .concept-blueprint .bp-compliance > * { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .concept-blueprint .bp-compliance > :last-child { border-bottom: 0; }
+  .concept-blueprint .bp-perk-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .concept-blueprint .bp-section { padding: 64px 0; }
+  .concept-blueprint .bp-sector-display {
+    grid-template-areas: "meta meta" "name name" "detail detail" "stat stat" "schem schem" "foot foot";
+    grid-template-columns: 1fr;
+  }
+  .concept-blueprint .bp-display-stat {
+    text-align: left;
+    border-left: 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-left: 0;
+    padding-top: 16px;
+  }
+  .concept-blueprint .bp-display-stat-l { margin-left: 0; }
+  .concept-blueprint .bp-register-head,
+  .concept-blueprint .bp-roster-head { display: none; }
+  .concept-blueprint .bp-register-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+  }
+  .concept-blueprint .bp-register-name { grid-column: 1 / -1; }
+  .concept-blueprint .bp-roster-row {
+    grid-template-columns: 1fr auto;
+    gap: 8px 16px;
+  }
+  .concept-blueprint .bp-roster-title { grid-column: 1 / -1; }
+  .concept-blueprint .bp-capacity-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .concept-blueprint .bp-capacity-bar-wrap { flex-direction: column; align-items: stretch; gap: 12px; }
+  .concept-blueprint .bp-capacity-readout { flex-direction: row; align-items: baseline; gap: 12px; min-width: 0; }
+  .concept-blueprint .bp-perk-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   ACCORDION — Divisions on Blueprint
+   Horizontal expanding columns, hover-to-expand with delay.
+   ============================================================ */
+.concept-blueprint .bp-acc-section {
+  background: var(--bg);
+  padding: 96px 0;
+}
+.concept-blueprint .bp-acc {
+  display: flex;
+  width: 100%;
+  height: 520px;
+  border: 1px solid rgba(0,0,0,0.18);
+  background: #0a1828;
+  overflow: hidden;
+}
+.concept-blueprint .bp-acc-col {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  cursor: pointer;
+  overflow: hidden;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  transition: flex 520ms cubic-bezier(0.7, 0, 0.2, 1);
+  outline: none;
+}
+.concept-blueprint .bp-acc-col:last-child { border-right: 0; }
+.concept-blueprint .bp-acc-col.is-active {
+  flex: 4 1 0;
+}
+.concept-blueprint .bp-acc-col:not(.is-active) {
+  flex: 1 1 0;
+}
+.concept-blueprint .bp-acc-col:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* illustration backdrop */
+.concept-blueprint .bp-acc-illust {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+.concept-blueprint .bp-acc-scrim {
+  position: absolute; inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(10,24,40,0.4) 0%, rgba(10,24,40,0.85) 100%);
+  transition: background 320ms;
+}
+.concept-blueprint .bp-acc-col.is-active .bp-acc-scrim {
+  background:
+    linear-gradient(180deg, rgba(10,24,40,0.45) 0%, rgba(10,24,40,0.92) 60%, rgba(10,24,40,0.96) 100%);
+}
+
+/* collapsed rail label — vertical text on every column */
+.concept-blueprint .bp-acc-rail {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 24px 8px;
+  color: #fff;
+  pointer-events: none;
+  transition: opacity 220ms;
+}
+.concept-blueprint .bp-acc-col.is-active .bp-acc-rail {
+  opacity: 0;
+}
+.concept-blueprint .bp-acc-rail-num {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.concept-blueprint .bp-acc-rail-name {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-display-cond, 'Archivo Narrow', sans-serif);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* expanded body — content shows when active */
+.concept-blueprint .bp-acc-body {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 24px;
+  padding: 36px 36px 32px;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 280ms 120ms, transform 320ms 120ms;
+}
+.concept-blueprint .bp-acc-col.is-active .bp-acc-body {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.concept-blueprint .bp-acc-body-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: end;
+  max-width: 64ch;
+}
+.concept-blueprint .bp-acc-body-num {
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+.concept-blueprint .bp-acc-body-h {
+  font-family: var(--font-display-cond, 'Archivo Narrow', sans-serif);
+  font-weight: 700;
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0;
+  color: #fff;
+}
+.concept-blueprint .bp-acc-body-blurb {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+  text-wrap: pretty;
+  max-width: 60ch;
+}
+.concept-blueprint .bp-acc-body-bot {
+  border-top: 1px solid rgba(255,255,255,0.22);
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px 24px;
+  align-items: start;
+}
+.concept-blueprint .bp-acc-body-services-h {
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  padding-top: 4px;
+}
+.concept-blueprint .bp-acc-body-services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+.concept-blueprint .bp-acc-body-services li {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.92);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.concept-blueprint .bp-acc-body-bullet {
+  color: var(--accent);
+  font-size: 13px;
+}
+.concept-blueprint .bp-acc-body-link {
+  align-self: start;
+  white-space: nowrap;
+}
+
+/* responsive — accordion collapses to vertical stacked panels */
+@media (max-width: 900px) {
+  .concept-blueprint .bp-acc {
+    flex-direction: column;
+    height: auto;
+  }
+  .concept-blueprint .bp-acc-col {
+    height: 100px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    transition: height 380ms cubic-bezier(0.7, 0, 0.2, 1);
+  }
+  .concept-blueprint .bp-acc-col.is-active { height: 460px; }
+  .concept-blueprint .bp-acc-rail {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 24px;
+    gap: 16px;
+  }
+  .concept-blueprint .bp-acc-rail-num,
+  .concept-blueprint .bp-acc-rail-name {
+    writing-mode: horizontal-tb;
+    transform: none;
+    margin: 0;
+  }
+  .concept-blueprint .bp-acc-body { padding: 24px; }
+  .concept-blueprint .bp-acc-body-bot { grid-template-columns: 1fr; gap: 12px; }
+}
+
+@media (max-width: 760px) {
+  .concept-blueprint .bp-herobandwrap {
+    height: auto;
+    min-height: 440px;
+  }
+  .concept-blueprint .bp-herobandwrap-overlay {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "tl"
+      "."
+      "bl"
+      "br"
+      "tr";
+    gap: 16px;
+    padding: 20px 0;
+  }
+  .concept-blueprint .bp-herobandwrap-tl,
+  .concept-blueprint .bp-herobandwrap-tr { flex-wrap: wrap; gap: 12px; }
+  .concept-blueprint .bp-herobandwrap-stamp { width: 64px; height: 64px; }
+}
