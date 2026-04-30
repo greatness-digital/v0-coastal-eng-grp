@@ -67,9 +67,7 @@ function App() {
           ) : (
             <window.Divisions theme={theme} data={data} />
           )}
-          {conceptKey === "drydock" ? (
-            <window.DrydockBody theme={theme} data={data} />
-          ) : conceptKey === "blueprint" ? (
+          {conceptKey === "drydock" ? null : conceptKey === "blueprint" ? (
             <window.BlueprintBody theme={theme} data={data} />
           ) : (
             <>
@@ -80,7 +78,9 @@ function App() {
               <window.ClientsStrip theme={theme} data={data} />
             </>
           )}
-          <window.ContactBand theme={theme} data={data} />
+          {conceptKey !== "drydock" && (
+            <window.ContactBand theme={theme} data={data} />
+          )}
         </main>
         <window.Footer theme={theme} data={data} />
         <window.MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} data={data} />
