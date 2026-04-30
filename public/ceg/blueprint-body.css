@@ -970,3 +970,116 @@
   .concept-blueprint .bp-herobandwrap-tr { flex-wrap: wrap; gap: 12px; }
   .concept-blueprint .bp-herobandwrap-stamp { width: 64px; height: 64px; }
 }
+
+/* ── Blueprint hero overrides ───────────────────────────────────
+   Fixes the type hero on the Blueprint concept:
+   - Restores real container margins (parent is display:flex, which
+     was causing the inner .ceg-container to expand full-bleed).
+   - Left-aligns all three headline lines.
+   - Tightens the giant display type so "BUILT" / "WATERLINE." can't
+     bleed off the left edge on narrower viewports.
+   ──────────────────────────────────────────────────────────────── */
+.concept-blueprint .hero-type {
+  display: block;            /* opt out of the flex layout that broke containment */
+  min-height: auto;
+  padding: 0;
+}
+.concept-blueprint .hero-type > .ceg-container {
+  display: block;            /* override the inherited flex from the base hero */
+  flex: none;
+  width: min(1320px, 100% - 64px);
+  margin-inline: auto;
+  padding-block: 0;
+}
+.concept-blueprint .hero-type .ceg-hero-type-inner {
+  width: 100%;
+  max-width: 1100px;         /* keeps the column readable on huge screens */
+  margin-left: 0;
+  padding: 112px 0 64px;
+  row-gap: 40px;
+}
+
+/* Eyebrow meta strip */
+.concept-blueprint .hero-type .ceg-hero-type-meta {
+  justify-content: flex-start;
+  padding: 12px 0;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+}
+
+/* Headline — three left-aligned lines, sensible scale */
+.concept-blueprint .hero-type .ceg-h1-mega {
+  text-align: left;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  align-self: start;
+  margin: 0;
+}
+.concept-blueprint .hero-type .ceg-h1-line { display: block; text-align: left; }
+.concept-blueprint .hero-type .ceg-h1-thinline {
+  text-align: left;
+  padding-right: 0;
+  margin: 6px 0 2px;
+}
+.concept-blueprint .hero-type .ceg-h1-thin {
+  font-size: 0.28em;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.concept-blueprint .hero-type .ceg-h1-thin::before {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: rgba(255,255,255,0.45);
+  display: inline-block;
+}
+
+/* Lede + CTAs row */
+.concept-blueprint .hero-type .ceg-hero-type-foot {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: end;
+}
+.concept-blueprint .hero-type .ceg-hero-lede {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 52ch;
+}
+.concept-blueprint .hero-type .ceg-hero-ctas {
+  justify-content: flex-start;
+}
+
+/* Stat tickers — ensure they sit cleanly in the constrained column */
+.concept-blueprint .hero-type .ceg-hero-type-tickers {
+  margin-top: 8px;
+}
+.concept-blueprint .hero-type .ceg-hero-type-tick {
+  padding: 22px 24px 0 0;
+}
+.concept-blueprint .hero-type .ceg-hero-type-tick-v {
+  font-size: clamp(36px, 3.6vw, 52px);
+}
+
+@media (max-width: 880px) {
+  .concept-blueprint .hero-type > .ceg-container {
+    width: min(1320px, 100% - 32px);
+  }
+  .concept-blueprint .hero-type .ceg-hero-type-inner {
+    padding: 80px 0 48px;
+    row-gap: 28px;
+  }
+  .concept-blueprint .hero-type .ceg-hero-type-foot {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .concept-blueprint .hero-type .ceg-h1-mega {
+    font-size: clamp(48px, 12vw, 96px);
+  }
+}
