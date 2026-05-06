@@ -1,6 +1,18 @@
 import type { Metadata, Viewport } from "next"
+import { Barlow, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-barlow",
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
   title: "Coastal Engineering Group — Heavy Marine Construction",
@@ -38,15 +50,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${barlow.variable} ${inter.variable}`}>
       <head>
-        {/* Google Fonts — sourced from the original CEG index.html */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Playfair+Display:wght@400;500;600;700;800&family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
         {/* CEG stylesheets */}
         <link rel="stylesheet" href="/ceg/styles.css" />
         <link rel="stylesheet" href="/ceg/drydock-body.css" />

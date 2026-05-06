@@ -7,7 +7,7 @@ html, body { margin: 0; padding: 0; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-body);
+  font-family: var(--font-inter, "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   font-size: var(--body-size);
   line-height: var(--body-lh);
   -webkit-font-smoothing: antialiased;
@@ -24,9 +24,10 @@ ul { list-style: none; padding: 0; margin: 0; }
 /* ─── Type primitives ──────────────────────────────────────────── */
 .ceg-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--font-mono);
+  font-family: var(--font-inter, "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   font-size: var(--eyebrow-size);
-  letter-spacing: var(--eyebrow-spacing);
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-mute);
   margin-bottom: 18px;
@@ -35,9 +36,9 @@ ul { list-style: none; padding: 0; margin: 0; }
   width: 22px; height: 1px; background: var(--brand);
 }
 .ceg-h1 {
-  font-family: var(--font-display);
+  font-family: var(--font-barlow, "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   font-size: var(--h1-size);
-  font-weight: var(--h1-weight);
+  font-weight: 900;
   line-height: var(--h1-lh);
   letter-spacing: -0.02em;
   margin: 0 0 22px;
@@ -46,9 +47,9 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 .ceg-h1.serif { letter-spacing: -0.015em; }
 .ceg-h2 {
-  font-family: var(--font-display);
+  font-family: var(--font-barlow, "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   font-size: var(--h2-size);
-  font-weight: var(--h2-weight);
+  font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.018em;
   margin: 0 0 16px;
@@ -64,7 +65,7 @@ ul { list-style: none; padding: 0; margin: 0; }
 .ceg-btn {
   display: inline-flex; align-items: center; gap: 12px;
   padding: 14px 22px;
-  font-family: var(--font-body);
+  font-family: var(--font-inter, "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   font-size: 14px; font-weight: 600;
   letter-spacing: 0.02em;
   border: 1px solid transparent;
@@ -88,8 +89,8 @@ ul { list-style: none; padding: 0; margin: 0; }
 /* ─── Utility bar ──────────────────────────────────────────────── */
 .ceg-util {
   background: var(--ink); color: rgba(255,255,255,0.78);
+  font-family: var(--font-inter, "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   font-size: 12.5px; letter-spacing: 0.01em;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 .ceg-util a { color: rgba(255,255,255,0.95); }
 .ceg-util a:hover { color: #fff; }
