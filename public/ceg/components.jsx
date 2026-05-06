@@ -1596,8 +1596,103 @@ function FeaturedProjects({ theme, data }) {
   );
 }
 
+// ─── Careers section ────────────────────────────────────────────────────────────
+const PILLARS = [
+  {
+    title: "Training & Certifications",
+    body: "ADCI, OSHA 10/30/40, USACE CQM, NHI/FHWA, and more. We put in the hours so you're qualified for the work that others can't touch.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 2L4 6v4c0 4 8 7 8 7s8-3 8-7V6l-8-4z"/>
+      <path d="M12 13v5"/>
+      <path d="M9 15h6"/>
+    </svg>`,
+  },
+  {
+    title: "Clear Advancement Paths",
+    body: "From tender to supervisor to PE diver — there's a defined path forward here. Growth is built into how we operate, not an afterthought.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 18V8"/>
+      <path d="M8 12l4-4 4 4"/>
+      <path d="M4 21h16"/>
+    </svg>`,
+  },
+  {
+    title: "Work That Matters",
+    body: "Navy dry docks, bridge foundations, dams, seawalls. You'll work on critical infrastructure up and down the East Coast — the kind of projects that build a résumé.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 2L2 7v3c0 5 10 8 10 8s10-3 10-8V7l-10-5z"/>
+      <path d="M12 13v6"/>
+    </svg>`,
+  },
+  {
+    title: "Veteran-Led. Safety First.",
+    body: "Our leadership comes from the armed forces and the field. That means discipline, accountability, and a crew that has each other's backs — above and below the waterline.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 2l8 4v5c0 6-8 8-8 8s-8-2-8-8V6l8-4z"/>
+      <path d="M12 11l1.5 3 3.3.5-2.4 2 .6 3.3L12 16.5l-2.9 2.3.6-3.3-2.4-2 3.3-.5L12 11z"/>
+    </svg>`,
+  },
+];
+
+function Careers({ theme, data }) {
+  return (
+    <section id="careers" className="ceg-section ceg-careers">
+      <div className="ceg-container">
+        
+        {/* Section header */}
+        <div className="ceg-careers-head">
+          <Eyebrow accent>Join the Team</Eyebrow>
+          <h2 className="ceg-h2 ceg-careers-heading">Build a Career That Goes Deep</h2>
+        </div>
+
+        {/* Two-column layout */}
+        <div className="ceg-careers-layout">
+          
+          {/* LEFT COLUMN — Pitch + CTAs */}
+          <div className="ceg-careers-left">
+            <p className="ceg-careers-body">
+              Commercial diving is one of the most demanding careers in the world — and one of the most rewarding. At Coastal Engineering Group, you're not just a diver or an engineer. You're part of a veteran-led team taking on the kind of work most firms can't handle: Navy facilities, critical infrastructure, and projects that matter. We invest in the people who want to grow.
+            </p>
+            <p className="ceg-careers-body-short">
+              We're actively hiring experienced field divers, professional engineers, and support staff across our East Coast operations.
+            </p>
+
+            <div className="ceg-careers-ctas">
+              <a href="https://recruiting.paylocity.com" target="_blank" rel="noopener noreferrer" className="ceg-btn ceg-btn-primary ceg-careers-btn">
+                View Open Positions →
+              </a>
+              <a href="/careers" className="ceg-btn ceg-btn-ghost ceg-careers-btn">
+                Learn About Careers →
+              </a>
+            </div>
+
+            <div className="ceg-careers-trust">
+              ADCI Certified · OSHA 10/30/40 · Veteran-Led Organization
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN — 2×2 Pillar Grid */}
+          <div className="ceg-careers-right">
+            <div className="ceg-careers-grid">
+              {PILLARS.map((pillar, i) => (
+                <div key={i} className="ceg-career-pillar">
+                  <div className="ceg-pillar-icon" dangerouslySetInnerHTML={{ __html: pillar.icon }} />
+                  <h3 className="ceg-pillar-title">{pillar.title}</h3>
+                  <p className="ceg-pillar-body">{pillar.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, WhyCEG, FeaturedProjects, Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, FeaturedProjects, Careers, Divisions, Markets, Projects, CareersPg, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });

@@ -2155,6 +2155,214 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   }
 }
 
+/* ─── Careers Section ──────────────────────────────────────────────────────── */
+.ceg-careers {
+  background: #0b1929;
+  color: white;
+  padding: 120px 0;
+}
+
+/* Section header — left-aligned */
+.ceg-careers-head {
+  margin-bottom: 72px;
+}
+.ceg-careers-head .ceg-eyebrow {
+  color: #5b9bd5;
+}
+.ceg-careers-heading {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 900;
+  font-size: clamp(44px, 5.5vw, 64px);
+  line-height: 1.05;
+  color: white;
+  margin-bottom: 0;
+}
+
+/* Two-column layout */
+.ceg-careers-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* LEFT COLUMN */
+.ceg-careers-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ceg-careers-body {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #a8bdd0;
+  margin: 0;
+}
+
+.ceg-careers-body-short {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #a8bdd0;
+  margin: 0;
+}
+
+.ceg-careers-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ceg-careers-btn {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 700;
+  padding: 16px 24px;
+  text-align: center;
+  width: 100%;
+}
+
+.ceg-careers-btn.ceg-btn-primary {
+  background: #1c6fbf;
+  color: white;
+  border: 1px solid #1c6fbf;
+  transition: all 0.18s ease;
+}
+.ceg-careers-btn.ceg-btn-primary:hover {
+  background: #2078cc;
+  border-color: #2078cc;
+}
+
+.ceg-careers-btn.ceg-btn-ghost {
+  background: transparent;
+  color: #5b9bd5;
+  border: 1px solid #5b9bd5;
+  transition: all 0.18s ease;
+}
+.ceg-careers-btn.ceg-btn-ghost:hover {
+  background: #1c6fbf;
+  color: white;
+  border-color: #1c6fbf;
+}
+
+.ceg-careers-trust {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5b9bd5;
+  margin-top: 8px;
+}
+
+/* RIGHT COLUMN — 2×2 Grid */
+.ceg-careers-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.ceg-careers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.ceg-career-pillar {
+  background: #0f2236;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 0;
+  transition: all 0.2s ease;
+}
+
+.ceg-career-pillar:hover {
+  box-shadow: 0 8px 32px rgba(28, 111, 191, 0.15);
+}
+
+.ceg-pillar-icon {
+  width: 24px;
+  height: 24px;
+  color: #1c6fbf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ceg-pillar-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.ceg-pillar-title {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.3;
+  color: white;
+  margin: 0;
+}
+
+.ceg-pillar-body {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #a8bdd0;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ceg-careers-layout {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .ceg-careers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ceg-careers {
+    padding: 80px 0;
+  }
+  .ceg-careers-head {
+    margin-bottom: 48px;
+  }
+  .ceg-careers-heading {
+    font-size: clamp(36px, 7vw, 48px);
+  }
+  .ceg-careers-layout {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ceg-careers {
+    padding: 60px 0;
+  }
+  .ceg-careers-head {
+    margin-bottom: 36px;
+  }
+  .ceg-careers-grid {
+    grid-template-columns: 1fr;
+  }
+  .ceg-career-pillar {
+    padding: 24px 20px;
+  }
+  .ceg-careers-body,
+  .ceg-careers-body-short {
+    font-size: 15px;
+  }
+}
+
 /* ─── Concept toggle (the big prominent control at top) ──────── */
 .ceg-concept-toggle {
   position: sticky; top: 0; z-index: 90;
