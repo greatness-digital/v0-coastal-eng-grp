@@ -1775,8 +1775,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ─── Why CEG Section ─────────────────────────────────────────────────────── */
 .ceg-why {
-  background: #07131f;
-  color: white;
+  background: #f5f7f9;
+  color: #0b1929;
   padding: 100px 0;
 }
 
@@ -1798,21 +1798,21 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   gap: 24px;
 }
 .ceg-why-left .ceg-eyebrow {
-  color: #5b9bd5;
+  color: #1c6fbf;
 }
 .ceg-why-heading {
   font-family: var(--font-barlow, "Barlow", system-ui, sans-serif) !important;
   font-weight: 800 !important;
   font-size: clamp(32px, 3.8vw, 52px) !important;
   line-height: 1.1 !important;
-  color: white !important;
+  color: #0b1929 !important;
   margin-bottom: 0 !important;
 }
 .ceg-why-subhead {
   font-family: var(--font-inter, "Inter", system-ui, sans-serif);
   font-size: 16px;
   line-height: 1.65;
-  color: #a8bdd0;
+  color: #4a6074;
   max-width: 44ch;
 }
 .ceg-why-cta {
@@ -1830,10 +1830,10 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   gap: 32px;
   align-items: flex-start;
   padding: 40px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(11,25,41,0.1);
 }
 .ceg-why-item:first-child {
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(11,25,41,0.1);
 }
 .ceg-why-num {
   font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
@@ -1856,7 +1856,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-weight: 700;
   font-size: 18px;
   line-height: 1.3;
-  color: white;
+  color: #0b1929;
   margin: 0;
 }
 .ceg-why-body {
@@ -1864,7 +1864,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-size: 15px;
   font-weight: 400;
   line-height: 1.7;
-  color: #a8bdd0;
+  color: #4a6074;
   margin: 0;
 }
 
