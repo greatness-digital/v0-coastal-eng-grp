@@ -142,10 +142,11 @@ const CLIENTS = [
 ];
 
 const STATS = [
-  { value: "27", label: "Years on the water" },
-  { value: "180+", label: "Projects delivered" },
-  { value: "$1.2B", label: "Construction value" },
-  { value: "5", label: "Operating divisions" },
+  { value: "13", label: "Licensed States" },
+  { value: "500+", label: "Projects Completed" },
+  { value: "100%", label: "Safety Record" },
+  { value: "ADCI", label: "Certified" },
+  { value: "VOSB", label: "Verified" },
 ];
 
 const NAV = {

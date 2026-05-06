@@ -355,18 +355,17 @@ function HeroStats({ theme, data }) {
         <div className="ceg-hero-video-scrim" />
       </div>
       <div className="ceg-container ceg-hero-stats-center">
-        <Eyebrow>Coastal Engineering Group</Eyebrow>
+        <Eyebrow mark accent>Engineered Solutions. Built to Last.</Eyebrow>
         <h1 className="ceg-h1 serif">
-          We <em>build</em>, <em>dive</em>, <em>dredge</em>, and <em>design</em>{" "}
-          the structures that hold <span className="ceg-h1-accent">the&nbsp;coast</span> in place.
+          Marine Construction & Engineering<br/>
+          Along the East Coast
         </h1>
         <p className="ceg-hero-lede">
-          A veteran-owned, ADCI-certified marine contractor delivering integrated
-          heavy-civil work for NAVFAC, USACE, and the nation's port authorities.
+          Coastal Engineering Group delivers integrated diving, engineering, dredging, and construction services — with licensed PE engineers and ADCI-certified dive crews under one roof. One firm. End to end.
         </p>
         <div className="ceg-hero-ctas">
-          <Btn href="#projects" variant="primary">Featured projects</Btn>
-          <Btn href="#about" variant="ghost-onbrand">About the firm</Btn>
+          <Btn href="/contact" variant="primary">Start a Project →</Btn>
+          <Btn href="/careers" variant="ghost-onbrand">Build Your Career</Btn>
         </div>
       </div>
       <div className="ceg-hero-stats-bar">
