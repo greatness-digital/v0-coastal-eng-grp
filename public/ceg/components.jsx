@@ -835,7 +835,7 @@ function MarketPhoto({ marketKey }) {
   );
 }
 
-// ─── Capabilities section ───────────────────────────────────────────────────────
+// ─── Capabilities section ─────────────────────���─────────────────────────────────
 function Capabilities({ theme, data }) {
   return (
     <section id="capabilities" className="ceg-section ceg-capabilities">
@@ -1100,7 +1100,7 @@ function Projects({ theme, data }) {
   );
 }
 
-// ─── VOSB band ──────────────────────────────────────────────────────────────
+// ─── VOSB band ─────────────────────────────────────────���────────────────────
 // ─── Careers ────────────────────────────────────────────────────────────
 // Talent is a top business priority per Kevin — promote it on the homepage.
 // JMT-leaning: pitch + benefits grid + open-roles teaser.
@@ -1415,8 +1415,69 @@ function MobileMenu({ open, onClose, data }) {
   );
 }
 
+// ─── Why CEG section ────────────────────────────────────────────────────────────
+const WHY_ITEMS = [
+  {
+    num: "01",
+    title: "Engineering + Construction In-House",
+    body: "Where most firms stop at design or stop at build, we do both. Our PE engineers and construction crews work from the same playbook — which means fewer handoffs, tighter timelines, and accountability that doesn't disappear at the contract boundary.",
+  },
+  {
+    num: "02",
+    title: "PE Divers: Engineers Who Work Underwater",
+    body: "Our divers aren't just certified — they're licensed Professional Engineers. That means real-time structural assessment happens in the water, not after the fact on paper. Faster decisions, fewer mobilizations, better data.",
+  },
+  {
+    num: "03",
+    title: "13-State PE Licensure",
+    body: "Licensed to practice engineering in New York, New Jersey, Pennsylvania, Connecticut, Delaware, Virginia, Maryland, Maine, North Carolina, South Carolina, Ohio, Georgia, and Florida — the full East Coast footprint your project demands.",
+  },
+  {
+    num: "04",
+    title: "Veteran-Owned. Safety-Driven.",
+    body: "Coastal Engineering Group is a Veteran-Owned Small Business (VOSB). That background shapes how we operate: disciplined, methodical, and with an uncompromising safety record across every project, every team, every state.",
+  },
+];
+
+function WhyCEG({ theme, data }) {
+  return (
+    <section id="why-ceg" className="ceg-section ceg-why">
+      <div className="ceg-container">
+        <div className="ceg-why-layout">
+
+          {/* Left sticky column */}
+          <div className="ceg-why-left">
+            <div className="ceg-why-left-inner">
+              <Eyebrow accent>Why CEG</Eyebrow>
+              <h2 className="ceg-h2 ceg-why-heading">One Firm. Two Disciplines. Better Outcomes.</h2>
+              <p className="ceg-why-subhead">
+                Most projects require separate contracts for engineering and construction. Coastal Engineering Group delivers both — under one roof, on one timeline.
+              </p>
+              <a href="#contact" className="ceg-btn ceg-btn-primary ceg-why-cta">Start a Project →</a>
+            </div>
+          </div>
+
+          {/* Right column — numbered differentiators */}
+          <div className="ceg-why-right">
+            {WHY_ITEMS.map((item) => (
+              <div key={item.num} className="ceg-why-item">
+                <div className="ceg-why-num">{item.num}</div>
+                <div className="ceg-why-content">
+                  <h3 className="ceg-why-title">{item.title}</h3>
+                  <p className="ceg-why-body">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });

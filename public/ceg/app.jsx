@@ -20,6 +20,7 @@ function App() {
       <main>
         <window.Hero theme={theme} data={data} conceptKey="drydock" />
         <window.Capabilities theme={theme} data={data} />
+        <window.WhyCEG theme={theme} data={data} />
       </main>
       <window.Footer theme={theme} data={data} />
       <window.MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} data={data} />
