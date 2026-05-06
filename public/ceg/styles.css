@@ -1634,6 +1634,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-size: clamp(36px, 4vw, 56px);
   line-height: 1.1;
   margin-bottom: 20px;
+  color: white;
 }
 .ceg-capabilities .ceg-section-lede {
   font-family: var(--font-inter, "Inter", system-ui, sans-serif);
