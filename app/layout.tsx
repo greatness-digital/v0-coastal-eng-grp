@@ -47,12 +47,11 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Playfair+Display:wght@400;500;600;700;800&family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
-        {/* CEG concept stylesheets */}
+        {/* CEG stylesheets */}
         <link rel="stylesheet" href="/ceg/styles.css" />
         <link rel="stylesheet" href="/ceg/drydock-body.css" />
-        <link rel="stylesheet" href="/ceg/blueprint-body.css" />
       </head>
-      <body className="antialiased" data-concept="tidemark">
+      <body className="antialiased" data-concept="drydock">
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

@@ -15,15 +15,13 @@ const CDN_REACT = "https://unpkg.com/react@18.3.1/umd/react.development.js"
 const CDN_REACT_DOM = "https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
 const CDN_BABEL = "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
 
-// Order matters: data → themes → components → drydock-body → blueprint-body →
-// blueprint-overrides → app.  app.jsx is what mounts <App /> into #root.
+// Order matters: data → themes → components → drydock-body → app.
+// app.jsx mounts <App /> into #root.
 const JSX_FILES = [
   "/ceg/data.jsx",
   "/ceg/themes.jsx",
   "/ceg/components.jsx",
   "/ceg/drydock-body.jsx",
-  "/ceg/blueprint-body.jsx",
-  "/ceg/blueprint-overrides.jsx",
   "/ceg/app.jsx",
 ]
 
