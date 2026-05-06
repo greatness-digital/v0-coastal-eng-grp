@@ -107,12 +107,33 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 /* ─── Nav ──────────────────────────────────────────────────────── */
 .ceg-nav-shell {
-  position: sticky; top: var(--toggle-h, 0px); z-index: 80;
+  position: relative;
+  background: var(--bg);
+}
+
+/* Logo row — static, scrolls with the page */
+.ceg-nav-logo-row {
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.ceg-nav-logo-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+/* Menu bar — sticky */
+.ceg-nav-menu-bar {
+  position: sticky;
+  top: 0;
+  z-index: 80;
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
   transition: box-shadow .2s ease, background .2s ease;
 }
-.ceg-nav-shell.is-scrolled { box-shadow: 0 4px 24px rgba(10, 24, 40, 0.06); }
+.ceg-nav-menu-bar.is-scrolled { box-shadow: 0 4px 24px rgba(10, 24, 40, 0.12); }
+
 .ceg-nav-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 5px 0; }
 .ceg-logo img { height: 74px; width: auto; display: block; }
 

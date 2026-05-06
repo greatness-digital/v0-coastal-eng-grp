@@ -208,25 +208,32 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
   }
 
   return (
-    <header className={`ceg-nav-shell ${scrolled ? "is-scrolled" : ""} nav-${theme.nav}`}>
-      <div className="ceg-container ceg-nav-row">
-        <a href="#" className="ceg-logo">
-          <img src="/assets/logo.avif" alt="Coastal Engineering" />
-        </a>
-
-        {navItems}
-
-        <div className="ceg-nav-right">
+    <header className={`ceg-nav-shell nav-${theme.nav}`}>
+      {/* Logo row — static, scrolls away */}
+      <div className="ceg-nav-logo-row">
+        <div className="ceg-container ceg-nav-logo-inner">
+          <a href="#" className="ceg-logo">
+            <img src="/assets/logo.avif" alt="Coastal Engineering" />
+          </a>
           <a href="#contact" className="ceg-nav-phone">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
               <path d="M3 2h2l1.5 3-1.5 1c.7 1.4 1.6 2.3 3 3l1-1.5L12 9v2c0 .6-.4 1-1 1C6.6 12 2 7.4 2 3c0-.6.4-1 1-1z" stroke="currentColor" strokeWidth="1.3" fill="none"/>
             </svg>
             {data.CONTACT.phone}
           </a>
-          <Btn href="#contact" variant="primary" arrow={false}>Request a Bid</Btn>
-          <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
-            <span /><span /><span />
-          </button>
+        </div>
+      </div>
+
+      {/* Menu bar — sticky */}
+      <div className={`ceg-nav-menu-bar ${scrolled ? "is-scrolled" : ""}`}>
+        <div className="ceg-container ceg-nav-row">
+          {navItems}
+          <div className="ceg-nav-right">
+            <Btn href="#contact" variant="primary" arrow={false}>Request a Bid</Btn>
+            <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
+              <span /><span /><span />
+            </button>
+          </div>
         </div>
       </div>
     </header>
