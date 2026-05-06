@@ -1,6 +1,49 @@
 // Shared content data for all three concepts
 // Sourced from meeting notes + coastalengineeringllc.com
 
+const CAPABILITIES = [
+  {
+    key: "diving",
+    badge: "CAP-01",
+    title: "Commercial Diving",
+    body: "PE-certified divers performing underwater inspections, structural repairs, and confined-space operations. Our divers aren't just certified — they're licensed engineers.",
+    link: "Explore Diving →",
+    icon: "diving",
+  },
+  {
+    key: "engineering",
+    badge: "CAP-02",
+    title: "Marine Engineering",
+    body: "Professional engineering services across structures, marine systems, and waterfront infrastructure. PE-stamped drawings and QA/QC delivered in 13 licensed states.",
+    link: "Explore Engineering →",
+    icon: "engineering",
+  },
+  {
+    key: "construction",
+    badge: "CAP-03",
+    title: "Marine Construction",
+    body: "Heavy marine construction including seawalls, piers, underwater concrete, welding, and structural repairs. Built to perform in demanding coastal and freshwater environments.",
+    link: "Explore Construction →",
+    icon: "construction",
+  },
+  {
+    key: "dredging",
+    badge: "CAP-04",
+    title: "Dredging & Debris Removal",
+    body: "Precision dredging for navigation channels, lake restoration, and sediment management. Careful, methodical operations protecting sensitive aquatic environments.",
+    link: "Explore Dredging →",
+    icon: "dredging",
+  },
+  {
+    key: "marine-services",
+    badge: "CAP-05",
+    title: "Marine Services & Equipment",
+    body: "ROV inspection, tugboats, barges, and crane rentals supporting marine construction operations up and down the East Coast. Full capability, when and where you need it.",
+    link: "Explore Marine Services →",
+    icon: "marine",
+  },
+];
+
 const DIVISIONS = [
   {
     key: "diving",
@@ -186,4 +229,4 @@ const CAREERS = {
   ],
 };
 
-window.CEG_DATA = { DIVISIONS, MARKETS, PROJECTS, STATES_WORKED, CERTS, CLIENTS, STATS, NAV, CONTACT, CAREERS };
+window.CEG_DATA = { CAPABILITIES, DIVISIONS, MARKETS, PROJECTS, STATES_WORKED, CERTS, CLIENTS, STATS, NAV, CONTACT, CAREERS };

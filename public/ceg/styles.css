@@ -1616,6 +1616,162 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .concept-blueprint .ceg-division-card-svc li span { background: var(--accent); }
 .concept-blueprint .ceg-division-card .ceg-btn-link { color: var(--accent); }
 
+/* ─── Capabilities Grid Section ──────────────────────────────────────────── */
+.ceg-capabilities {
+  background: #0b1929;
+  color: white;
+  padding: 80px 0;
+}
+.ceg-capabilities .ceg-section-head {
+  margin-bottom: 64px;
+}
+.ceg-capabilities .ceg-eyebrow {
+  color: #5b9bd5;
+}
+.ceg-capabilities .ceg-h2 {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 800;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.ceg-capabilities .ceg-section-lede {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 16px;
+  color: #a8bdd0;
+  max-width: 65ch;
+}
+.ceg-capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* CAP Cards 1-5 */
+.ceg-cap-card {
+  background: #0f2236;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+.ceg-cap-card:hover {
+  border-color: #5b9bd5;
+  background: rgba(15, 34, 54, 0.8);
+}
+.ceg-cap-badge {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5b9bd5;
+}
+.ceg-cap-title {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 0;
+  color: white;
+}
+.ceg-cap-body {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  flex-grow: 1;
+}
+.ceg-cap-link {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: #5b9bd5;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: auto;
+}
+
+/* CAP-06: CTA Card */
+.ceg-cap-card-cta {
+  background: #1c6fbf !important;
+  border-color: #1c6fbf !important;
+  padding: 48px 40px;
+}
+.ceg-cap-card-cta:hover {
+  background: #2078cc !important;
+  border-color: #2078cc !important;
+}
+.ceg-cap-cta-eyebrow {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.ceg-cap-cta-title {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 1.2;
+  margin: 12px 0;
+  color: white;
+}
+.ceg-cap-cta-body {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.85);
+  margin: 16px 0;
+}
+.ceg-cap-cta-btn {
+  background: white;
+  color: #1c6fbf;
+  border: none;
+  padding: 14px 0;
+  width: 100%;
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border-radius: 0;
+  margin-top: 20px;
+}
+.ceg-cap-cta-btn:hover {
+  background: rgba(255,255,255,0.95);
+}
+
+@media (max-width: 1024px) {
+  .ceg-capabilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+@media (max-width: 640px) {
+  .ceg-capabilities {
+    padding: 60px 0;
+  }
+  .ceg-capabilities .ceg-section-head {
+    margin-bottom: 40px;
+  }
+  .ceg-capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ceg-cap-card {
+    padding: 32px 24px;
+  }
+}
+
 /* ─── Concept toggle (the big prominent control at top) ──────── */
 .ceg-concept-toggle {
   position: sticky; top: 0; z-index: 90;

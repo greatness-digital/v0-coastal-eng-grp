@@ -835,7 +835,44 @@ function MarketPhoto({ marketKey }) {
   );
 }
 
-// ─── Divisions section ──────────��───────────���───────────────────────────────
+// ─── Capabilities section ───────────────────────────────────────────────────────
+function Capabilities({ theme, data }) {
+  return (
+    <section id="capabilities" className="ceg-section ceg-capabilities">
+      <div className="ceg-container">
+        <div className="ceg-section-head">
+          <Eyebrow accent>What We Do</Eyebrow>
+          <h2 className="ceg-h2">Five Divisions. One Firm.</h2>
+          <p className="ceg-section-lede">
+            Engineering expertise and construction capability in-house — no second firm required.
+          </p>
+        </div>
+
+        <div className="ceg-capabilities-grid">
+          {/* CAP-01 through CAP-05 cards */}
+          {data.CAPABILITIES.map((cap, i) => (
+            <a key={cap.key} href={`#capability-${cap.key}`} className="ceg-cap-card">
+              <div className="ceg-cap-badge">{cap.badge}</div>
+              <h3 className="ceg-cap-title">{cap.title}</h3>
+              <p className="ceg-cap-body">{cap.body}</p>
+              <span className="ceg-cap-link">{cap.link}</span>
+            </a>
+          ))}
+
+          {/* CAP-06: CTA Card */}
+          <a href="#contact" className="ceg-cap-card ceg-cap-card-cta">
+            <div className="ceg-cap-cta-eyebrow">Ready to Get Started?</div>
+            <h3 className="ceg-cap-cta-title">Start a Project</h3>
+            <p className="ceg-cap-cta-body">Tell us about your project. We'll respond within 24 hours.</p>
+            <button className="ceg-cap-cta-btn">Contact Our Team →</button>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Divisions section ──────────────────────────────────────────────────────────
 function Divisions({ theme, data }) {
   const [active, setActive] = useState(0);
   const div = data.DIVISIONS[active];
@@ -1381,5 +1418,5 @@ function MobileMenu({ open, onClose, data }) {
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });
