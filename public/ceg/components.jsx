@@ -1483,8 +1483,121 @@ function WhyCEG({ theme, data }) {
   );
 }
 
+// ─── Featured Projects section ──────────────────────────────────────────────────
+function FeaturedProjects({ theme, data }) {
+  const [expertiseFilter, setExpertiseFilter] = useState("All");
+  const [stateFilter, setStateFilter] = useState("All States");
+
+  // Extract unique expertise tags and states from projects
+  const expertiseOptions = ["All", ...Array.from(new Set(data.PROJECTS.map(p => p.tag))).sort()];
+  const stateOptions = ["All States", ...data.STATES_WORKED];
+
+  // Filter projects based on active filters
+  const filteredProjects = data.PROJECTS.filter(p => {
+    const expertiseMatch = expertiseFilter === "All" || p.tag === expertiseFilter;
+    const stateMatch = stateFilter === "All States" || p.state === stateFilter;
+    return expertiseMatch && stateMatch;
+  });
+
+  // Use first 3 filtered projects, or show all if less than 3
+  const displayProjects = filteredProjects.slice(0, 3);
+  const hasNoResults = filteredProjects.length === 0;
+
+  return (
+    <section id="featured-projects" className="ceg-section ceg-featured-projects">
+      <div className="ceg-container">
+        
+        {/* Section header — centered */}
+        <div className="ceg-featured-projects-head">
+          <Eyebrow accent>Our Work</Eyebrow>
+          <h2 className="ceg-h2">Featured Projects</h2>
+          <p className="ceg-featured-projects-subhead">
+            From Navy dry docks to dam inspections — work that demands precision, depth, and the full range of our capabilities.
+          </p>
+        </div>
+
+        {/* Filter bar */}
+        <div className="ceg-featured-projects-filters">
+          <div className="ceg-filter-group">
+            <div className="ceg-filter-label">Expertise</div>
+            <div className="ceg-filter-pills">
+              {expertiseOptions.map(opt => (
+                <button
+                  key={opt}
+                  className={`ceg-filter-pill ${expertiseFilter === opt ? "is-active" : ""}`}
+                  onClick={() => setExpertiseFilter(opt)}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="ceg-filter-group">
+            <div className="ceg-filter-label">State</div>
+            <div className="ceg-filter-pills">
+              {stateOptions.map(opt => (
+                <button
+                  key={opt}
+                  className={`ceg-filter-pill ${stateFilter === opt ? "is-active" : ""}`}
+                  onClick={() => setStateFilter(opt)}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Cards grid or no-results message */}
+        {hasNoResults ? (
+          <div className="ceg-featured-projects-empty">
+            <p>No projects match this filter — check back as we add more.</p>
+          </div>
+        ) : (
+          <div className="ceg-featured-projects-grid">
+            {displayProjects.map((project, i) => (
+              <article
+                key={i}
+                className="ceg-project-card"
+                data-expertise={project.tag}
+                data-state={project.state}
+              >
+                {/* Image area — 16:9 placeholder */}
+                <div className="ceg-project-card-image">
+                  <div className="ceg-project-card-placeholder">Photo Coming</div>
+                </div>
+
+                {/* Badges */}
+                <div className="ceg-project-card-badges">
+                  <span className="ceg-project-badge ceg-project-badge-expertise">{project.tag}</span>
+                  <span className="ceg-project-badge ceg-project-badge-state">{project.state}</span>
+                </div>
+
+                {/* Title */}
+                <h3 className="ceg-project-card-title">{project.title}</h3>
+
+                {/* Description */}
+                <p className="ceg-project-card-description">{project.blurb}</p>
+
+                {/* View link */}
+                <a href="#" className="ceg-project-card-link">View Project →</a>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {/* View All Projects link */}
+        <div className="ceg-featured-projects-footer">
+          <a href="#projects" className="ceg-featured-projects-all">View All Projects →</a>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, WhyCEG, Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, FeaturedProjects, Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });
