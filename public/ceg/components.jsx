@@ -355,7 +355,7 @@ function HeroStats({ theme, data }) {
         <div className="ceg-hero-video-scrim" />
       </div>
       <div className="ceg-container ceg-hero-stats-center">
-        <Eyebrow mark accent>Engineered Solutions. Built to Last.</Eyebrow>
+        <Eyebrow accent>Engineered Solutions. Built to Last.</Eyebrow>
         <h1 className="ceg-h1 serif">
           Marine Construction & Engineering<br/>
           Along the East Coast
@@ -835,7 +835,7 @@ function MarketPhoto({ marketKey }) {
   );
 }
 
-// ─── Divisions section ──────────��───────────────────────────────────────────
+// ─── Divisions section ──────────��───────────���───────────────────────────────
 function Divisions({ theme, data }) {
   const [active, setActive] = useState(0);
   const div = data.DIVISIONS[active];
