@@ -2283,6 +2283,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+  align-items: stretch;
 }
 
 .ceg-career-pillar {
@@ -2306,7 +2307,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   background-position: center center;
   border: none !important;
   padding: 0 !important;
-  min-height: 220px;
+  align-self: stretch;
+  min-height: 0;
 }
 .ceg-pillar-photo:hover {
   border: none !important;
