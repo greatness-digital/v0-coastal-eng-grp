@@ -1802,7 +1802,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   padding: 100px 0;
 }
 
-/* 2-column layout: sticky left / scrolling right */
+/* 2-column layout */
 .ceg-why-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1810,14 +1810,21 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   align-items: start;
 }
 .ceg-why-left {
-  position: sticky;
-  top: 100px;
+  display: flex;
+  flex-direction: column;
 }
 .ceg-why-left-inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+}
+.ceg-why-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  margin-top: 40px;
 }
 .ceg-why-left .ceg-eyebrow {
   color: #1c6fbf;

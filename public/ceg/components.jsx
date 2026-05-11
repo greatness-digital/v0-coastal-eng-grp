@@ -1185,7 +1185,7 @@ function ClientsStrip({ theme, data }) {
   );
 }
 
-// ─── Contact band + Footer ──────────────────────────────────────────────────
+// ─── Contact band + Footer ���─────────────────────────────────────────────────
 function ContactBand({ theme, data }) {
   const [submitted, setSubmitted] = useState(false);
   return (
@@ -1452,7 +1452,7 @@ function WhyCEG({ theme, data }) {
       <div className="ceg-container">
         <div className="ceg-why-layout">
 
-          {/* Left sticky column */}
+          {/* Left column */}
           <div className="ceg-why-left">
             <div className="ceg-why-left-inner">
               <Eyebrow accent>Why CEG</Eyebrow>
@@ -1462,6 +1462,11 @@ function WhyCEG({ theme, data }) {
               </p>
               <a href="#contact" className="ceg-btn ceg-btn-primary ceg-why-cta">Start a Project →</a>
             </div>
+            <img
+              src="/assets/why-ceg-photo.jpg"
+              alt="Commercial diver working on marine structure underwater"
+              className="ceg-why-photo"
+            />
           </div>
 
           {/* Right column — numbered differentiators */}
