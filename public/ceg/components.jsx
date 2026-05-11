@@ -1705,8 +1705,77 @@ function CertificationsBar() {
   );
 }
 
+// ─── Locations section ──────────────────────────────────────────────────────────
+const MAP_PIN = (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{display:"inline-block",verticalAlign:"middle",marginRight:"6px",flexShrink:0}}>
+    <path d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" fill="#1c6fbf"/>
+    <circle cx="8" cy="6" r="1.5" fill="#fff"/>
+  </svg>
+);
+
+const STATES = ["NY","NJ","PA","CT","DE","VA","MD","ME","NC","SC","OH","GA","FL"];
+
+function Locations() {
+  return (
+    <section id="locations" className="ceg-section ceg-locations">
+      <div className="ceg-container">
+
+        {/* Header */}
+        <div className="ceg-locations-head">
+          <Eyebrow accent>Where We Work</Eyebrow>
+          <h2 className="ceg-h2 ceg-locations-heading">East Coast Presence. National Reach.</h2>
+          <p className="ceg-locations-subhead">
+            Two offices. Thirteen licensed states. Deployed wherever the project demands.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="ceg-locations-cards">
+
+          {/* HQ */}
+          <div className="ceg-location-card">
+            <div className="ceg-location-badge">Headquarters</div>
+            <h3 className="ceg-location-name">{MAP_PIN}Greenwood Lake, NY</h3>
+            <div className="ceg-location-divider" />
+            <div className="ceg-location-details">
+              <div>845-328-3178</div>
+              <div>info@coastalenggroup.com</div>
+            </div>
+          </div>
+
+          {/* Southeast */}
+          <div className="ceg-location-card">
+            <div className="ceg-location-badge">Southeast Operations</div>
+            <h3 className="ceg-location-name">{MAP_PIN}Jacksonville, FL</h3>
+            <div className="ceg-location-divider" />
+            <div className="ceg-location-details">
+              <div><em>Full address coming soon</em></div>
+              <div>845-328-3178</div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* States */}
+        <div className="ceg-locations-states">
+          <div className="ceg-locations-states-label">Licensed to Practice In:</div>
+          <div className="ceg-locations-states-row">
+            {STATES.map((s, i) => (
+              <React.Fragment key={s}>
+                <span className="ceg-state-item">{s}</span>
+                {i < STATES.length - 1 && <span className="ceg-state-dot">·</span>}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Divisions, Markets, Projects, CareersPg, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Locations, Divisions, Markets, Projects, CareersPg, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });

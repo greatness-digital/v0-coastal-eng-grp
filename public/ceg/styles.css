@@ -2407,6 +2407,134 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   white-space: nowrap;
 }
 
+/* ─── Locations Section ───────────────────────────────────────────────────── */
+.ceg-locations {
+  background: #0b1929;
+  color: white;
+  padding: 100px 0;
+}
+.ceg-locations-head {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.ceg-locations-head .ceg-eyebrow {
+  color: #5b9bd5;
+  justify-content: center;
+}
+.ceg-locations-heading {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 800;
+  font-size: clamp(36px, 4.5vw, 52px);
+  line-height: 1.1;
+  color: white;
+  margin-bottom: 16px;
+}
+.ceg-locations-subhead {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 16px;
+  line-height: 1.65;
+  color: #a8bdd0;
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* Two cards */
+.ceg-locations-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+.ceg-location-card {
+  background: #0f2236;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+}
+.ceg-location-badge {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5b9bd5;
+  margin-bottom: 20px;
+}
+.ceg-location-name {
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  color: white;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+}
+.ceg-location-divider {
+  width: 100%;
+  height: 1px;
+  background: #1c6fbf;
+  margin-bottom: 20px;
+}
+.ceg-location-details {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #a8bdd0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* States row */
+.ceg-locations-states {
+  text-align: center;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.ceg-locations-states-label {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5b9bd5;
+}
+.ceg-locations-states-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+}
+.ceg-state-dot {
+  color: #1c6fbf;
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .ceg-locations-cards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .ceg-location-card {
+    padding: 32px 28px;
+  }
+  .ceg-locations {
+    padding: 72px 0;
+  }
+}
+
 /* ─── Concept toggle (the big prominent control at top) ──────── */
 .ceg-concept-toggle {
   position: sticky; top: 0; z-index: 90;

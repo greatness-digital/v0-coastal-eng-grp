@@ -24,6 +24,7 @@ function App() {
         <window.FeaturedProjects theme={theme} data={data} />
         <window.Careers theme={theme} data={data} />
         <window.CertificationsBar />
+        <window.Locations />
       </main>
       <window.Footer theme={theme} data={data} />
       <window.MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} data={data} />
