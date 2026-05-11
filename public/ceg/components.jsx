@@ -1678,8 +1678,35 @@ function Careers({ theme, data }) {
   );
 }
 
+// ─── Certifications Bar ─────────────────────────────────────────────────────────
+const CERT_PILLS = [
+  "ADCI Certified",
+  "VOSB Certified",
+  "USACE CQM",
+  "NHI / FHWA",
+  "ASDSO Dam Safety",
+  "OSHA 10 / 30 / 40",
+  "ASCE Waterfront",
+  "PE Licensed · 13 States",
+];
+
+function CertificationsBar() {
+  return (
+    <section className="ceg-certs-bar">
+      <div className="ceg-container">
+        <div className="ceg-certs-eyebrow">Certifications &amp; Standards</div>
+        <div className="ceg-certs-pills">
+          {CERT_PILLS.map((cert) => (
+            <span key={cert} className="ceg-cert-pill">{cert}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, WhyCEG, FeaturedProjects, Careers, Divisions, Markets, Projects, CareersPg, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Divisions, Markets, Projects, CareersPg, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });
