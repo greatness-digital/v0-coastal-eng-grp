@@ -1945,9 +1945,9 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   transform: translateX(60px);
   transition:
     background 0.25s ease,
-    padding 0.25s ease,
     border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
   border-left: 3px solid transparent;
   padding-left: 20px;
   padding-right: 8px;
@@ -1963,12 +1963,12 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .ceg-why-visible .ceg-why-item:nth-child(3) { animation: ceg-why-slide-in 0.55s cubic-bezier(0.22,1,0.36,1) 0.31s forwards; }
 .ceg-why-visible .ceg-why-item:nth-child(4) { animation: ceg-why-slide-in 0.55s cubic-bezier(0.22,1,0.36,1) 0.44s forwards; }
 
-/* Hover effect */
+/* Hover effect — transform only, no padding change to avoid reflow */
 .ceg-why-item:hover {
   background: rgba(28,111,191,0.04);
   border-left-color: #1c6fbf;
-  padding-left: 24px;
   box-shadow: 4px 0 0 0 rgba(28,111,191,0.06) inset;
+  transform: translateX(3px);
 }
 .ceg-why-item:hover .ceg-why-num {
   color: #1558a0;
