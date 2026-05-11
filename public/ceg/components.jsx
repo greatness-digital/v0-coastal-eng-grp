@@ -1549,9 +1549,13 @@ function FeaturedProjects({ theme, data }) {
                 data-expertise={project.tag}
                 data-state={project.state}
               >
-                {/* Image area — 16:9 placeholder */}
+                {/* Image area — 16:9 */}
                 <div className="ceg-project-card-image">
-                  <div className="ceg-project-card-placeholder">Photo Coming</div>
+                  {project.image ? (
+                    <img src={project.image} alt={project.title} className="ceg-project-card-img" />
+                  ) : (
+                    <div className="ceg-project-card-placeholder">Photo Coming</div>
+                  )}
                 </div>
 
                 {/* Badges */}
@@ -1776,5 +1780,5 @@ function Locations() {
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Locations, Divisions, Markets, Projects, CareersPg, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Locations, Divisions, Markets, Projects, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
 });

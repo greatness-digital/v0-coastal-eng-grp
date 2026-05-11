@@ -2032,6 +2032,13 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   background: #0b1929;
   overflow: hidden;
 }
+.ceg-project-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .ceg-project-card-placeholder {
   position: absolute;
   inset: 0;

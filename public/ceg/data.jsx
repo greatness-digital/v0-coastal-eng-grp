@@ -92,14 +92,14 @@ const MARKETS = [
 
 const PROJECTS = [
   {
-    title: "Naval Station Norfolk — Pier 11 Rehabilitation",
-    client: "NAVFAC Mid-Atlantic",
-    market: "Federal",
-    state: "VA",
-    year: "2025",
-    tag: "Construction",
-    blurb: "Structural repairs and fender system replacement on an active berthing pier.",
-    award: "NAVFAC Project Excellence",
+    title: "Railroad Bridge Inspection Over Open Water",
+    client: "CSX Transportation",
+    market: "Commercial",
+    state: "NY",
+    year: "2024",
+    tag: "Diving",
+    blurb: "Underwater inspection of timber pile substructure on active overwater railroad bridge crossing.",
+    image: "/assets/railroad-bridge-inspection.jpg",
   },
   {
     title: "Cape May Seawall Reinforcement",
