@@ -359,7 +359,7 @@ function HeroStats({ theme, data }) {
         </p>
         <div className="ceg-hero-ctas">
           <Btn href="/contact" variant="hero-accent" arrow={false}>Start a Project</Btn>
-          <Btn href="/careers" variant="ghost-onbrand">Build Your Career</Btn>
+          <Btn href="/careers" variant="ghost-onbrand" arrow={true}>Build Your Career</Btn>
         </div>
       </div>
       <div className="ceg-hero-stats-bar">
