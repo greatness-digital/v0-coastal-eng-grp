@@ -1185,7 +1185,7 @@ function ClientsStrip({ theme, data }) {
   );
 }
 
-// ─── Contact band + Footer ���─────────────────────────────────────────────────
+// ─── Contact band + Footer �����─────────────────────────────────────────────────
 function ContactBand({ theme, data }) {
   const [submitted, setSubmitted] = useState(false);
   return (
@@ -1491,18 +1491,14 @@ function WhyCEG({ theme, data }) {
 // ─── Featured Projects section ──────────────────────────────────────────────────
 function FeaturedProjects({ theme, data }) {
   const [expertiseFilter, setExpertiseFilter] = useState("All");
-  const [stateFilter, setStateFilter] = useState("All States");
 
-  // Extract unique expertise tags and states from projects
+  // Extract unique expertise tags from projects
   const expertiseOptions = ["All", ...Array.from(new Set(data.PROJECTS.map(p => p.tag))).sort()];
-  const stateOptions = ["All States", ...data.STATES_WORKED];
 
-  // Filter projects based on active filters
-  const filteredProjects = data.PROJECTS.filter(p => {
-    const expertiseMatch = expertiseFilter === "All" || p.tag === expertiseFilter;
-    const stateMatch = stateFilter === "All States" || p.state === stateFilter;
-    return expertiseMatch && stateMatch;
-  });
+  // Filter projects by expertise only
+  const filteredProjects = data.PROJECTS.filter(p =>
+    expertiseFilter === "All" || p.tag === expertiseFilter
+  );
 
   // Use first 3 filtered projects, or show all if less than 3
   const displayProjects = filteredProjects.slice(0, 3);
@@ -1521,30 +1517,16 @@ function FeaturedProjects({ theme, data }) {
           </p>
         </div>
 
-        {/* Filter bar */}
+        {/* Filter bar — expertise only */}
         <div className="ceg-featured-projects-filters">
           <div className="ceg-filter-group">
-            <div className="ceg-filter-label">Expertise</div>
+            <div className="ceg-filter-label">Filter by Expertise</div>
             <div className="ceg-filter-pills">
               {expertiseOptions.map(opt => (
                 <button
                   key={opt}
                   className={`ceg-filter-pill ${expertiseFilter === opt ? "is-active" : ""}`}
                   onClick={() => setExpertiseFilter(opt)}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="ceg-filter-group">
-            <div className="ceg-filter-label">State</div>
-            <div className="ceg-filter-pills">
-              {stateOptions.map(opt => (
-                <button
-                  key={opt}
-                  className={`ceg-filter-pill ${stateFilter === opt ? "is-active" : ""}`}
-                  onClick={() => setStateFilter(opt)}
                 >
                   {opt}
                 </button>
