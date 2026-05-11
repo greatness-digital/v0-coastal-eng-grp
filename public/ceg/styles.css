@@ -325,9 +325,16 @@ ul { list-style: none; padding: 0; margin: 0; }
   overflow: hidden;
   display: flex; flex-direction: column;
 }
+.hero-stats .ceg-hero-background {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 .hero-stats .ceg-hero-video-wrap {
   position: absolute; inset: 0; z-index: 0;
   overflow: hidden;
+  display: none;
 }
 .hero-stats .ceg-hero-video {
   position: absolute;

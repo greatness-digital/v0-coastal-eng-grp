@@ -342,25 +342,12 @@ function HeroPhoto({ theme, data }) {
   );
 }
 
-// HERO B — stats-led editorial, full-bleed video background
+// HERO B — stats-led editorial, full-bleed image background
 function HeroStats({ theme, data }) {
   return (
     <section className="ceg-hero hero-stats">
-      <div className="ceg-hero-video-wrap" aria-hidden>
-        <video
-          className="ceg-hero-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="https://images.pexels.com/videos/1409899/free-video-1409899.jpg?auto=compress&cs=tinysrgb&w=1600"
-        >
-          <source src="https://videos.pexels.com/video-files/1409899/1409899-uhd_3840_2160_25fps.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/2519660/2519660-hd_1920_1080_30fps.mp4" type="video/mp4" />
-        </video>
-        <div className="ceg-hero-video-scrim" />
-      </div>
+      <div className="ceg-hero-background" aria-hidden style={{backgroundImage: "url('/assets/hero-background.jpg')"}} />
+      <div className="ceg-hero-video-scrim" />
       <div className="ceg-container ceg-hero-stats-center">
         <Eyebrow accent>Engineered Solutions. Built to Last.</Eyebrow>
         <h1 className="ceg-h1 serif">
