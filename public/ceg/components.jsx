@@ -845,7 +845,7 @@ function Capabilities({ theme, data }) {
         <div className="ceg-capabilities-grid">
           {/* CAP-01 through CAP-05 cards */}
           {data.CAPABILITIES.map((cap, i) => (
-            <a key={cap.key} href={`#capability-${cap.key}`} className={`ceg-cap-card${(cap.key === "diving" || cap.key === "dredging" || cap.key === "construction") ? " ceg-cap-card-has-photo" : ""}`}>
+            <a key={cap.key} href={`#capability-${cap.key}`} className={`ceg-cap-card${(cap.key === "diving" || cap.key === "dredging" || cap.key === "construction" || cap.key === "marine-services") ? " ceg-cap-card-has-photo" : ""}`}>
               {cap.key === "diving" && (
                 <div className="ceg-cap-card-photo-bg" style={{backgroundImage: "url('/assets/commercial-diving.jpg')"}} />
               )}
@@ -854,6 +854,9 @@ function Capabilities({ theme, data }) {
               )}
               {cap.key === "construction" && (
                 <div className="ceg-cap-card-photo-bg" style={{backgroundImage: "url('/assets/marine-construction.jpg')"}} />
+              )}
+              {cap.key === "marine-services" && (
+                <div className="ceg-cap-card-photo-bg" style={{backgroundImage: "url('/assets/marine-services.jpg')"}} />
               )}
               <div className="ceg-cap-badge">{cap.badge}</div>
               <h3 className="ceg-cap-title">{cap.title}</h3>
