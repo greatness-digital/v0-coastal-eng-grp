@@ -358,7 +358,7 @@ function HeroStats({ theme, data }) {
           Coastal Engineering Group delivers integrated diving, engineering, dredging, and construction services — with licensed PE engineers and ADCI-certified dive crews under one roof. One firm. End to end.
         </p>
         <div className="ceg-hero-ctas">
-          <Btn href="/contact" variant="primary">Start a Project →</Btn>
+          <Btn href="/contact" variant="hero-accent" arrow={false}>Start a Project</Btn>
           <Btn href="/careers" variant="ghost-onbrand">Build Your Career</Btn>
         </div>
       </div>
