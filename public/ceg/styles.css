@@ -2164,8 +2164,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ─── Careers Section ──────────────────────────────────────────────────────── */
 .ceg-careers {
-  background: #0b1929;
-  color: white;
+  background: #f5f7f9;
+  color: #0b1929;
   padding: 120px 0;
 }
 
@@ -2174,14 +2174,14 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   margin-bottom: 72px;
 }
 .ceg-careers-head .ceg-eyebrow {
-  color: #5b9bd5;
+  color: #1c6fbf;
 }
 .ceg-careers-heading {
   font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
   font-weight: 900;
   font-size: clamp(44px, 5.5vw, 64px);
   line-height: 1.05;
-  color: white;
+  color: #0b1929;
   margin-bottom: 0;
 }
 
@@ -2205,7 +2205,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-size: 16px;
   font-weight: 400;
   line-height: 1.75;
-  color: #a8bdd0;
+  color: #4a6074;
   margin: 0;
 }
 
@@ -2214,7 +2214,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-size: 16px;
   font-weight: 400;
   line-height: 1.75;
-  color: #a8bdd0;
+  color: #4a6074;
   margin: 0;
 }
 
@@ -2246,8 +2246,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 .ceg-careers-btn.ceg-btn-ghost {
   background: transparent;
-  color: #5b9bd5;
-  border: 1px solid #5b9bd5;
+  color: #1c6fbf;
+  border: 1px solid #1c6fbf;
   transition: all 0.18s ease;
 }
 .ceg-careers-btn.ceg-btn-ghost:hover {
@@ -2262,7 +2262,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #5b9bd5;
+  color: #1c6fbf;
   margin-top: 8px;
 }
 
@@ -2279,7 +2279,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 
 .ceg-career-pillar {
-  background: #0f2236;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
@@ -2289,7 +2290,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 
 .ceg-career-pillar:hover {
-  box-shadow: 0 8px 32px rgba(28, 111, 191, 0.15);
+  border-color: #1c6fbf;
+  box-shadow: 0 8px 32px rgba(28, 111, 191, 0.08);
 }
 
 .ceg-pillar-icon {
@@ -2312,7 +2314,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-weight: 700;
   font-size: 16px;
   line-height: 1.3;
-  color: white;
+  color: #0b1929;
   margin: 0;
 }
 
@@ -2321,7 +2323,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   font-size: 13px;
   font-weight: 400;
   line-height: 1.65;
-  color: #a8bdd0;
+  color: #4a6074;
   margin: 0;
 }
 
