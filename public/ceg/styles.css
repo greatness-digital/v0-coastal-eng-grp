@@ -1923,6 +1923,12 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 
 /* Right column: numbered items */
+/* Why-item entrance animation */
+@keyframes ceg-why-slide-in {
+  0%   { opacity: 0; transform: translateX(60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
 .ceg-why-right {
   display: flex;
   flex-direction: column;
@@ -1934,10 +1940,43 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   align-items: flex-start;
   padding: 40px 0;
   border-bottom: 1px solid rgba(11,25,41,0.1);
+  /* entrance: hidden until JS adds .ceg-why-visible to the parent */
+  opacity: 0;
+  transform: translateX(60px);
+  transition:
+    background 0.25s ease,
+    padding 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  border-left: 3px solid transparent;
+  padding-left: 20px;
+  padding-right: 8px;
+  margin-left: -23px;
 }
 .ceg-why-item:first-child {
   border-top: 1px solid rgba(11,25,41,0.1);
 }
+
+/* Fire entrance when parent gets .ceg-why-visible */
+.ceg-why-visible .ceg-why-item:nth-child(1) { animation: ceg-why-slide-in 0.55s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
+.ceg-why-visible .ceg-why-item:nth-child(2) { animation: ceg-why-slide-in 0.55s cubic-bezier(0.22,1,0.36,1) 0.18s forwards; }
+.ceg-why-visible .ceg-why-item:nth-child(3) { animation: ceg-why-slide-in 0.55s cubic-bezier(0.22,1,0.36,1) 0.31s forwards; }
+.ceg-why-visible .ceg-why-item:nth-child(4) { animation: ceg-why-slide-in 0.55s cubic-bezier(0.22,1,0.36,1) 0.44s forwards; }
+
+/* Hover effect */
+.ceg-why-item:hover {
+  background: rgba(28,111,191,0.04);
+  border-left-color: #1c6fbf;
+  padding-left: 24px;
+  box-shadow: 4px 0 0 0 rgba(28,111,191,0.06) inset;
+}
+.ceg-why-item:hover .ceg-why-num {
+  color: #1558a0;
+}
+.ceg-why-item:hover .ceg-why-title {
+  color: #1c6fbf;
+}
+
 .ceg-why-num {
   font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
   font-weight: 900;

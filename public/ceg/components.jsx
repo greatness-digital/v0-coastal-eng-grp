@@ -1430,7 +1430,7 @@ function MobileMenu({ open, onClose, data }) {
   );
 }
 
-// ─── Why CEG section ────────────────────────────────────────────────────────────
+// ─── Why CEG section ────────────────────────────────────────────────���───────────
 const WHY_ITEMS = [
   {
     num: "01",
@@ -1455,6 +1455,24 @@ const WHY_ITEMS = [
 ];
 
 function WhyCEG({ theme, data }) {
+  const rightRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const el = rightRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("ceg-why-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="why-ceg" className="ceg-section ceg-why">
       <div className="ceg-container">
@@ -1478,7 +1496,7 @@ function WhyCEG({ theme, data }) {
           </div>
 
           {/* Right column — numbered differentiators */}
-          <div className="ceg-why-right">
+          <div className="ceg-why-right" ref={rightRef}>
             {WHY_ITEMS.map((item) => (
               <div key={item.num} className="ceg-why-item">
                 <div className="ceg-why-num">{item.num}</div>
