@@ -733,6 +733,28 @@ ul { list-style: none; padding: 0; margin: 0; }
   padding: 44px 44px;
   display: flex; flex-direction: column;
   border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+.ceg-division-card[data-has-photo="true"] {
+  background-color: var(--bg);
+}
+.ceg-division-card[data-has-photo="true"] .ceg-division-card-photo-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.08;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.ceg-division-card[data-has-photo="true"]:hover .ceg-division-card-photo-bg {
+  opacity: 0.13;
+}
+.ceg-division-card[data-has-photo="true"] > *:not(.ceg-division-card-photo-bg) {
+  position: relative;
+  z-index: 1;
 }
 .ceg-division-card-num {
   font-family: var(--font-mono); font-size: 11px;
@@ -1691,10 +1713,29 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   color: inherit;
   transition: all 0.2s ease;
   border-radius: 0;
+  position: relative;
+  overflow: hidden;
 }
 .ceg-cap-card:hover {
   border-color: #5b9bd5;
   background: rgba(15, 34, 54, 0.8);
+}
+.ceg-cap-card-has-photo .ceg-cap-card-photo-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.08;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.ceg-cap-card-has-photo:hover .ceg-cap-card-photo-bg {
+  opacity: 0.13;
+}
+.ceg-cap-card-has-photo > *:not(.ceg-cap-card-photo-bg) {
+  position: relative;
+  z-index: 1;
 }
 .ceg-cap-badge {
   font-family: var(--font-inter, "Inter", system-ui, sans-serif);

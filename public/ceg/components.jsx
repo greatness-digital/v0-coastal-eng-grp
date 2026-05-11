@@ -845,7 +845,10 @@ function Capabilities({ theme, data }) {
         <div className="ceg-capabilities-grid">
           {/* CAP-01 through CAP-05 cards */}
           {data.CAPABILITIES.map((cap, i) => (
-            <a key={cap.key} href={`#capability-${cap.key}`} className="ceg-cap-card">
+            <a key={cap.key} href={`#capability-${cap.key}`} className={`ceg-cap-card${cap.key === "diving" ? " ceg-cap-card-has-photo" : ""}`}>
+              {cap.key === "diving" && (
+                <div className="ceg-cap-card-photo-bg" style={{backgroundImage: "url('/assets/commercial-diving.jpg')"}} />
+              )}
               <div className="ceg-cap-badge">{cap.badge}</div>
               <h3 className="ceg-cap-title">{cap.title}</h3>
               <p className="ceg-cap-body">{cap.body}</p>
@@ -907,7 +910,13 @@ function Divisions({ theme, data }) {
 
           <div className="ceg-divisions-display">
             <PlaceholderPhoto kind={div.key === "engineering" ? "bridge" : div.key === "marine-services" ? "barge" : div.key} tall />
-            <div className="ceg-division-card">
+            <div
+              className="ceg-division-card"
+              data-has-photo={div.key === "diving" ? "true" : undefined}
+            >
+              {div.key === "diving" && (
+                <div className="ceg-division-card-photo-bg" style={{backgroundImage: "url('/assets/commercial-diving.jpg')"}} />
+              )}
               <div className="ceg-division-card-num">0{active + 1}</div>
               <div className="ceg-division-card-name">{div.name}</div>
               <p className="ceg-division-card-blurb">{div.blurb}</p>
@@ -1095,7 +1104,7 @@ function Projects({ theme, data }) {
 }
 
 // ─── VOSB band ─────────────────────────────────────────���────────────────────
-// ─── Careers ────────────────────────────────────────────────────────────
+// ─── Careers ────────────────────────────���───────────────────────────────
 // Talent is a top business priority per Kevin — promote it on the homepage.
 // JMT-leaning: pitch + benefits grid + open-roles teaser.
 function Careers({ theme, data }) {
