@@ -1604,12 +1604,7 @@ const PILLARS = [
     </svg>`,
   },
   {
-    title: "Work That Matters",
-    body: "Navy dry docks, bridge foundations, dams, seawalls. You'll work on critical infrastructure up and down the East Coast — the kind of projects that build a résumé.",
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 2L2 7v3c0 5 10 8 10 8s10-3 10-8V7l-10-5z"/>
-      <path d="M12 13v6"/>
-    </svg>`,
+    title: null, // photo card — rendered separately
   },
   {
     title: "Veteran-Led. Safety First.",
@@ -1661,13 +1656,17 @@ function Careers({ theme, data }) {
           {/* RIGHT COLUMN — 2×2 Pillar Grid */}
           <div className="ceg-careers-right">
             <div className="ceg-careers-grid">
-              {PILLARS.map((pillar, i) => (
-                <div key={i} className="ceg-career-pillar">
-                  <div className="ceg-pillar-icon" dangerouslySetInnerHTML={{ __html: pillar.icon }} />
-                  <h3 className="ceg-pillar-title">{pillar.title}</h3>
-                  <p className="ceg-pillar-body">{pillar.body}</p>
-                </div>
-              ))}
+              {PILLARS.map((pillar, i) =>
+                pillar.title === null ? (
+                  <div key={i} className="ceg-career-pillar ceg-pillar-photo" />
+                ) : (
+                  <div key={i} className="ceg-career-pillar">
+                    <div className="ceg-pillar-icon" dangerouslySetInnerHTML={{ __html: pillar.icon }} />
+                    <h3 className="ceg-pillar-title">{pillar.title}</h3>
+                    <p className="ceg-pillar-body">{pillar.body}</p>
+                  </div>
+                )
+              )}
             </div>
           </div>
 

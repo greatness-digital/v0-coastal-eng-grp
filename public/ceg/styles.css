@@ -2293,6 +2293,18 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   border-color: #1c6fbf;
   box-shadow: 0 8px 32px rgba(28, 111, 191, 0.08);
 }
+.ceg-pillar-photo {
+  background-image: url('/assets/careers-work-photo.jpg');
+  background-size: cover;
+  background-position: center center;
+  border: none !important;
+  padding: 0 !important;
+  min-height: 220px;
+}
+.ceg-pillar-photo:hover {
+  border: none !important;
+  box-shadow: none !important;
+}
 
 .ceg-pillar-icon {
   width: 24px;
