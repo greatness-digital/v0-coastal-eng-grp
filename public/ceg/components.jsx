@@ -1400,7 +1400,9 @@ function MobileMenu({ open, onClose, data }) {
   const [openSection, setOpenSection] = useState(null);
   if (!open) return null;
   return (
-    <div className="ceg-mobile" role="dialog" aria-modal="true">
+    <>
+      <div className="ceg-mobile-backdrop" onClick={onClose} aria-hidden="true" />
+      <div className="ceg-mobile" role="dialog" aria-modal="true">
       <div className="ceg-mobile-head">
         <img src="/assets/logo.avif" alt="Coastal Engineering" className="ceg-mobile-logo"/>
         <button className="ceg-mobile-close" onClick={onClose} aria-label="Close">
@@ -1424,9 +1426,10 @@ function MobileMenu({ open, onClose, data }) {
       </div>
       <div className="ceg-mobile-foot">
         <a href={`tel:${data.CONTACT.phone}`}>{data.CONTACT.phone}</a>
-        <Btn href="#contact" onClick={onClose}>Request a bid</Btn>
+        <Btn href="#contact" onClick={onClose}>Request a Bid</Btn>
       </div>
     </div>
+    </>
   );
 }
 
