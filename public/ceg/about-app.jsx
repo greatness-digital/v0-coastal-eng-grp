@@ -84,7 +84,10 @@ function OurStory() {
       <div className="ceg-container">
         <div className="ceg-about-story-layout">
           <div className="ceg-about-story-head">
-            <span className="ceg-eyebrow ceg-eyebrow-mark">Who we are</span>
+            <div className="ceg-eyebrow">
+              <span className="ceg-eyebrow-mark" />
+              <span>Who We Are</span>
+            </div>
             <h2 className="ceg-h2">{ABOUT_DATA.story.headline}</h2>
           </div>
           <div className="ceg-about-story-body">
@@ -104,7 +107,10 @@ function Leadership() {
     <section id="leadership" className="ceg-section ceg-about-leadership">
       <div className="ceg-container">
         <div className="ceg-section-head">
-          <span className="ceg-eyebrow ceg-eyebrow-mark">Our Team</span>
+          <div className="ceg-eyebrow">
+            <span className="ceg-eyebrow-mark" />
+            <span>Our Team</span>
+          </div>
           <h2 className="ceg-h2">Leadership</h2>
           <p className="ceg-section-lede">
             Experienced professionals with deep expertise in marine construction, engineering, and commercial diving operations.
