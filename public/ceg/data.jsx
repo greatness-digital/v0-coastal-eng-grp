@@ -187,7 +187,7 @@ const CLIENTS = [
 ];
 
 const STATS = [
-  { value: "13", label: "Licensed States" },
+  { value: "20+", label: "Years of Experience" },
   { value: "500+", label: "Projects Completed" },
   { value: "100%", label: "Safety Record" },
   { value: "ADCI", label: "Certified" },

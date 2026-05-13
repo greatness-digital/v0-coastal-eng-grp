@@ -351,11 +351,10 @@ function HeroStats({ theme, data }) {
       <div className="ceg-container ceg-hero-stats-center">
         <Eyebrow accent>Engineered Solutions. Built to Last.</Eyebrow>
         <h1 className="ceg-h1 serif">
-          Marine Construction & Engineering<br/>
-          Along the East Coast
+          Delivering Complex Marine Construction and Underwater Infrastructure Projects
         </h1>
         <p className="ceg-hero-lede">
-          Coastal Engineering Group delivers integrated diving, engineering, dredging, and construction services — with licensed PE engineers and ADCI-certified dive crews under one roof. One firm. End to end.
+          Coastal Engineering delivers marine construction, commercial diving, and underwater infrastructure solutions for transportation, waterfront, municipal, and energy projects throughout the Eastern United States.
         </p>
         <div className="ceg-hero-ctas">
           <Btn href="/contact" variant="hero-accent">Start a Project</Btn>
@@ -1433,7 +1432,7 @@ function MobileMenu({ open, onClose, data }) {
   );
 }
 
-// ─── Why CEG section ────────────────────────────────────────────────�����───────────
+// ─── Why CEG section ───────────────────��────────────────────────────�����───────────
 const WHY_ITEMS = [
   {
     num: "01",
@@ -1710,7 +1709,7 @@ function Careers({ theme, data }) {
   );
 }
 
-// ─── Certifications Bar ───────────────────────────────────────────────────���─────
+// ─── Certifications Bar ───────────────────���───────────────────────────────���─────
 const CERT_PILLS = [
   "ADCI Certified",
   "VOSB Certified",
