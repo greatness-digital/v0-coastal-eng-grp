@@ -184,7 +184,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
             <span>VOSB · ADCI</span>
           </div>
           <a href="#" className="ceg-logo ceg-logo-center">
-            <img src="/assets/logo.avif" alt="Coastal Engineering" />
+            <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
           </a>
           <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
             <a href="#careers">Careers</a>
@@ -213,7 +213,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
       <div className="ceg-nav-logo-row">
         <div className="ceg-container ceg-nav-logo-inner">
           <a href="#" className="ceg-logo">
-            <img src="/assets/logo.avif" alt="Coastal Engineering" />
+            <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
           </a>
           <a href="#contact" className="ceg-nav-phone">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
@@ -1300,7 +1300,7 @@ function Footer({ theme, data }) {
       <div className="ceg-container">
         <div className="ceg-footer-top">
           <div className="ceg-footer-brand">
-            <img src="/assets/logo.avif" alt="Coastal Engineering" className="ceg-footer-logo"/>
+            <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" className="ceg-footer-logo"/>
             <p className="ceg-footer-tagline">
               Marine construction, diving, dredging, engineering, and marine services
               for the working waterfront.
@@ -1403,7 +1403,7 @@ function MobileMenu({ open, onClose, data }) {
       <div className="ceg-mobile-backdrop" onClick={onClose} aria-hidden="true" />
       <div className="ceg-mobile" role="dialog" aria-modal="true">
       <div className="ceg-mobile-head">
-        <img src="/assets/logo.avif" alt="Coastal Engineering" className="ceg-mobile-logo"/>
+        <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" className="ceg-mobile-logo"/>
         <button className="ceg-mobile-close" onClick={onClose} aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.6"/></svg>
         </button>
@@ -1432,7 +1432,7 @@ function MobileMenu({ open, onClose, data }) {
   );
 }
 
-// ─── Why CEG section ───────────────────��────────────────────────────�����───────────
+// ─── Why CEG section ──────────────���────��────────────────────────────�����───────────
 const WHY_ITEMS = [
   {
     num: "01",
@@ -1709,7 +1709,7 @@ function Careers({ theme, data }) {
   );
 }
 
-// ─── Certifications Bar ───────────────────���───────────────────────────────���─────
+// ─── Certifications Bar ────────────���──────���───────────────────────────────���─────
 const CERT_PILLS = [
   "ADCI Certified",
   "VOSB Certified",
