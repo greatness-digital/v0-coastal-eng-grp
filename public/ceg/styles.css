@@ -2815,3 +2815,279 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   .ceg-concept-toggle-tab { flex: 1; }
   .ceg-concept-toggle-tab-desc { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ABOUT PAGE STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── About Hero ──────────────────────────────────────────────────────────── */
+.ceg-about-hero {
+  position: relative;
+  padding: 120px 0 100px;
+  background: linear-gradient(135deg, #0a1628 0%, #0f2236 50%, #1a3a5c 100%);
+  color: #ffffff;
+  overflow: hidden;
+}
+.ceg-about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.ceg-about-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+.ceg-about-hero .ceg-h1 {
+  color: #ffffff;
+  margin: 20px 0 24px;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.15;
+}
+.ceg-about-hero-lede {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  max-width: 640px;
+}
+.ceg-about-hero-accent {
+  position: absolute;
+  right: -120px;
+  bottom: -80px;
+  width: 400px;
+  height: 400px;
+  border: 1px solid rgba(91,155,213,0.15);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ─── Our Story ───────────────────────────────────────────────────────────── */
+.ceg-about-story {
+  background: var(--bg);
+  padding: 100px 0;
+}
+.ceg-about-story-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+.ceg-about-story-head .ceg-h2 {
+  margin-top: 16px;
+  color: var(--ink);
+}
+.ceg-about-story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.ceg-about-story-body p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+.ceg-about-story-body p:first-child {
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+@media (max-width: 900px) {
+  .ceg-about-story-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ─── Leadership ──────────────────────────────────────────────────────────── */
+.ceg-about-leadership {
+  background: #f8fafc;
+  padding: 100px 0;
+}
+.ceg-about-leadership .ceg-section-head {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+.ceg-about-leadership .ceg-section-lede {
+  margin-top: 16px;
+}
+.ceg-leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.ceg-leader-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.ceg-leader-card:hover {
+  border-color: #1c6fbf;
+  box-shadow: 0 12px 40px rgba(28,111,191,0.1);
+  transform: translateY(-4px);
+}
+.ceg-leader-photo {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #e2e8f0;
+}
+.ceg-leader-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.ceg-leader-card:hover .ceg-leader-photo img {
+  transform: scale(1.05);
+}
+.ceg-leader-info {
+  padding: 24px;
+}
+.ceg-leader-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+.ceg-leader-title {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #1c6fbf;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.ceg-leader-bio {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-top: 12px;
+}
+@media (max-width: 1100px) {
+  .ceg-leadership-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .ceg-leadership-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+}
+
+/* ─── Veteran Owned ───────────────────────────────────────────────────────── */
+.ceg-about-veteran {
+  background: #0f2236;
+  color: #ffffff;
+  padding: 100px 0;
+}
+.ceg-about-veteran-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.ceg-about-veteran .ceg-h2.on-light {
+  color: #ffffff;
+  margin: 16px 0 20px;
+}
+.ceg-about-veteran-lede {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.8);
+}
+.ceg-about-veteran-points {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+.ceg-about-veteran-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.9);
+}
+.ceg-about-veteran-points li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #5b9bd5;
+}
+.ceg-vosb-badge-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ceg-vosb-badge-inner {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 3px solid rgba(91,155,213,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(91,155,213,0.08);
+}
+.ceg-vosb-badge-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #5b9bd5;
+  margin-bottom: 8px;
+}
+.ceg-vosb-badge-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+}
+.ceg-vosb-badge-sub {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.6);
+  max-width: 180px;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .ceg-about-veteran-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+  .ceg-about-veteran-points { align-items: center; }
+  .ceg-about-veteran-points li { text-align: left; }
+}
+
+/* ─── About CTA ───────────────────────────────────────────────────────────── */
+.ceg-about-cta {
+  background: var(--bg);
+  padding: 100px 0;
+}
+.ceg-about-cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ceg-about-cta .ceg-h2 {
+  color: var(--ink);
+}
+.ceg-about-cta-lede {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 20px 0 32px;
+}
+.ceg-btn-lg {
+  padding: 16px 32px;
+  font-size: 1rem;
+}
