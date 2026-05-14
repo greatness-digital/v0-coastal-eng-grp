@@ -25,6 +25,7 @@ function App() {
         <window.Careers theme={theme} data={data} />
         <window.CertificationsBar />
         <window.Locations />
+        <window.FinalCTA data={data} />
       </main>
       <window.Footer theme={theme} data={data} />
       <window.MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} data={data} />

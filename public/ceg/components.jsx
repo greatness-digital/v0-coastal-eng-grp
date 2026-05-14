@@ -1429,7 +1429,7 @@ function Footer({ theme, data }) {
   );
 }
 
-// ─── Mobile menu ────────────────────────────────────────────────────────────
+// ─── Mobile menu ─────────────────────────────────────────���──────────────────
 function MobileMenu({ open, onClose, data }) {
   const [openSection, setOpenSection] = useState(null);
   if (!open) return null;
@@ -1844,8 +1844,36 @@ function Locations() {
   );
 }
 
+function FinalCTA({ data }) {
+  const phone = data?.CONTACT?.phone || "845-328-3178";
+  return (
+    <section className="ceg-final-cta">
+      <div className="ceg-final-cta-inner">
+        <p className="ceg-final-cta-eyebrow">Let&apos;s Build Something</p>
+        <h2 className="ceg-final-cta-heading">Ready to Start Your Next Project?</h2>
+        <p className="ceg-final-cta-sub">
+          From underwater inspection to full marine construction — Coastal Engineering Group delivers integrated solutions across 13 licensed states. Tell us what you&apos;re working on.
+        </p>
+        <div className="ceg-final-cta-btns">
+          <a href="#contact" className="ceg-final-cta-btn ceg-final-cta-btn-primary">Start a Project →</a>
+          <a href={`tel:${phone}`} className="ceg-final-cta-btn ceg-final-cta-btn-secondary">Call {phone}</a>
+        </div>
+        <div className="ceg-final-cta-trust">
+          <span>ADCI Certified</span>
+          <span className="ceg-final-cta-dot">·</span>
+          <span>100% Safety Record</span>
+          <span className="ceg-final-cta-dot">·</span>
+          <span>PE Licensed in 13 States</span>
+          <span className="ceg-final-cta-dot">·</span>
+          <span>Veteran-Owned</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 Object.assign(window, {
   applyThemeVars,
   Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
-  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Locations, Divisions, Markets, Projects, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+  Capabilities, WhyCEG, FeaturedProjects, Careers, CertificationsBar, Locations, Divisions, Markets, Projects, VOSBBand, ClientsStrip, ContactBand, FinalCTA, Footer, MobileMenu,
 });
