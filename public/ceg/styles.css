@@ -2908,19 +2908,35 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .ceg-about-hero {
   position: relative;
   padding: 120px 0 100px;
-  background: linear-gradient(135deg, #0a1628 0%, #0f2236 50%, #1a3a5c 100%);
+  background: #0a1628;
   color: #ffffff;
   overflow: hidden;
 }
+/* Real photo layer */
 .ceg-about-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/assets/hero-background.jpg');
+  background-image: url('/assets/about-hero-bg.jpg');
   background-size: cover;
-  background-position: center;
-  opacity: 0.12;
+  background-position: center 40%;
+  opacity: 0.38;
   pointer-events: none;
+  z-index: 0;
+}
+/* Dark gradient overlay so text stays legible */
+.ceg-about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10, 22, 40, 0.82) 0%,
+    rgba(10, 22, 40, 0.55) 55%,
+    rgba(10, 22, 40, 0.2) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 .ceg-about-hero-inner {
   position: relative;
