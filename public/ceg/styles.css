@@ -2558,6 +2558,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .ceg-careers-btn.ceg-btn-ghost:hover {
   background: #1c6fbf;
   color: white;
+}
   border-color: #1c6fbf;
 }
 
@@ -3653,10 +3654,10 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display, "Barlow", system-ui, sans-serif);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.01em;
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
   padding: 16px 36px;
   border-radius: 0;
   border: 1.5px solid transparent;
@@ -3710,7 +3711,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    FEDERAL MARKETS PAGE
-   ═══════════════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════════���════ */
 
 /* ─── Shared helpers ────────────────────────────────────────────────────────── */
 .fed-section { padding: 96px 0; }
@@ -3729,8 +3730,8 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 /* ─── Shared buttons ────────────────────────────────────────────────────────── */
 .fed-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: var(--font-display, "Barlow", system-ui, sans-serif);
-  font-weight: 700; font-size: 14px; letter-spacing: 0.01em;
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-weight: 600; font-size: 14px; letter-spacing: 0.02em;
   padding: 14px 28px; border-radius: 0; border: 1.5px solid transparent;
   text-decoration: none; cursor: pointer; white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
