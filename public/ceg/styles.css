@@ -2871,6 +2871,28 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .ceg-about-story {
   background: var(--bg);
   padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.ceg-about-story::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 55%;
+  height: 120%;
+  background-image: url('/assets/diver-helmet.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.055;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 30% 50%, black 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 80% at 30% 50%, black 20%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+.ceg-about-story .ceg-container {
+  position: relative;
+  z-index: 1;
 }
 .ceg-about-story-layout {
   display: grid;
