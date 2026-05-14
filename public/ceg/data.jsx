@@ -199,7 +199,7 @@ const NAV = {
     { label: "Our Story",      href: "/about#story" },
     { label: "Leadership",     href: "/about#leadership" },
     { label: "Veteran-Owned",  href: "/about#veteran" },
-    { label: "Safety & Quality", href: "/about#safety" },
+    { label: "Safety & Quality", href: "/safety-quality" },
     { label: "Careers",        href: "#careers" },
   ]},
   markets: { label: "Markets", items: MARKETS.map(m => m.name) },
