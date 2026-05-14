@@ -1411,6 +1411,38 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .ceg-footer {
   background: var(--ink); color: rgba(255,255,255,0.85);
   padding: 80px 0 24px;
+  position: relative;
+  overflow: hidden;
+}
+/* Diver illustration — right-aligned, feathered on the left edge */
+.ceg-footer::before {
+  content: "";
+  position: absolute;
+  top: -5%;
+  right: -2%;
+  width: 42%;
+  height: 115%;
+  background-image: url('/assets/footer-diver-illustration.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.22;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 68% 50%, black 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse 70% 80% at 68% 50%, black 20%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Left vignette to protect text legibility */
+.ceg-footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--ink) 40%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+.ceg-footer > * {
+  position: relative;
+  z-index: 1;
 }
 .ceg-footer-top {
   display: grid; grid-template-columns: 1.2fr 2fr; gap: 64px;
@@ -3314,7 +3346,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
    SAFETY & QUALITY PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─── Shared helpers ───���─────────────────────────────────────────────────── */
+/* ─── Shared helpers ───�����─────────────────────────────────────────────────── */
 .sq-section { padding: 96px 0; }
 .sq-section-head { text-align: center; max-width: 700px; margin: 0 auto 56px; }
 .sq-h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.15; margin: 16px 0 0; }
