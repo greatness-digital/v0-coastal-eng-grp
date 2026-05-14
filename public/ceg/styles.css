@@ -1688,12 +1688,10 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 /* Centered-logo nav (Drydock) ---------------------------------- */
 .ceg-nav-centered {
   padding: 0;
-  position: sticky;
-  top: 0;
-  z-index: 80;
+  position: relative;
+  z-index: 79;
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
-  box-shadow: 0 1px 8px rgba(11,25,41,0.06);
 }
 .ceg-nav-centered-top {
   display: grid;
@@ -1743,10 +1741,47 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .ceg-logo-center { justify-self: center; }
 .ceg-logo-center img { height: 108px; width: auto; display: block; }
 
-.ceg-nav-centered-bottom {
-  display: flex; justify-content: center;
-  border-top: 1px solid var(--rule);
+/* Sticky nav bar — separate element for proper sticky behavior */
+.ceg-nav-sticky-bar {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  transition: box-shadow 0.2s ease;
+}
+.ceg-nav-sticky-bar.is-scrolled {
+  box-shadow: 0 4px 24px rgba(10, 24, 40, 0.12);
+}
+.ceg-nav-sticky-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
+  position: relative;
+}
+.ceg-nav-sticky-bar .ceg-nav-main {
+  gap: 0;
+  display: flex;
+  justify-content: center;
+}
+.ceg-nav-sticky-bar .ceg-nav-trigger {
+  padding: 18px 28px;
+  font-family: var(--font-inter, "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ceg-nav-sticky-bar .ceg-nav-trigger:hover { color: var(--brand); }
+.ceg-nav-sticky-bar .ceg-nav-item.is-open .ceg-nav-trigger { color: var(--brand); }
+.ceg-nav-sticky-bar .ceg-nav-item.is-open .ceg-nav-trigger::after {
+  left: 28px; right: 28px; bottom: 0;
+}
+.ceg-nav-sticky-bar .ceg-dropdown,
+.ceg-nav-sticky-bar .ceg-mega {
+  left: 50%; transform: translateX(-50%);
 }
 .ceg-nav-centered .ceg-nav-main {
   gap: 0;
@@ -1772,8 +1807,46 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   left: 50%; transform: translateX(-50%);
 }
 
+/* Sticky elements — hidden by default, fade in when scrolled */
+.ceg-nav-sticky-phone,
+.ceg-nav-sticky-cta {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.ceg-nav-sticky-phone {
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  padding: 18px 0;
+}
+.ceg-nav-sticky-phone:hover { color: var(--brand); }
+.ceg-nav-sticky-cta {
+  right: 0;
+}
+/* Fade in when scrolled */
+.ceg-nav-sticky-bar.is-scrolled .ceg-nav-sticky-phone,
+.ceg-nav-sticky-bar.is-scrolled .ceg-nav-sticky-cta {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 1100px) {
+  .ceg-nav-sticky-phone { display: none; }
+}
+@media (max-width: 980px) {
+  .ceg-nav-sticky-cta { display: none; }
+}
+
 @media (max-width: 920px) {
-  .ceg-nav-centered-bottom { display: none; }
+  .ceg-nav-sticky-bar { display: none; }
   .ceg-nav-centered-side { display: none; }
   .ceg-nav-centered-top {
     display: flex;
@@ -3711,7 +3784,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    FEDERAL MARKETS PAGE
-   ══════════════════════════════════════════════════════════════════════���════ */
+   ══════════════════════════════════════════════════════════════════════�����════ */
 
 /* ─── Shared helpers ────────────────────────────────────────────────────────── */
 .fed-section { padding: 96px 0; }

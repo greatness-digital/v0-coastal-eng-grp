@@ -68,9 +68,9 @@ function Eyebrow({ children, mark = false }) {
   );
 }
 
-function Btn({ children, variant = "primary", arrow = true, href = "#", onClick }) {
+function Btn({ children, variant = "primary", arrow = true, href = "#", onClick, className = "" }) {
   return (
-    <a href={href} onClick={onClick} className={`ceg-btn ceg-btn-${variant}`}>
+    <a href={href} onClick={onClick} className={`ceg-btn ceg-btn-${variant} ${className}`.trim()}>
       <span>{children}</span>
       {arrow && (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
@@ -194,34 +194,49 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
 
   if (isCentered) {
     return (
-      <header className={`ceg-nav-shell ceg-nav-centered ${scrolled ? "is-scrolled" : ""} nav-${theme.nav}`}>
-        <div className="ceg-container ceg-nav-centered-top">
-          <div className="ceg-nav-centered-side ceg-nav-centered-side-l">
-            <a href={`tel:${data.CONTACT.phone}`} className="ceg-nav-phone">{data.CONTACT.phone}</a>
-            <span aria-hidden style={{ opacity: 0.4 }}>·</span>
-            <span>VOSB · ADCI</span>
-          </div>
-          <a href="#" className="ceg-logo ceg-logo-center">
-            <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
-          </a>
-          <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
-            <a href="#careers">Careers</a>
-            <span aria-hidden style={{ opacity: 0.4 }}>·</span>
-            <a href="#contact" className="ceg-nav-centered-cta">
-              Request a Bid
-              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden>
-                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
-              </svg>
+      <>
+        {/* Top section — scrolls away with page */}
+        <header className={`ceg-nav-shell ceg-nav-centered nav-${theme.nav}`}>
+          <div className="ceg-container ceg-nav-centered-top">
+            <div className="ceg-nav-centered-side ceg-nav-centered-side-l">
+              <a href={`tel:${data.CONTACT.phone}`} className="ceg-nav-phone">{data.CONTACT.phone}</a>
+              <span aria-hidden style={{ opacity: 0.4 }}>·</span>
+              <span>VOSB · ADCI</span>
+            </div>
+            <a href="#" className="ceg-logo ceg-logo-center">
+              <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
             </a>
+            <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
+              <a href="#careers">Careers</a>
+              <span aria-hidden style={{ opacity: 0.4 }}>·</span>
+              <a href="#contact" className="ceg-nav-centered-cta">
+                Request a Bid
+                <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden>
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
+                </svg>
+              </a>
+            </div>
+            <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
+              <span /><span /><span />
+            </button>
           </div>
-          <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
-            <span /><span /><span />
-          </button>
+        </header>
+        {/* Sticky nav bar — separate element so sticky works */}
+        <div className={`ceg-nav-sticky-bar ${scrolled ? "is-scrolled" : ""}`}>
+          <div className="ceg-container ceg-nav-sticky-bar-inner">
+            {/* Phone — fades in when scrolled */}
+            <a href={`tel:${data.CONTACT.phone}`} className="ceg-nav-sticky-phone">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M3 2h2l1.5 3-1.5 1c.7 1.4 1.6 2.3 3 3l1-1.5L12 9v2c0 .6-.4 1-1 1C6.6 12 2 7.4 2 3c0-.6.4-1 1-1z" stroke="currentColor" strokeWidth="1.3" fill="none"/>
+              </svg>
+              {data.CONTACT.phone}
+            </a>
+            {navItems}
+            {/* Request a Bid — fades in when scrolled */}
+            <Btn href="#contact" variant="primary" arrow={false} className="ceg-nav-sticky-cta">Request a Bid</Btn>
+          </div>
         </div>
-        <div className="ceg-nav-centered-bottom">
-          {navItems}
-        </div>
-      </header>
+      </>
     );
   }
 
@@ -1429,7 +1444,7 @@ function Footer({ theme, data }) {
   );
 }
 
-// ─── Mobile menu ─────────────────────────────────────────���──────────────────
+// ─── Mobile menu ─────────────────────────────────────────�����──────────────────
 function MobileMenu({ open, onClose, data }) {
   const [openSection, setOpenSection] = useState(null);
   if (!open) return null;
