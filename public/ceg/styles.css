@@ -3575,8 +3575,38 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   background: #1c6fbf;
   padding: 112px 24px;
   width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+/* Photo layer — right-aligned, feathered on the left edge */
+.ceg-final-cta::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -4%;
+  width: 52%;
+  height: 120%;
+  background-image: url('/assets/cta-diver-crane.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.18;
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 72% 50%, black 15%, transparent 72%);
+  mask-image: radial-gradient(ellipse 75% 85% at 72% 50%, black 15%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Reinforcing left-side vignette so text stays crisp */
+.ceg-final-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #1c6fbf 35%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 .ceg-final-cta-inner {
+  position: relative;
+  z-index: 1;
   max-width: 720px;
   margin: 0 auto;
   display: flex;
