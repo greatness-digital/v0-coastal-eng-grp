@@ -2884,7 +2884,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   background-image: url('/assets/diver-helmet.jpg');
   background-size: cover;
   background-position: center top;
-  opacity: 0.055;
+  opacity: 0.15;
   -webkit-mask-image: radial-gradient(ellipse 70% 80% at 30% 50%, black 20%, transparent 75%);
   mask-image: radial-gradient(ellipse 70% 80% at 30% 50%, black 20%, transparent 75%);
   pointer-events: none;
