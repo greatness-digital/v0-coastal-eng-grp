@@ -200,8 +200,6 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
           <div className="ceg-container ceg-nav-centered-top">
             <div className="ceg-nav-centered-side ceg-nav-centered-side-l">
               <a href={`tel:${data.CONTACT.phone}`} className="ceg-nav-phone">{data.CONTACT.phone}</a>
-              <span aria-hidden style={{ opacity: 0.4 }}>·</span>
-              <span>VOSB · ADCI</span>
             </div>
             <a href="#" className="ceg-logo ceg-logo-center">
               <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
