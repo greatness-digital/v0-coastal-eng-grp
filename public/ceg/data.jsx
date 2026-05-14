@@ -195,7 +195,13 @@ const STATS = [
 ];
 
 const NAV = {
-  about: { label: "About", items: ["Our Story", "Leadership", "Veteran-Owned", "Safety & Quality", "Careers"] },
+  about: { label: "About", items: [
+    { label: "Our Story",      href: "/about#story" },
+    { label: "Leadership",     href: "/about#leadership" },
+    { label: "Veteran-Owned",  href: "/about#veteran" },
+    { label: "Safety & Quality", href: "/about#safety" },
+    { label: "Careers",        href: "#careers" },
+  ]},
   markets: { label: "Markets", items: MARKETS.map(m => m.name) },
   services: { label: "Services", items: DIVISIONS.map(d => d.name) },
   projects: { label: "Projects", items: ["Featured Work", "Federal", "State & Local", "Energy", "Commercial"] },

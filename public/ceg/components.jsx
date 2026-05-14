@@ -244,16 +244,20 @@ function SimplePanel({ item, navKey, data }) {
   return (
     <div className="ceg-dropdown">
       <ul>
-        {item.items.map((label) => (
-          <li key={label}>
-            <a href={`#${navKey}-${label.toLowerCase().replace(/\s+/g, "-")}`}>
-              <span>{label}</span>
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
-                <path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" strokeWidth="1.3" />
-              </svg>
-            </a>
-          </li>
-        ))}
+        {item.items.map((entry) => {
+          const label = typeof entry === "string" ? entry : entry.label;
+          const href  = typeof entry === "string" ? `#${navKey}-${label.toLowerCase().replace(/\s+/g, "-")}` : entry.href;
+          return (
+            <li key={label}>
+              <a href={href}>
+                <span>{label}</span>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+                  <path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" strokeWidth="1.3" />
+                </svg>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -272,11 +276,15 @@ function MegaPanel({ navKey, item, data, shared }) {
         <div className="ceg-mega-col">
           <div className="ceg-mega-eyebrow">All {item.label}</div>
           <ul className="ceg-mega-list">
-            {item.items.map((label) => (
-              <li key={label}>
-                <a href={`#${navKey}-${label.toLowerCase().replace(/\s+/g, "-")}`}>{label}</a>
-              </li>
-            ))}
+            {item.items.map((entry) => {
+              const label = typeof entry === "string" ? entry : entry.label;
+              const href  = typeof entry === "string" ? `#${navKey}-${label.toLowerCase().replace(/\s+/g, "-")}` : entry.href;
+              return (
+                <li key={label}>
+                  <a href={href}>{label}</a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -998,7 +1006,7 @@ function Markets({ theme, data }) {
   );
 }
 
-// ─── Projects ───────────────────────────────────────────────────────────────
+// ─── Projects ─────────────────────────────────────────────────────────────���─
 function Projects({ theme, data }) {
   // Featured case study (large) + category browser (side) + 3 case studies below.
   // No top-level filter chips per Kevin's review — category browser is the entry point.
@@ -1417,7 +1425,11 @@ function MobileMenu({ open, onClose, data }) {
             </button>
             {openSection === k && (
               <ul>
-                {item.items.map((i) => <li key={i}><a href="#" onClick={onClose}>{i}</a></li>)}
+                {item.items.map((entry) => {
+                  const label = typeof entry === "string" ? entry : entry.label;
+                  const href  = typeof entry === "string" ? "#" : entry.href;
+                  return <li key={label}><a href={href} onClick={onClose}>{label}</a></li>;
+                })}
               </ul>
             )}
           </div>
@@ -1432,7 +1444,7 @@ function MobileMenu({ open, onClose, data }) {
   );
 }
 
-// ─── Why CEG section ──────────────���────��────────────────────────────�����───────────
+// ─��─ Why CEG section ──────────────���────��────────────────────────────�����───────────
 const WHY_ITEMS = [
   {
     num: "01",
