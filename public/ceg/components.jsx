@@ -106,7 +106,6 @@ function UtilityBar({ theme, data }) {
         <div className="ceg-util-right">
           <a href="#contact">{data.CONTACT.emergency}</a>
           <span className="ceg-util-sep">·</span>
-          <span className="ceg-util-sep">·</span>
           <a href="#careers">Careers</a>
           <a href="#partners">Partner Portal</a>
         </div>
@@ -1155,7 +1154,7 @@ function Projects({ theme, data }) {
 }
 
 // ─── VOSB band ─────────────────────────────────────────���───────────────────���
-// ─── Careers ────────────────────────────���───────────────────────────────
+// ─── Careers ───────────��────────────────���───────────────────────────────
 // Talent is a top business priority per Kevin — promote it on the homepage.
 // JMT-leaning: pitch + benefits grid + open-roles teaser.
 function Careers({ theme, data }) {
