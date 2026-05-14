@@ -207,8 +207,6 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
               <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
             </a>
             <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
-              <a href="#careers">Careers</a>
-              <span aria-hidden style={{ opacity: 0.4 }}>·</span>
               <a href="#contact" className="ceg-nav-centered-cta">
                 Request a Bid
                 <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden>
