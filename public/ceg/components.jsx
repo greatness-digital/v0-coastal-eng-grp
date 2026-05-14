@@ -1324,7 +1324,10 @@ function Footer({ theme, data }) {
               <div key={k} className="ceg-footer-col">
                 <div className="ceg-footer-col-h">{item.label}</div>
                 <ul>
-                  {item.items.slice(0, 5).map((i) => <li key={i}><a href="#">{i}</a></li>)}
+                  {item.items.slice(0, 5).map((entry) => {
+                    const label = typeof entry === "string" ? entry : entry.label;
+                    return <li key={label}><a href="#">{label}</a></li>;
+                  })}
                 </ul>
               </div>
             ))}
