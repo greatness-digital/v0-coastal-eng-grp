@@ -3005,6 +3005,28 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   background: #0f2236;
   color: #ffffff;
   padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.ceg-about-veteran::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 55%;
+  height: 120%;
+  background-image: url('/assets/diver-city.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.15;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 50%, black 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 80% at 70% 50%, black 20%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+.ceg-about-veteran .ceg-container {
+  position: relative;
+  z-index: 1;
 }
 .ceg-about-veteran-layout {
   display: grid;
