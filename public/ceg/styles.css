@@ -21,6 +21,89 @@ ul { list-style: none; padding: 0; margin: 0; }
 .ceg-container { width: min(1320px, 100% - 48px); margin-inline: auto; }
 .ceg-app { min-height: 100vh; }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   REVEAL / ENTRANCE ANIMATION SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes ceg-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ceg-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ceg-slide-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Hero entrance — plays immediately on load, no JS needed */
+.ceg-hero-stats-center .ceg-eyebrow {
+  animation: ceg-fade-in 0.7s ease 0.1s both;
+}
+.ceg-hero-stats-center h1 {
+  animation: ceg-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+.ceg-hero-stats-center .ceg-hero-lede {
+  animation: ceg-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+.ceg-hero-stats-center .ceg-hero-ctas {
+  animation: ceg-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+.ceg-hero-stats-bar {
+  animation: ceg-fade-in 0.8s ease 0.7s both;
+}
+
+/* Scroll-triggered base states — hidden until JS adds .is-revealed */
+.ceg-reveal-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ceg-reveal-fade-up.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ceg-reveal-slide-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+.ceg-reveal-slide-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger grid — children animate in sequence when parent gets .is-revealed */
+.ceg-reveal-stagger-grid > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ceg-reveal-stagger-grid.is-revealed > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+.ceg-reveal-stagger-grid.is-revealed > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.13s; }
+.ceg-reveal-stagger-grid.is-revealed > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.21s; }
+.ceg-reveal-stagger-grid.is-revealed > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.29s; }
+.ceg-reveal-stagger-grid.is-revealed > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.37s; }
+.ceg-reveal-stagger-grid.is-revealed > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ceg-hero-stats-center .ceg-eyebrow,
+  .ceg-hero-stats-center h1,
+  .ceg-hero-stats-center .ceg-hero-lede,
+  .ceg-hero-stats-center .ceg-hero-ctas,
+  .ceg-hero-stats-bar,
+  .ceg-reveal-fade-up,
+  .ceg-reveal-slide-right,
+  .ceg-reveal-stagger-grid > * { animation: none; transition: none; opacity: 1; transform: none; }
+}
+
 /* ─── Type primitives ──────────────────────────────────────────── */
 .ceg-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;

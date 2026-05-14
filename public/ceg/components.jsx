@@ -3,6 +3,24 @@
 
 const { useState, useEffect, useRef } = React;
 
+// ─── Reveal hook ─────────────────────────────────────────────────────────────
+// Adds class "is-revealed" to the ref'd element when it enters the viewport.
+// threshold: 0–1, delay: optional extra ms offset for the first fire.
+function useReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add("is-revealed"); observer.disconnect(); } },
+      { threshold }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
 // ─── Utilities ──────────────────────────────────────────────────────────────
 function applyThemeVars(theme) {
   const c = theme.colors;
@@ -838,10 +856,12 @@ function MarketPhoto({ marketKey }) {
 
 // ─── Capabilities section ─────────────────────���─────────────────────────────────
 function Capabilities({ theme, data }) {
+  const headRef = useReveal(0.2);
+  const gridRef = useReveal(0.1);
   return (
     <section id="capabilities" className="ceg-section ceg-capabilities">
       <div className="ceg-container">
-        <div className="ceg-section-head">
+        <div className="ceg-section-head ceg-reveal-fade-up" ref={headRef}>
           <Eyebrow accent>What We Do</Eyebrow>
           <h2 className="ceg-h2">Five Divisions. One Firm.</h2>
           <p className="ceg-section-lede">
@@ -849,7 +869,7 @@ function Capabilities({ theme, data }) {
           </p>
         </div>
 
-        <div className="ceg-capabilities-grid">
+        <div className="ceg-capabilities-grid ceg-reveal-stagger-grid" ref={gridRef}>
           {/* CAP-01 through CAP-05 cards */}
           {data.CAPABILITIES.map((cap, i) => (
             <a key={cap.key} href={`#capability-${cap.key}`} className={`ceg-cap-card${(cap.key === "diving" || cap.key === "dredging" || cap.key === "engineering" || cap.key === "construction" || cap.key === "marine-services") ? " ceg-cap-card-has-photo" : ""}`}>
@@ -967,10 +987,12 @@ function Divisions({ theme, data }) {
 
 // ─── Markets ────────────────────────────────────────────────────────────────
 function Markets({ theme, data }) {
+  const headRef = useReveal(0.2);
+  const gridRef = useReveal(0.1);
   return (
     <section id="markets" className="ceg-section ceg-markets">
       <div className="ceg-container">
-        <div className="ceg-section-head ceg-section-head-row">
+        <div className="ceg-section-head ceg-section-head-row ceg-reveal-fade-up" ref={headRef}>
           <div>
             <Eyebrow mark>Markets we serve</Eyebrow>
             <h2 className="ceg-h2">Federal contracts.<br/>Commercial accountability.</h2>
@@ -982,7 +1004,7 @@ function Markets({ theme, data }) {
           </p>
         </div>
 
-        <div className="ceg-markets-grid">
+        <div className="ceg-markets-grid ceg-reveal-stagger-grid" ref={gridRef}>
           {data.MARKETS.map((m, i) => (
             <a key={m.key} href={`#market-${m.key}`} className="ceg-market-card">
               <div className="ceg-market-bg" aria-hidden>
@@ -1203,10 +1225,12 @@ function ClientsStrip({ theme, data }) {
 // ─── Contact band + Footer �����─────────────────────────────────────────────────
 function ContactBand({ theme, data }) {
   const [submitted, setSubmitted] = useState(false);
+  const textRef = useReveal(0.15);
+  const formRef = useReveal(0.15);
   return (
     <section id="contact" className="ceg-section ceg-contact">
       <div className="ceg-container ceg-contact-grid">
-        <div className="ceg-contact-text">
+        <div className="ceg-contact-text ceg-reveal-fade-up" ref={textRef}>
           <Eyebrow mark>Start a project</Eyebrow>
           <h2 className="ceg-h2">
             Let's build it together.<br/>
@@ -1237,7 +1261,7 @@ function ContactBand({ theme, data }) {
           </div>
         </div>
 
-        <form className="ceg-contact-form" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+        <form className="ceg-contact-form ceg-reveal-slide-right" ref={formRef} onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
           {submitted ? (
             <div className="ceg-contact-thanks">
               <div className="ceg-contact-thanks-icon">
@@ -1496,7 +1520,7 @@ function WhyCEG({ theme, data }) {
         <div className="ceg-why-layout">
 
           {/* Left column */}
-          <div className="ceg-why-left">
+          <div className="ceg-why-left ceg-reveal-fade-up" ref={useReveal(0.15)}>
             <div className="ceg-why-left-inner">
               <Eyebrow accent>Why CEG</Eyebrow>
               <h2 className="ceg-h2 ceg-why-heading">One Firm. Two Disciplines. Better Outcomes.</h2>
