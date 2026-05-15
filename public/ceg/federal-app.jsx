@@ -57,6 +57,8 @@ const FED_DATA = {
       body: "PE-led structural inspection of federal waterfront and underwater infrastructure. Level 1, 2, and 3 inspections with full photographic documentation and PE-stamped engineering reports.",
       services: ["Structural inspection", "Scour evaluation", "Fathometric survey", "PE-stamped reports"],
       icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
+      featured: true,
+      image: "/assets/federal-hydrographic.jpg",
     },
     {
       title: "Dredging & Debris Removal",
@@ -77,6 +79,7 @@ const FED_DATA = {
       title: "US Naval Academy — Farragut Field Seawall Repair",
       body: "PE-led underwater QC dive team and full-time structural QC specialist for seawall and bulkhead repairs along the Santee River Basin. EM385-compliant operations throughout.",
       tags: ["QA/QC", "Seawall", "NAVFAC"],
+      image: "/assets/federal-project-dam.jpg",
     },
     {
       badge: "USACE · Multi-State",
@@ -181,24 +184,31 @@ function FedCapabilities() {
         </div>
         <div className="fed-caps-grid">
           {FED_DATA.capabilities.map((cap, i) => (
-            <div key={i} className="fed-cap-card">
-              <div className="fed-cap-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d={cap.icon} />
-                </svg>
+            <div key={i} className={`fed-cap-card ${cap.featured ? 'featured' : ''}`}>
+              {cap.image && (
+                <div className="fed-cap-image">
+                  <img src={cap.image} alt={cap.title} />
+                </div>
+              )}
+              <div className="fed-cap-content">
+                <div className="fed-cap-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={cap.icon} />
+                  </svg>
+                </div>
+                <h3 className="fed-cap-title">{cap.title}</h3>
+                <p className="fed-cap-body">{cap.body}</p>
+                <ul className="fed-cap-services">
+                  {cap.services.map((s, j) => (
+                    <li key={j}>
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                        <path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                      </svg>
+                      {s}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="fed-cap-title">{cap.title}</h3>
-              <p className="fed-cap-body">{cap.body}</p>
-              <ul className="fed-cap-services">
-                {cap.services.map((s, j) => (
-                  <li key={j}>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                      <path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                    </svg>
-                    {s}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
@@ -221,17 +231,24 @@ function FedProjects() {
         </div>
         <div className="fed-projects-grid">
           {FED_DATA.projects.map((p, i) => (
-            <div key={i} className="fed-project-card">
-              <span className="fed-project-badge">{p.badge}</span>
-              <h3 className="fed-project-title">{p.title}</h3>
-              <p className="fed-project-body">{p.body}</p>
-              <div className="fed-project-footer">
-                <div className="fed-project-tags">
-                  {p.tags.map((t, j) => (
-                    <span key={j} className="fed-project-tag">{t}</span>
-                  ))}
+            <div key={i} className={`fed-project-card ${p.image ? 'has-image' : ''}`}>
+              {p.image && (
+                <div className="fed-project-image">
+                  <img src={p.image} alt={p.title} />
                 </div>
-                <a href="#contact" className="fed-project-link">View Project →</a>
+              )}
+              <div className="fed-project-content">
+                <span className="fed-project-badge">{p.badge}</span>
+                <h3 className="fed-project-title">{p.title}</h3>
+                <p className="fed-project-body">{p.body}</p>
+                <div className="fed-project-footer">
+                  <div className="fed-project-tags">
+                    {p.tags.map((t, j) => (
+                      <span key={j} className="fed-project-tag">{t}</span>
+                    ))}
+                  </div>
+                  <a href="#contact" className="fed-project-link">View Project →</a>
+                </div>
               </div>
             </div>
           ))}
@@ -261,6 +278,9 @@ function FedTeaming() {
             </p>
           </div>
           <div className="fed-teaming-right">
+            <div className="fed-teaming-image">
+              <img src="/assets/federal-team.jpg" alt="CEG team at dive operations" />
+            </div>
             <div className="fed-teaming-card">
               <h3 className="fed-teaming-card-title">For Prime Contractors</h3>
               <p className="fed-teaming-card-body">
