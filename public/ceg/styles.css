@@ -3863,15 +3863,34 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   position: relative;
   overflow: hidden;
 }
+/* Background photo */
+.fed-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/federal-hero-bg.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Dark vignette — protects left-side text */
 .fed-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
+  background: linear-gradient(
+    to right,
+    rgba(11, 25, 41, 0.92) 0%,
+    rgba(11, 25, 41, 0.72) 50%,
+    rgba(11, 25, 41, 0.35) 100%
+  ), repeating-linear-gradient(
     0deg, transparent, transparent 60px,
     rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px
   );
   pointer-events: none;
+  z-index: 0;
 }
 .fed-hero-inner { position: relative; z-index: 1; max-width: 820px; }
 .fed-hero-h1 {
