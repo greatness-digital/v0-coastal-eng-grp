@@ -202,7 +202,7 @@ const NAV = {
     { label: "Safety & Quality", href: "/safety-quality" },
     { label: "Careers",        href: "#careers" },
   ]},
-  markets: { label: "Markets", items: MARKETS.map(m => m.name) },
+  markets: { label: "Markets", items: MARKETS.map(m => ({ label: m.name, href: `/markets/${m.key}` })) },
   services: { label: "Services", items: DIVISIONS.map(d => d.name) },
   projects: { label: "Projects", items: ["Featured Work", "Federal", "State & Local", "Energy", "Commercial"] },
   insights: { label: "Insights", items: ["News", "Press Releases", "Resilience Reports"] },
