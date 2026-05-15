@@ -199,7 +199,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
             <div className="ceg-nav-centered-side ceg-nav-centered-side-l">
               <a href={`tel:${data.CONTACT.phone}`} className="ceg-nav-phone">{data.CONTACT.phone}</a>
             </div>
-            <a href="#" className="ceg-logo ceg-logo-center">
+            <a href="/" className="ceg-logo ceg-logo-center">
               <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
             </a>
             <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
@@ -239,7 +239,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
       {/* Logo row — static, scrolls away */}
       <div className="ceg-nav-logo-row">
         <div className="ceg-container ceg-nav-logo-inner">
-          <a href="#" className="ceg-logo">
+          <a href="/" className="ceg-logo">
             <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
           </a>
           <a href="#contact" className="ceg-nav-phone">
@@ -1154,7 +1154,7 @@ function Projects({ theme, data }) {
 }
 
 // ─── VOSB band ─────────────────────────────────────────���───────────────────���
-// ─── Careers ───────────��────────────────���───────────────────────────────
+// ─── Careers ───────────��────────────────������──────────────────────────────
 // Talent is a top business priority per Kevin — promote it on the homepage.
 // JMT-leaning: pitch + benefits grid + open-roles teaser.
 function Careers({ theme, data }) {
