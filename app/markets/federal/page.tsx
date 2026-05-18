@@ -76,22 +76,6 @@ export default function FederalMarketPage() {
 
   return (
     <>
-      {!ready && !error && (
-        <div
-          aria-hidden
-          style={{
-            position: "fixed", inset: 0, display: "flex", alignItems: "center",
-            justifyContent: "center", background: "#0b1929", color: "#5b9bd5",
-            fontFamily: '"Inter", system-ui, sans-serif', fontSize: 13,
-            letterSpacing: "0.18em", textTransform: "uppercase", zIndex: 9999,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <span style={{ width: 22, height: 1, background: "#5b9bd5", display: "inline-block" }} />
-            <span>Loading</span>
-          </div>
-        </div>
-      )}
       {error && (
         <div role="alert" style={{ padding: 24, margin: 24, border: "1px solid #b00020",
           color: "#b00020", fontFamily: "ui-monospace, monospace", fontSize: 13, background: "#fff5f5" }}>
