@@ -1,0 +1,205 @@
+/* ─── Federal market page — Tidemark concept ─────────────────────────────── */
+
+/* ─── Quick-facts callout strip ──────────────────────────────────────────── */
+.fed-facts {
+  background: var(--brand);
+  color: var(--on-brand);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.fed-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.fed-fact {
+  padding: 36px 28px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.fed-fact:last-child { border-right: none; }
+.fed-fact-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 10px;
+}
+.fed-fact-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.fed-fact-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+}
+@media (max-width: 1060px) {
+  .fed-facts-grid { grid-template-columns: repeat(3, 1fr); }
+  .fed-fact:nth-child(3) { border-right: none; }
+  .fed-fact:nth-child(n+4) { border-top: 1px solid rgba(255,255,255,0.12); }
+}
+@media (max-width: 580px) {
+  .fed-facts-grid { grid-template-columns: repeat(2, 1fr); }
+  .fed-fact:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.12); }
+  .fed-fact:nth-child(2n) { border-right: none; }
+  .fed-fact:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.12); }
+  .fed-fact { padding: 24px 20px; }
+  .fed-fact-value { font-size: 22px; }
+}
+
+/* ─── Intro section ──────────────────────────────────────────────────────── */
+.fed-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.fed-intro-points {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fed-intro-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.fed-intro-points li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--brand);
+}
+.fed-intro-photo {
+  position: relative;
+}
+.fed-intro-photo img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 900px) {
+  .fed-intro-grid { grid-template-columns: 1fr; gap: 48px; }
+  .fed-intro-photo { order: -1; }
+  .fed-intro-photo img { height: 300px; }
+}
+
+/* ─── Pillars ────────────────────────────────────────────────────────────── */
+.fed-pillars .ceg-section-head { margin-bottom: 48px; }
+.fed-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.fed-pillar {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+.fed-pillar-img {
+  height: 260px;
+  overflow: hidden;
+}
+.fed-pillar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.fed-pillar:hover .fed-pillar-img img { transform: scale(1.04); }
+.fed-pillar-body {
+  padding: 32px 28px 36px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: none;
+}
+.fed-pillar-body .ceg-eyebrow { margin-bottom: 10px; }
+.fed-pillar-h {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+.fed-pillar-p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+}
+@media (max-width: 860px) {
+  .fed-pillars-grid { grid-template-columns: 1fr; }
+  .fed-pillar-img { height: 220px; }
+}
+
+/* ─── Past performance grid ──────────────────────────────────────────────── */
+.fed-projects { background: var(--surface); }
+.fed-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+.fed-projects-foot {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+@media (max-width: 860px) {
+  .fed-projects-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 580px) {
+  .fed-projects-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Callout / deep-dive blocks ─────────────────────────────────────────── */
+.fed-callout {
+  background: var(--brand-soft);
+  border-left: 3px solid var(--brand);
+  padding: 28px 32px;
+  margin: 40px 0;
+}
+.fed-callout-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+.fed-callout-h {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.fed-callout-body {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.fed-callout-body a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+}

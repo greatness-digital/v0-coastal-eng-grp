@@ -1,0 +1,1386 @@
+// CEG homepage components — concept-aware via theme prop.
+// All components consume `theme` (resolved THEMES[key]) and `data` (CEG_DATA).
+
+const { useState, useEffect, useRef } = React;
+
+// ─── Utilities ──────────────────────────────────────────────────────────────
+function applyThemeVars(theme) {
+  const c = theme.colors;
+  const t = theme.type;
+  const f = theme.fonts;
+  return {
+    "--bg": c.bg,
+    "--surface": c.surface,
+    "--surface-alt": c.surfaceAlt,
+    "--ink": c.ink,
+    "--ink-soft": c.inkSoft,
+    "--ink-mute": c.inkMute,
+    "--rule": c.rule,
+    "--brand": c.brand,
+    "--brand-hi": c.brandHi,
+    "--brand-soft": c.brandSoft,
+    "--accent": c.accent,
+    "--on-brand": c.onBrand,
+    "--hero-overlay": c.heroOverlay,
+    "--hero-bg": c.heroBg || c.brand,
+    "--hero-ink": c.heroInk || c.onBrand,
+    "--font-display": f.display,
+    "--font-display-cond": f.displayCond || f.display,
+    "--font-body": f.body,
+    "--font-mono": f.mono,
+    "--eyebrow-size": t.eyebrowSize,
+    "--eyebrow-spacing": t.eyebrowSpacing,
+    "--h1-size": t.h1,
+    "--h1-weight": t.h1Weight,
+    "--h1-lh": t.h1Lh,
+    "--h2-size": t.h2,
+    "--h2-weight": t.h2Weight,
+    "--body-size": t.body,
+    "--body-lh": t.bodyLh,
+  };
+}
+
+// ─── Tiny atoms ─────────────────────────────────────────────────────────────
+function Eyebrow({ children, mark = false }) {
+  return (
+    <div className="ceg-eyebrow">
+      {mark && <span className="ceg-eyebrow-mark" />}
+      <span>{children}</span>
+    </div>
+  );
+}
+
+function Btn({ children, variant = "primary", arrow = true, href = "#", onClick }) {
+  return (
+    <a href={href} onClick={onClick} className={`ceg-btn ceg-btn-${variant}`}>
+      <span>{children}</span>
+      {arrow && (
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
+        </svg>
+      )}
+    </a>
+  );
+}
+
+// ─── Top utility bar ────────────────────────────────────────────────────────
+function UtilityBar({ theme, data }) {
+  return (
+    <div className="ceg-util">
+      <div className="ceg-container ceg-util-row">
+        <div className="ceg-util-left">
+          <span className="ceg-util-pill">
+            <svg className="ceg-flag" viewBox="0 0 19 10" aria-hidden xmlns="http://www.w3.org/2000/svg">
+              <rect width="19" height="10" fill="#B22234" />
+              <rect y="0.77"  width="19" height="0.77" fill="#fff" />
+              <rect y="2.31"  width="19" height="0.77" fill="#fff" />
+              <rect y="3.85"  width="19" height="0.77" fill="#fff" />
+              <rect y="5.39"  width="19" height="0.77" fill="#fff" />
+              <rect y="6.93"  width="19" height="0.77" fill="#fff" />
+              <rect y="8.47"  width="19" height="0.77" fill="#fff" />
+              <rect width="7.6" height="5.39" fill="#3C3B6E" />
+            </svg>
+            Veteran-Owned Small Business
+          </span>
+          <span className="ceg-util-sep">·</span>
+          <span>NAVFAC · USACE · USCG</span>
+        </div>
+        <div className="ceg-util-right">
+          <a href="#contact">{data.CONTACT.emergency}</a>
+          <span className="ceg-util-sep">·</span>
+          <a href={`tel:${data.CONTACT.phone}`}>{data.CONTACT.phone}</a>
+          <span className="ceg-util-sep">·</span>
+          <a href="#careers">Careers</a>
+          <a href="#partners">Partner Portal</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Navigation ─────────────────────────────────────────────────────────────
+function Nav({ theme, data, conceptKey, onMobileOpen }) {
+  const [openKey, setOpenKey] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isMega = theme.nav === "mega" || theme.nav === "mega-centered";
+  const isCentered = theme.nav === "mega-centered";
+  // Drydock concept: click-to-open with a single shared mega panel anchored to the nav row
+  const isClickNav = conceptKey === "drydock";
+
+  // Close on outside click / Escape when in click-nav mode
+  useEffect(() => {
+    if (!isClickNav || !openKey) return;
+    const onDocClick = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setOpenKey(null);
+    };
+    const onKey = (e) => { if (e.key === "Escape") setOpenKey(null); };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isClickNav, openKey]);
+
+  const handleTrigger = (key) => {
+    if (isClickNav) {
+      setOpenKey((cur) => (cur === key ? null : key));
+    }
+  };
+
+  const navItems = (
+    <nav
+      ref={navRef}
+      className={`ceg-nav-main ${isClickNav ? "is-click-nav" : ""} ${openKey ? "has-open" : ""}`}
+      onMouseLeave={isClickNav ? undefined : () => setOpenKey(null)}
+    >
+      {Object.entries(data.NAV).map(([key, item]) => (
+        <div
+          key={key}
+          className={`ceg-nav-item ${openKey === key ? "is-open" : ""}`}
+          onMouseEnter={isClickNav ? undefined : () => setOpenKey(key)}
+        >
+          <button
+            className="ceg-nav-trigger"
+            type="button"
+            aria-expanded={openKey === key}
+            aria-haspopup="true"
+            onClick={() => handleTrigger(key)}
+          >
+            <span>{item.label}</span>
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden>
+              <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
+          </button>
+          {/* Per-item panels only when NOT in click-nav (shared panel) mode */}
+          {!isClickNav && openKey === key && (
+            isMega ? <MegaPanel navKey={key} item={item} data={data} /> : <SimplePanel item={item} navKey={key} data={data} />
+          )}
+        </div>
+      ))}
+      {/* Shared, nav-anchored mega panel for click-nav (Drydock) */}
+      {isClickNav && openKey && data.NAV[openKey] && (
+        <MegaPanel navKey={openKey} item={data.NAV[openKey]} data={data} shared />
+      )}
+    </nav>
+  );
+
+  if (isCentered) {
+    return (
+      <header className={`ceg-nav-shell ceg-nav-centered ${scrolled ? "is-scrolled" : ""} nav-${theme.nav}`}>
+        <div className="ceg-container ceg-nav-centered-top">
+          <div className="ceg-nav-centered-side ceg-nav-centered-side-l">
+            <a href={`tel:${data.CONTACT.phone}`} className="ceg-nav-phone">{data.CONTACT.phone}</a>
+            <span aria-hidden style={{ opacity: 0.4 }}>·</span>
+            <span>VOSB · ADCI</span>
+          </div>
+          <a href="#" className="ceg-logo ceg-logo-center">
+            <img src="assets/logo.avif" alt="Coastal Engineering" />
+          </a>
+          <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
+            <a href="#careers">Careers</a>
+            <span aria-hidden style={{ opacity: 0.4 }}>·</span>
+            <a href="#contact" className="ceg-nav-centered-cta">
+              Request a Bid
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
+              </svg>
+            </a>
+          </div>
+          <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
+            <span /><span /><span />
+          </button>
+        </div>
+        <div className="ceg-nav-centered-bottom">
+          {navItems}
+        </div>
+      </header>
+    );
+  }
+
+  return (
+    <header className={`ceg-nav-shell ${scrolled ? "is-scrolled" : ""} nav-${theme.nav}`}>
+      <div className="ceg-container ceg-nav-row">
+        <a href="#" className="ceg-logo">
+          <img src="assets/logo.avif" alt="Coastal Engineering" />
+        </a>
+
+        {navItems}
+
+        <div className="ceg-nav-right">
+          <a href="#contact" className="ceg-nav-phone">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path d="M3 2h2l1.5 3-1.5 1c.7 1.4 1.6 2.3 3 3l1-1.5L12 9v2c0 .6-.4 1-1 1C6.6 12 2 7.4 2 3c0-.6.4-1 1-1z" stroke="currentColor" strokeWidth="1.3" fill="none"/>
+            </svg>
+            {data.CONTACT.phone}
+          </a>
+          <Btn href="#contact" variant="primary" arrow={false}>Request a Bid</Btn>
+          <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
+            <span /><span /><span />
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function SimplePanel({ item, navKey, data }) {
+  return (
+    <div className="ceg-dropdown">
+      <ul>
+        {item.items.map((label) => (
+          <li key={label}>
+            <a href={`#${navKey}-${label.toLowerCase().replace(/\s+/g, "-")}`}>
+              <span>{label}</span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
+                <path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" strokeWidth="1.3" />
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function MegaPanel({ navKey, item, data, shared }) {
+  // Richer panel: column 1 = list, column 2 = featured, column 3 = call-out
+  const featured =
+    navKey === "services" ? data.DIVISIONS.slice(0, 3) :
+    navKey === "markets"  ? data.MARKETS.slice(0, 3) :
+    null;
+
+  return (
+    <div className={`ceg-mega ${shared ? "ceg-mega-shared" : ""}`}>
+      <div className="ceg-mega-grid">
+        <div className="ceg-mega-col">
+          <div className="ceg-mega-eyebrow">All {item.label}</div>
+          <ul className="ceg-mega-list">
+            {item.items.map((label) => (
+              <li key={label}>
+                <a href={`#${navKey}-${label.toLowerCase().replace(/\s+/g, "-")}`}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {featured && (
+          <div className="ceg-mega-col ceg-mega-feature">
+            <div className="ceg-mega-eyebrow">Featured</div>
+            {featured.map((f) => (
+              <a key={f.key || f.name} href="#" className="ceg-mega-feature-card">
+                <div className="ceg-mega-feature-title">{f.name}</div>
+                <div className="ceg-mega-feature-blurb">{f.blurb || f.detail}</div>
+              </a>
+            ))}
+          </div>
+        )}
+
+        <div className="ceg-mega-col ceg-mega-cta">
+          <div className="ceg-mega-eyebrow">Talk to us</div>
+          <div className="ceg-mega-cta-text">
+            Have a project on the drawing board? Our opportunity team responds within one business day.
+          </div>
+          <Btn href="#contact" arrow>Request a bid</Btn>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── HERO ───────────────────────────────────────────────────────────────────
+function Hero({ theme, data, conceptKey }) {
+  if (theme.hero === "stats") return <HeroStats theme={theme} data={data} />;
+  if (theme.hero === "type")  return <HeroType theme={theme} data={data} />;
+  return <HeroPhoto theme={theme} data={data} />;
+}
+
+// HERO A — photo-led
+function HeroPhoto({ theme, data }) {
+  return (
+    <section className="ceg-hero hero-photo">
+      <div className="ceg-hero-media">
+        <PlaceholderPhoto kind="hero-diver" />
+        <div className="ceg-hero-scrim" />
+      </div>
+      <div className="ceg-container">
+        <div className="ceg-hero-inner">
+        <Eyebrow mark>Coastal Engineering Group · Est. 1998</Eyebrow>
+        <h1 className="ceg-h1">
+          Heavy marine construction<br/>
+          for the working waterfront.
+        </h1>
+        <p className="ceg-hero-lede">
+          Five integrated divisions — diving, engineering, dredging, construction,
+          and marine services — delivering federal and commercial waterfront work
+          from the Mid-Atlantic up the Eastern Seaboard.
+        </p>
+        <div className="ceg-hero-ctas">
+          <Btn href="#projects" variant="primary">View our work</Btn>
+          <Btn href="#contact" variant="ghost">Request a bid</Btn>
+        </div>
+        </div>
+      </div>
+      <HeroFooterStrip data={data} />
+    </section>
+  );
+}
+
+// HERO B — stats-led editorial, full-bleed video background
+function HeroStats({ theme, data }) {
+  return (
+    <section className="ceg-hero hero-stats">
+      <div className="ceg-hero-video-wrap" aria-hidden>
+        <video
+          className="ceg-hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="https://images.pexels.com/videos/1409899/free-video-1409899.jpg?auto=compress&cs=tinysrgb&w=1600"
+        >
+          <source src="https://videos.pexels.com/video-files/1409899/1409899-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/2519660/2519660-hd_1920_1080_30fps.mp4" type="video/mp4" />
+        </video>
+        <div className="ceg-hero-video-scrim" />
+      </div>
+      <div className="ceg-container ceg-hero-stats-center">
+        <Eyebrow>Coastal Engineering Group</Eyebrow>
+        <h1 className="ceg-h1 serif">
+          We <em>build</em>, <em>dive</em>, <em>dredge</em>, and <em>design</em>{" "}
+          the structures that hold <span className="ceg-h1-accent">the&nbsp;coast</span> in place.
+        </h1>
+        <p className="ceg-hero-lede">
+          A veteran-owned, ADCI-certified marine contractor delivering integrated
+          heavy-civil work for NAVFAC, USACE, and the nation's port authorities.
+        </p>
+        <div className="ceg-hero-ctas">
+          <Btn href="#projects" variant="primary">Featured projects</Btn>
+          <Btn href="#about" variant="ghost-onbrand">About the firm</Btn>
+        </div>
+      </div>
+      <div className="ceg-hero-stats-bar">
+        <div className="ceg-container ceg-hero-stats-bar-row">
+          {data.STATS.map((s, i) => (
+            <div key={i} className="ceg-hero-stat">
+              <div className="ceg-hero-stat-value">{s.value}</div>
+              <div className="ceg-hero-stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// HERO C — type-driven, blueprint-style
+function HeroType({ theme, data }) {
+  return (
+    <section className="ceg-hero hero-type">
+      <div className="ceg-hero-type-photo" aria-hidden>
+        <img
+          src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1800&q=80"
+          alt=""
+          className="ceg-hero-type-photo-img"
+          loading="eager"
+        />
+        <div className="ceg-hero-type-photo-scrim" />
+      </div>
+      <div className="ceg-blueprint-grid" aria-hidden />
+      <div className="ceg-container">
+        <div className="ceg-hero-type-inner">
+          <div className="ceg-hero-type-meta">
+            <span className="ceg-mono">N 36°50′ / W 76°17′</span>
+            <span className="ceg-mono ceg-hero-type-meta-rule" aria-hidden />
+            <span className="ceg-mono">EST · 1998</span>
+            <span className="ceg-mono ceg-hero-type-meta-rule" aria-hidden />
+            <span className="ceg-mono">VOSB · ADCI</span>
+          </div>
+
+          <h1 className="ceg-h1 ceg-h1-mega">
+            <span className="ceg-h1-line">BUILT</span>
+            <span className="ceg-h1-line ceg-h1-thinline">
+              <span className="ceg-h1-thin">for the</span>
+            </span>
+            <span className="ceg-h1-line">WATERLINE.</span>
+          </h1>
+
+          <div className="ceg-hero-type-foot">
+            <p className="ceg-hero-lede">
+              Marine construction, commercial diving, dredging, engineering,
+              and a fleet of tugs and barges — under one accountable
+              veteran-owned company.
+            </p>
+            <div className="ceg-hero-ctas">
+              <Btn href="#projects" variant="primary">View projects</Btn>
+              <Btn href="#contact" variant="ghost">Request a bid</Btn>
+            </div>
+          </div>
+
+          <div className="ceg-hero-type-tickers">
+            {data.STATS.map((s, i) => (
+              <div key={i} className="ceg-hero-type-tick">
+                <div className="ceg-hero-type-tick-idx">0{i + 1}</div>
+                <div className="ceg-hero-type-tick-v">{s.value}</div>
+                <div className="ceg-hero-type-tick-l">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HeroFooterStrip({ data, subtle }) {
+  return (
+    <div className={`ceg-hero-foot ${subtle ? "is-subtle" : ""}`}>
+      <div className="ceg-container ceg-hero-foot-row">
+        <span className="ceg-hero-foot-eyebrow">Trusted partner</span>
+        <div className="ceg-hero-foot-clients">
+          {data.CLIENTS.slice(0, 6).map((c) => (
+            <span key={c} className="ceg-hero-foot-client">{c}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Photo URL maps ────────────────────────────────────────────────────────
+// Direct Unsplash CDN URLs — verified popular long-lived photos.
+// `?auto=format&fit=crop&w=1200&q=80` keeps file size reasonable.
+const U = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=80`;
+
+const PHOTO_BY_KIND = {
+  // hero
+  "hero-diver": U("1544551763-46a013bb70d5"), // scuba diver in deep blue water
+  // tag-driven kinds (Featured Work)
+  seawall:      U("1473625247510-8ceb1760943f"), // wooden pier into water
+  pier:         U("1518684079-3c830dcef090"),    // long pier perspective
+  diver:        U("1582967788606-a171c1080cb0"), // scuba diver underwater
+  dredge:       U("1494412519320-aa613dfb7738"), // working harbor
+  barge:        U("1516937941344-00b4e0337589"), // tugboat
+  bridge:       U("1486325212027-8081e485255e"), // bridge underside structure
+  // division keys (Divisions display panel)
+  construction: U("1504307651254-35680f356dfd"), // construction crane
+  diving:       U("1582967788606-a171c1080cb0"), // scuba diver
+  dredging:     U("1494412519320-aa613dfb7738"), // working harbor
+  engineering:  U("1486325212027-8081e485255e"), // bridge engineering
+  "marine-services": U("1516937941344-00b4e0337589"), // tugboat
+};
+const PHOTO_BY_MARKET = {
+  federal:       U("1457449940276-e8deed18bfff"), // navy ship at sea
+  "state-local": U("1473625247510-8ceb1760943f"), // pier
+  energy:        U("1466611653911-95081537e5b7"), // offshore wind
+  commercial:    U("1494412519320-aa613dfb7738"), // marina
+  industrial:    U("1605281317010-fe5ffe798166"), // industrial port
+};
+
+// ─── Placeholder photo ──────────────────────────────────────────────────────
+function PlaceholderPhoto({ kind = "seawall", small = false, tall = false }) {
+  // SVG-based marine construction placeholder. Clearly labeled.
+  const palette = {
+    seawall: { sky: "#3a5870", sea: "#1a2f44", structure: "#2a3a4d", label: "SEAWALL · NAVFAC NORFOLK" },
+    pier:    { sky: "#4a6275", sea: "#1d3349", structure: "#2d4156", label: "PIER REHABILITATION" },
+    diver:   { sky: "#3a8aa8", sea: "#1a5070", structure: "#0d2030", label: "COMMERCIAL DIVING" },
+    dredge:  { sky: "#3d5468", sea: "#1f2f42", structure: "#2c3d52", label: "DREDGING OPERATION" },
+    barge:   { sky: "#36495a", sea: "#1a2837", structure: "#26384a", label: "MARINE SERVICES" },
+    bridge:  { sky: "#42566a", sea: "#1d2e40", structure: "#2a3c4f", label: "BRIDGE SUBSTRUCTURE" },
+  }[kind] || { sky: "#3a5870", sea: "#1a2f44", structure: "#2a3a4d", label: "MARINE CONSTRUCTION" };
+
+  return (
+    <div className={`ceg-photo ${small ? "is-small" : ""} ${tall ? "is-tall" : ""}`} data-kind={kind}>
+      {PHOTO_BY_KIND[kind] && (
+        <img
+          src={PHOTO_BY_KIND[kind]}
+          alt=""
+          className="ceg-photo-img"
+          loading="lazy"
+          onLoad={(e) => { if (e.currentTarget.naturalWidth < 200) e.currentTarget.style.display = "none"; }}
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+      )}
+      <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+        <defs>
+          <linearGradient id={`sky-${kind}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={palette.sky} stopOpacity="0.95"/>
+            <stop offset="100%" stopColor={palette.sea} stopOpacity="1"/>
+          </linearGradient>
+          <linearGradient id={`sea-${kind}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={palette.sea}/>
+            <stop offset="100%" stopColor="#08111c"/>
+          </linearGradient>
+          <pattern id={`grain-${kind}`} width="3" height="3" patternUnits="userSpaceOnUse">
+            <rect width="3" height="3" fill="transparent"/>
+            <circle cx="1" cy="1" r="0.4" fill="white" opacity="0.025"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="500" fill={`url(#sky-${kind})`}/>
+        <rect y="280" width="800" height="220" fill={`url(#sea-${kind})`}/>
+
+        {kind === "seawall" && (
+          <>
+            <rect x="0" y="240" width="800" height="60" fill={palette.structure}/>
+            {Array.from({ length: 40 }).map((_, i) => (
+              <line key={i} x1={i * 20} y1="240" x2={i * 20} y2="300" stroke="#000" strokeOpacity="0.25" strokeWidth="1"/>
+            ))}
+            <rect x="0" y="235" width="800" height="6" fill="#000" fillOpacity="0.4"/>
+            <rect x="60" y="180" width="40" height="80" fill={palette.structure} stroke="#000" strokeOpacity="0.3"/>
+            <rect x="700" y="200" width="35" height="60" fill={palette.structure} stroke="#000" strokeOpacity="0.3"/>
+          </>
+        )}
+        {kind === "pier" && (
+          <>
+            <rect x="0" y="270" width="800" height="20" fill={palette.structure}/>
+            {Array.from({ length: 12 }).map((_, i) => (
+              <rect key={i} x={50 + i * 60} y="290" width="14" height="180" fill={palette.structure}/>
+            ))}
+            <rect x="100" y="240" width="180" height="40" fill={palette.structure} stroke="#000" strokeOpacity="0.25"/>
+            <rect x="120" y="220" width="20" height="20" fill="#fff" fillOpacity="0.15"/>
+            <rect x="150" y="215" width="20" height="25" fill="#fff" fillOpacity="0.18"/>
+          </>
+        )}
+        {kind === "diver" && (
+          <>
+            {/* surface light rays */}
+            <ellipse cx="400" cy="60" rx="280" ry="40" fill="#fff" fillOpacity="0.18"/>
+            <path d="M250 60 L180 500 L260 500 L340 60 Z" fill="#fff" fillOpacity="0.06"/>
+            <path d="M380 60 L340 500 L420 500 L460 60 Z" fill="#fff" fillOpacity="0.05"/>
+            <path d="M520 60 L580 500 L620 500 L580 60 Z" fill="#fff" fillOpacity="0.07"/>
+            {/* underwater wharf piles in distance */}
+            <rect x="60" y="180" width="22" height="320" fill="#0d2030" opacity="0.85"/>
+            <rect x="120" y="200" width="18" height="300" fill="#0d2030" opacity="0.7"/>
+            <rect x="680" y="190" width="22" height="310" fill="#0d2030" opacity="0.85"/>
+            <rect x="730" y="210" width="18" height="290" fill="#0d2030" opacity="0.7"/>
+            {/* diver — silhouette with helmet, tank, fins */}
+            <g transform="translate(390 290)">
+              {/* tank on back */}
+              <rect x="-8" y="-10" width="14" height="46" rx="6" fill="#0d2030"/>
+              {/* body / suit */}
+              <ellipse cx="0" cy="20" rx="22" ry="34" fill="#0d2030"/>
+              {/* helmet */}
+              <circle cx="0" cy="-18" r="22" fill="#0d2030"/>
+              <circle cx="0" cy="-18" r="22" fill="none" stroke="#5fa6c4" strokeWidth="1.5" opacity="0.7"/>
+              {/* helmet faceplate light */}
+              <ellipse cx="-6" cy="-22" rx="9" ry="6" fill="#a8d8e8" opacity="0.85"/>
+              <circle cx="-3" cy="-23" r="2" fill="#fff" opacity="0.95"/>
+              {/* arm reaching to wharf */}
+              <path d="M18 4 Q60 -10 95 -25" stroke="#0d2030" strokeWidth="10" strokeLinecap="round" fill="none"/>
+              {/* umbilical/hose to surface */}
+              <path d="M-4 -32 Q-30 -100 -10 -200 Q40 -300 0 -420" stroke="#d8a040" strokeWidth="2.5" fill="none" opacity="0.85"/>
+              {/* fins */}
+              <path d="M-12 50 Q-20 65 -28 70 L-14 58 Z" fill="#0d2030"/>
+              <path d="M12 50 Q20 65 28 70 L14 58 Z" fill="#0d2030"/>
+            </g>
+            {/* bubbles */}
+            {[
+              [395,260,3],[388,235,2],[400,210,2.5],[392,180,1.8],[385,150,2.2],[400,120,1.6],[395,95,1.4],
+              [410,250,2],[418,220,1.5],[412,190,1.8],[420,160,1.2],
+              [378,275,2],[372,245,1.7],[380,215,1.4]
+            ].map(([x,y,r],i)=>(
+              <circle key={i} cx={x} cy={y} r={r} fill="#fff" fillOpacity="0.55" stroke="#fff" strokeOpacity="0.8" strokeWidth="0.5"/>
+            ))}
+            {/* foreground caustic shimmer */}
+            <ellipse cx="400" cy="450" rx="180" ry="14" fill="#fff" fillOpacity="0.07"/>
+          </>
+        )}
+        {kind === "dredge" && (
+          <>
+            <rect x="200" y="230" width="380" height="60" fill={palette.structure}/>
+            <rect x="380" y="160" width="10" height="80" fill={palette.structure}/>
+            <line x1="385" y1="170" x2="540" y2="280" stroke={palette.structure} strokeWidth="6"/>
+            <rect x="535" y="270" width="30" height="20" fill={palette.structure}/>
+          </>
+        )}
+        {kind === "barge" && (
+          <>
+            <rect x="100" y="260" width="500" height="40" fill={palette.structure}/>
+            <rect x="610" y="240" width="100" height="60" fill={palette.structure}/>
+            <rect x="640" y="200" width="30" height="40" fill={palette.structure}/>
+          </>
+        )}
+        {kind === "bridge" && (
+          <>
+            <rect x="0" y="220" width="800" height="20" fill={palette.structure}/>
+            <rect x="100" y="240" width="20" height="240" fill={palette.structure}/>
+            <rect x="680" y="240" width="20" height="240" fill={palette.structure}/>
+            <rect x="380" y="240" width="40" height="240" fill={palette.structure}/>
+          </>
+        )}
+
+        <rect width="800" height="500" fill={`url(#grain-${kind})`}/>
+
+        <g transform="translate(24,470)">
+          <rect x="-4" y="-14" width="240" height="20" fill="#000" fillOpacity="0.5"/>
+          <text x="0" y="0" fontFamily="ui-monospace, monospace" fontSize="10" fill="#fff" fillOpacity="0.85" letterSpacing="1.5">
+            PLACEHOLDER · {palette.label}
+          </text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ─── Market action photo (unique scene per market) ──────────────────────────
+function MarketPhoto({ marketKey }) {
+  const scenes = {
+    federal: {
+      // Naval pier at dawn — battleship silhouette + crane
+      sky1: "#7a9bbd", sky2: "#3d5e80", water: "#3a5878", structure: "#1c2e44", accent: "#e8b87a",
+      label: "FEDERAL · NAVFAC",
+      paint: (
+        <g>
+          {/* horizon glow */}
+          <ellipse cx="600" cy="290" rx="320" ry="40" fill="#5b7aa0" opacity="0.18"/>
+          {/* battleship silhouette */}
+          <path d="M0 290 L120 290 L160 270 L520 270 L560 290 Z" fill="#0a1828"/>
+          <rect x="280" y="220" width="60" height="50" fill="#0a1828"/>
+          <rect x="290" y="190" width="14" height="35" fill="#0a1828"/>
+          <rect x="320" y="200" width="10" height="25" fill="#0a1828"/>
+          <line x1="295" y1="190" x2="295" y2="160" stroke="#0a1828" strokeWidth="2"/>
+          {/* crane */}
+          <rect x="660" y="140" width="6" height="160" fill="#1c2e44"/>
+          <line x1="663" y1="140" x2="760" y2="200" stroke="#1c2e44" strokeWidth="3"/>
+          <line x1="730" y1="180" x2="730" y2="270" stroke="#1c2e44" strokeWidth="1.5"/>
+          {/* warning lights */}
+          <circle cx="295" cy="158" r="2" fill="#ff5530" opacity="0.9"/>
+          <circle cx="663" cy="138" r="2" fill="#ff5530" opacity="0.9"/>
+          {/* water reflections */}
+          {Array.from({length:14}).map((_,i)=>(
+            <line key={i} x1={50+i*55} y1={310+(i%3)*8} x2={120+i*55} y2={310+(i%3)*8} stroke="#3a5a7a" strokeWidth="0.8" opacity="0.35"/>
+          ))}
+        </g>
+      ),
+    },
+    "state-local": {
+      // Bridge construction with rebar cage — clear daylight
+      sky1: "#9bb4cd", sky2: "#5a7592", water: "#4a6480", structure: "#2a3d52", accent: "#d8a040",
+      label: "STATE · DOT BRIDGE",
+      paint: (
+        <g>
+          {/* bridge deck */}
+          <rect x="0" y="200" width="800" height="22" fill="#2a3d52"/>
+          <rect x="0" y="222" width="800" height="6" fill="#0c1622"/>
+          {/* piers */}
+          <rect x="120" y="222" width="34" height="260" fill="#2a3d52"/>
+          <rect x="380" y="222" width="34" height="260" fill="#2a3d52"/>
+          <rect x="640" y="222" width="34" height="260" fill="#2a3d52"/>
+          {/* rebar cage on left pier */}
+          <g opacity="0.9">
+            <rect x="115" y="160" width="44" height="60" fill="none" stroke="#d8a040" strokeWidth="1"/>
+            {[0,1,2,3,4].map(i=>(
+              <line key={i} x1={120+i*9} y1="160" x2={120+i*9} y2="220" stroke="#d8a040" strokeWidth="1"/>
+            ))}
+            {[0,1,2,3].map(i=>(
+              <line key={i} x1="115" y1={170+i*15} x2="159" y2={170+i*15} stroke="#d8a040" strokeWidth="0.8"/>
+            ))}
+          </g>
+          {/* worker silhouette */}
+          <g transform="translate(170,170)">
+            <circle cx="0" cy="0" r="4" fill="#0c1622"/>
+            <rect x="-3" y="4" width="6" height="14" fill="#0c1622"/>
+            <rect x="-2" y="-7" width="4" height="3" fill="#d8a040"/>
+          </g>
+          {/* water */}
+          <rect y="290" width="800" height="210" fill="url(#mp-water)"/>
+        </g>
+      ),
+    },
+    energy: {
+      // Offshore wind turbine + jack-up vessel — bright open sea
+      sky1: "#a8c2db", sky2: "#5e82a4", water: "#3a5876", structure: "#1c3147", accent: "#ffffff",
+      label: "ENERGY · OFFSHORE WIND",
+      paint: (
+        <g>
+          {/* sun/horizon */}
+          <circle cx="650" cy="260" r="40" fill="#5b7aa0" opacity="0.25"/>
+          {/* foreground turbine */}
+          <rect x="395" y="80" width="10" height="220" fill="#1c3147"/>
+          <circle cx="400" cy="80" r="8" fill="#1c3147"/>
+          <line x1="400" y1="80" x2="460" y2="40" stroke="#1c3147" strokeWidth="6" strokeLinecap="round"/>
+          <line x1="400" y1="80" x2="345" y2="50" stroke="#1c3147" strokeWidth="6" strokeLinecap="round"/>
+          <line x1="400" y1="80" x2="395" y2="155" stroke="#1c3147" strokeWidth="6" strokeLinecap="round"/>
+          {/* distant turbines */}
+          {[100,180,560,720].map((x,i)=>(
+            <g key={i} opacity="0.55">
+              <rect x={x} y={140+i*4} width="3" height="140" fill="#1c3147"/>
+              <line x1={x+1.5} y1={140+i*4} x2={x+22} y2={125+i*4} stroke="#1c3147" strokeWidth="2"/>
+              <line x1={x+1.5} y1={140+i*4} x2={x-18} y2={130+i*4} stroke="#1c3147" strokeWidth="2"/>
+            </g>
+          ))}
+          {/* jack-up vessel right */}
+          <rect x="540" y="290" width="180" height="20" fill="#1c3147"/>
+          <rect x="555" y="200" width="6" height="90" fill="#1c3147"/>
+          <rect x="690" y="200" width="6" height="90" fill="#1c3147"/>
+          <rect x="565" y="270" width="120" height="22" fill="#243b54"/>
+          {/* water */}
+          <rect y="310" width="800" height="190" fill="url(#mp-water)"/>
+        </g>
+      ),
+    },
+    commercial: {
+      // Marina at golden hour with boats + dock
+      sky1: "#e8b87a", sky2: "#a86c4a", water: "#3a4a64", structure: "#1a2638", accent: "#f5d8a8",
+      label: "COMMERCIAL · MARINA",
+      paint: (
+        <g>
+          {/* warm horizon */}
+          <rect width="800" height="500" fill="url(#mp-sky)"/>
+          <ellipse cx="500" cy="280" rx="400" ry="30" fill="#e8b87a" opacity="0.18"/>
+          {/* main dock */}
+          <rect x="0" y="295" width="800" height="14" fill="#293b50"/>
+          {/* finger piers */}
+          {[80,220,360,500,640].map((x,i)=>(
+            <rect key={i} x={x} y="309" width="14" height="120" fill="#293b50"/>
+          ))}
+          {/* moored boats */}
+          {[140,280,420,560,700].map((x,i)=>(
+            <g key={i}>
+              <path d={`M${x-30} 340 L${x+30} 340 L${x+22} 360 L${x-22} 360 Z`} fill="#1c2c40"/>
+              <rect x={x-12} y="318" width="24" height="22" fill="#1c2c40"/>
+              <rect x={x-3} y="305" width="2" height="14" fill="#1c2c40"/>
+            </g>
+          ))}
+          {/* warm ripples */}
+          {Array.from({length:10}).map((_,i)=>(
+            <line key={i} x1={20+i*78} y1={400+(i%2)*10} x2={90+i*78} y2={400+(i%2)*10} stroke="#e8b87a" strokeWidth="0.8" opacity="0.3"/>
+          ))}
+          <rect y="430" width="800" height="70" fill="#0a1828" opacity="0.5"/>
+        </g>
+      ),
+    },
+    industrial: {
+      // Refinery / heavy waterfront with stacks + barge — overcast steel
+      sky1: "#8a929e", sky2: "#5a626e", water: "#3a424e", structure: "#22272f", accent: "#c84a26",
+      label: "INDUSTRIAL · TERMINAL",
+      paint: (
+        <g>
+          {/* smokestacks */}
+          <rect x="120" y="100" width="22" height="180" fill="#22272f"/>
+          <rect x="170" y="140" width="18" height="140" fill="#22272f"/>
+          <rect x="210" y="120" width="22" height="160" fill="#22272f"/>
+          {/* stack tops + smoke */}
+          <ellipse cx="131" cy="100" rx="14" ry="4" fill="#22272f"/>
+          <path d="M125 95 Q140 70 130 50 Q150 60 145 30" fill="none" stroke="#c84a26" strokeWidth="2" opacity="0.4"/>
+          <path d="M180 135 Q200 110 185 85" fill="none" stroke="#3a3f48" strokeWidth="3" opacity="0.5"/>
+          {/* tank */}
+          <ellipse cx="500" cy="220" rx="120" ry="14" fill="#22272f"/>
+          <rect x="380" y="220" width="240" height="80" fill="#22272f"/>
+          <ellipse cx="500" cy="300" rx="120" ry="14" fill="#15181d"/>
+          {/* loading arm */}
+          <rect x="390" y="180" width="6" height="40" fill="#22272f"/>
+          <line x1="393" y1="180" x2="350" y2="160" stroke="#22272f" strokeWidth="3"/>
+          {/* barge */}
+          <rect x="40" y="320" width="280" height="40" fill="#22272f"/>
+          <rect x="280" y="300" width="60" height="30" fill="#2a3038"/>
+          {/* warning beacon */}
+          <circle cx="131" cy="98" r="2.5" fill="#c84a26"/>
+          <circle cx="131" cy="98" r="5" fill="#c84a26" opacity="0.3"/>
+          {/* dark water */}
+          <rect y="360" width="800" height="140" fill="url(#mp-water)"/>
+        </g>
+      ),
+    },
+  };
+
+  const s = scenes[marketKey] || scenes.federal;
+
+  return (
+    <div className="ceg-photo" data-market={marketKey}>
+      {PHOTO_BY_MARKET[marketKey] && (
+        <img
+          src={PHOTO_BY_MARKET[marketKey]}
+          alt=""
+          className="ceg-photo-img"
+          loading="lazy"
+          onLoad={(e) => { if (e.currentTarget.naturalWidth < 200) e.currentTarget.style.display = "none"; }}
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+      )}
+      <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+        <defs>
+          <linearGradient id="mp-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={s.sky1}/>
+            <stop offset="100%" stopColor={s.sky2}/>
+          </linearGradient>
+          <linearGradient id="mp-water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={s.water}/>
+            <stop offset="100%" stopColor="#1c2c40"/>
+          </linearGradient>
+          <pattern id="mp-grain" width="3" height="3" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.4" fill="white" opacity="0.03"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="500" fill="url(#mp-sky)"/>
+        {s.paint}
+        <rect width="800" height="500" fill="url(#mp-grain)"/>
+        <g transform="translate(24,470)">
+          <rect x="-4" y="-14" width="220" height="20" fill="#000" fillOpacity="0.5"/>
+          <text x="0" y="0" fontFamily="ui-monospace, monospace" fontSize="10" fill="#fff" fillOpacity="0.85" letterSpacing="1.5">
+            PLACEHOLDER · {s.label}
+          </text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ─── Divisions section ──────────────────────────────────────────────────────
+function Divisions({ theme, data }) {
+  const [active, setActive] = useState(0);
+  const div = data.DIVISIONS[active];
+
+  return (
+    <section id="services" className="ceg-section ceg-divisions">
+      <div className="ceg-container">
+        <div className="ceg-section-head">
+          <Eyebrow mark>Five divisions · One company</Eyebrow>
+          <h2 className="ceg-h2">
+            From the {""}
+            <span className="ceg-h2-em">drawing board</span>
+            {" "}to the {""}
+            <span className="ceg-h2-em">water column.</span>
+          </h2>
+          <p className="ceg-section-lede">
+            We self-perform across every phase of marine work — eliminating the
+            handoffs, schedule risk, and split accountability of multi-prime delivery.
+          </p>
+        </div>
+
+        <div className="ceg-divisions-grid">
+          <div className="ceg-divisions-tabs">
+            {data.DIVISIONS.map((d, i) => (
+              <button
+                key={d.key}
+                className={`ceg-division-tab ${i === active ? "is-active" : ""}`}
+                onClick={() => setActive(i)}
+              >
+                <span className="ceg-division-tab-num">0{i + 1}</span>
+                <span className="ceg-division-tab-name">{d.short}</span>
+                <svg className="ceg-division-tab-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
+              </button>
+            ))}
+          </div>
+
+          <div className="ceg-divisions-display">
+            <PlaceholderPhoto kind={div.key === "engineering" ? "bridge" : div.key === "marine-services" ? "barge" : div.key} tall />
+            <div className="ceg-division-card">
+              <div className="ceg-division-card-num">0{active + 1}</div>
+              <div className="ceg-division-card-name">{div.name}</div>
+              <p className="ceg-division-card-blurb">{div.blurb}</p>
+              <ul className="ceg-division-card-svc">
+                {div.services.map((s) => (
+                  <li key={s}>
+                    <svg className="ceg-division-svc-tick" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+                      <path d="M2 6.5l2.5 2.5L10 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" strokeLinejoin="miter"/>
+                    </svg>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href={`#service-${div.key}`} className="ceg-division-card-cta">
+                <span className="ceg-division-card-cta-label">Explore {div.short}</span>
+                <span className="ceg-division-card-cta-arrow">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Markets ────────────────────────────────────────────────────────────────
+function Markets({ theme, data }) {
+  return (
+    <section id="markets" className="ceg-section ceg-markets">
+      <div className="ceg-container">
+        <div className="ceg-section-head ceg-section-head-row">
+          <div>
+            <Eyebrow mark>Markets we serve</Eyebrow>
+            <h2 className="ceg-h2">Federal contracts.<br/>Commercial accountability.</h2>
+          </div>
+          <p className="ceg-section-lede">
+            The bulk of our work supports federal coastal-resilience programs.
+            Our veteran-owned status enables direct teaming on NAVFAC and USACE
+            set-aside opportunities.
+          </p>
+        </div>
+
+        <div className="ceg-markets-grid">
+          {data.MARKETS.map((m, i) => (
+            <a key={m.key} href={`#market-${m.key}`} className="ceg-market-card">
+              <div className="ceg-market-bg" aria-hidden>
+                <MarketPhoto marketKey={m.key} />
+              </div>
+              <div className="ceg-market-body">
+                <div className="ceg-market-name">{m.name}</div>
+                <div className="ceg-market-detail">{m.detail}</div>
+                <div className="ceg-market-foot">
+                  <span className="ceg-market-projects">{m.projects} projects</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Projects ───────────────────────────────────────────────────────────────
+function Projects({ theme, data }) {
+  // Featured case study (large) + category browser (side) + 3 case studies below.
+  // No top-level filter chips per Kevin's review — category browser is the entry point.
+  const [activeTag, setActiveTag] = useState("All");
+  const tags = [
+    { key: "All", label: "All work", count: data.PROJECTS.length, hint: "Across all five divisions" },
+    { key: "Construction", label: "Construction", hint: "Piers, wharfs, seawalls, bridges" },
+    { key: "Diving", label: "Commercial Diving", hint: "Inspection, repair, salvage" },
+    { key: "Dredging", label: "Dredging", hint: "Mechanical & hydraulic" },
+    { key: "Engineering", label: "Engineering", hint: "Design, assessment, permitting" },
+    { key: "Marine Services", label: "Marine Services", hint: "Tug, barge & vessel support" },
+  ].map(t => ({
+    ...t,
+    count: t.count ?? data.PROJECTS.filter(p => p.tag === t.key).length,
+  }));
+
+  // Featured = first project (always shown, regardless of filter).
+  const featured = data.PROJECTS[0];
+  // Supporting = next 3 matching the active tag (excluding the featured project).
+  const pool = data.PROJECTS.slice(1).filter(p => activeTag === "All" || p.tag === activeTag);
+  const supporting = pool.slice(0, 3);
+
+  const photoFor = (p, i) => (
+    p.tag === "Diving" ? "diver" :
+    p.tag === "Dredging" ? "dredge" :
+    p.tag === "Marine Services" ? "barge" :
+    p.tag === "Engineering" ? "bridge" :
+    i % 2 === 0 ? "seawall" : "pier"
+  );
+
+  const Card = (p, i, isFeature) => (
+    <a key={p.title} href="#" className={`ceg-project-card ${isFeature ? "is-feature" : ""}`}>
+      <div className="ceg-project-media">
+        <PlaceholderPhoto kind={photoFor(p, i)}/>
+        <div className="ceg-project-tag">{p.tag}</div>
+      </div>
+      <div className="ceg-project-body">
+        <div className="ceg-project-meta">
+          <span>{p.market}</span><span>·</span><span>{p.state}</span><span>·</span><span>{p.year}</span>
+          {p.award && <><span>·</span><span className="ceg-project-award">★ {p.award}</span></>}
+        </div>
+        <div className="ceg-project-title">{p.title}</div>
+        <div className="ceg-project-client">{p.client}</div>
+        {isFeature && (
+          <p className="ceg-project-blurb">{p.blurb}</p>
+        )}
+        <div className="ceg-project-cta">
+          Read case study
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.4"/></svg>
+        </div>
+      </div>
+    </a>
+  );
+
+  return (
+    <section id="projects" className="ceg-section ceg-projects">
+      <div className="ceg-container">
+        <div className="ceg-section-head">
+          <Eyebrow mark>Featured work</Eyebrow>
+          <h2 className="ceg-h2">A track record on the working coast.</h2>
+        </div>
+
+        <div className="ceg-featured-row">
+          {Card(featured, 0, true)}
+
+          {/* Category browser — replaces the second case-study card */}
+          <aside className="ceg-cat-browser" aria-label="Browse case studies by expertise">
+            <div className="ceg-cat-browser-h">
+              <span className="ceg-cat-browser-eyebrow">Browse by expertise</span>
+              <h3 className="ceg-cat-browser-title">Case studies, by what we do.</h3>
+            </div>
+            <ul className="ceg-cat-browser-list">
+              {tags.map((t) => (
+                <li key={t.key}>
+                  <button
+                    type="button"
+                    className={`ceg-cat-browser-item ${activeTag === t.key ? "is-active" : ""}`}
+                    onClick={() => setActiveTag(t.key)}
+                    aria-pressed={activeTag === t.key}
+                  >
+                    <span className="ceg-cat-browser-row">
+                      <span className="ceg-cat-browser-label">{t.label}</span>
+                      <span className="ceg-cat-browser-count">{t.count}</span>
+                    </span>
+                    <span className="ceg-cat-browser-hint">{t.hint}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <a href="#all-projects" className="ceg-cat-browser-cta">
+              All 180+ projects
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6"/>
+              </svg>
+            </a>
+          </aside>
+        </div>
+
+        <div className="ceg-supporting-row">
+          {supporting.length === 0 ? (
+            <div className="ceg-supporting-empty">
+              No additional case studies in <strong>{activeTag}</strong> to show here yet.
+              <button className="ceg-link-btn" onClick={() => setActiveTag("All")}>
+                Show all →
+              </button>
+            </div>
+          ) : (
+            supporting.map((p, i) => Card(p, i + 2, false))
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── VOSB band ──────────────────────────────────────────────────────────────
+// ─── Careers ────────────────────────────────────────────────────────────
+// Talent is a top business priority per Kevin — promote it on the homepage.
+// JMT-leaning: pitch + benefits grid + open-roles teaser.
+function Careers({ theme, data }) {
+  const c = data.CAREERS;
+  return (
+    <section id="careers" className="ceg-section ceg-careers">
+      <div className="ceg-container">
+        <div className="ceg-careers-grid">
+          <div className="ceg-careers-text">
+            <Eyebrow mark>Careers at Coastal</Eyebrow>
+            <h2 className="ceg-h2 on-brand">{c.pitch}</h2>
+            <p className="ceg-careers-lede">{c.lede}</p>
+            <div className="ceg-careers-ctas">
+              <Btn href="#open-roles" variant="onbrand">Open positions</Btn>
+              <Btn href="#why-coastal" variant="ghost-onbrand">Why Coastal</Btn>
+            </div>
+          </div>
+          <div className="ceg-careers-aside">
+            <PlaceholderPhoto kind="diver" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VOSBBand({ theme, data }) {
+  return (
+    <section id="veteran" className="ceg-section ceg-vosb">
+      <div className="ceg-container ceg-vosb-grid">
+        <div className="ceg-vosb-text">
+          <Eyebrow>Veteran-Owned Small Business</Eyebrow>
+          <h2 className="ceg-h2 on-brand">Professional engineers and certified commercial divers — under one roof.</h2>
+          <p className="ceg-vosb-lede">
+            Our VOSB certification opens direct teaming opportunities on
+            federal set-aside contracts — and brings a culture of mission
+            ownership to every project we touch.
+          </p>
+          <div className="ceg-hero-ctas">
+            <Btn href="#about-vosb" variant="onbrand">Our certifications</Btn>
+            <Btn href="#partner" variant="ghost-onbrand">Partner with us</Btn>
+          </div>
+        </div>
+        <div className="ceg-vosb-certs">
+          {data.CERTS.map((c) => (
+            <div key={c.abbr} className="ceg-cert">
+              <div className="ceg-cert-abbr">{c.abbr}</div>
+              <div className="ceg-cert-full">{c.full}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Clients strip ──────────────────────────────────────────────────────────
+function ClientsStrip({ theme, data }) {
+  return (
+    <section className="ceg-section-tight ceg-clients">
+      <div className="ceg-container">
+        <div className="ceg-clients-row">
+          <div className="ceg-clients-label">
+            <Eyebrow>Selected clients</Eyebrow>
+          </div>
+          <div className="ceg-clients-list">
+            {data.CLIENTS.map((c) => (
+              <div key={c} className="ceg-client">{c}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Contact band + Footer ──────────────────────────────────────────────────
+function ContactBand({ theme, data }) {
+  const [submitted, setSubmitted] = useState(false);
+  return (
+    <section id="contact" className="ceg-section ceg-contact">
+      <div className="ceg-container ceg-contact-grid">
+        <div className="ceg-contact-text">
+          <Eyebrow mark>Start a project</Eyebrow>
+          <h2 className="ceg-h2">
+            Let's build it together.<br/>
+            Tell us about your project.
+          </h2>
+          <p className="ceg-section-lede">
+            Send us your scope, drawings, or RFP — our opportunity team
+            responds within one business day.
+          </p>
+
+          <div className="ceg-contact-info">
+            <div className="ceg-contact-info-row">
+              <span className="ceg-contact-info-label">Phone</span>
+              <a href={`tel:${data.CONTACT.phone}`} className="ceg-contact-info-val">{data.CONTACT.phone}</a>
+            </div>
+            <div className="ceg-contact-info-row">
+              <span className="ceg-contact-info-label">Email</span>
+              <a href={`mailto:${data.CONTACT.email}`} className="ceg-contact-info-val">{data.CONTACT.email}</a>
+            </div>
+            <div className="ceg-contact-info-row">
+              <span className="ceg-contact-info-label">Hours</span>
+              <span className="ceg-contact-info-val">{data.CONTACT.hours}</span>
+            </div>
+            <div className="ceg-contact-info-row">
+              <span className="ceg-contact-info-label">Emergency</span>
+              <span className="ceg-contact-info-val">{data.CONTACT.emergency}</span>
+            </div>
+          </div>
+        </div>
+
+        <form className="ceg-contact-form" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+          {submitted ? (
+            <div className="ceg-contact-thanks">
+              <div className="ceg-contact-thanks-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M6 14.5l5 5 11-12" stroke="currentColor" strokeWidth="2" strokeLinecap="square"/>
+                </svg>
+              </div>
+              <div className="ceg-contact-thanks-title">Message received.</div>
+              <div className="ceg-contact-thanks-body">
+                We'll respond within one business day. For urgent
+                response, call {data.CONTACT.phone}.
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="ceg-form-row ceg-form-row-2">
+                <Field label="Name" name="name" required />
+                <Field label="Company" name="company" required />
+              </div>
+              <div className="ceg-form-row ceg-form-row-2">
+                <Field label="Email" name="email" type="email" required />
+                <Field label="Phone" name="phone" type="tel" />
+              </div>
+              <Field label="Project type" name="market" select options={["Federal", "State & Local", "Energy", "Commercial", "Industrial"]} />
+              <Field label="Scope summary" name="summary" textarea required />
+              <button className="ceg-btn ceg-btn-primary ceg-btn-full" type="submit">
+                <span>Send to opportunity team</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square"/>
+                </svg>
+              </button>
+              <p className="ceg-form-fine">
+                By submitting you agree to our <a href="#">privacy notice</a>.
+              </p>
+            </>
+          )}
+        </form>
+      </div>
+    </section>
+  );
+}
+
+function Field({ label, name, type = "text", required, textarea, select, options = [] }) {
+  const [val, setVal] = useState("");
+  const [touched, setTouched] = useState(false);
+  const id = `f-${name}`;
+  return (
+    <div className={`ceg-field ${val ? "has-value" : ""} ${touched && !val && required ? "is-error" : ""}`}>
+      <label htmlFor={id}>{label}{required && <span className="ceg-field-req">*</span>}</label>
+      {textarea ? (
+        <textarea id={id} name={name} value={val} onChange={(e) => setVal(e.target.value)} onBlur={() => setTouched(true)} rows={4} required={required}/>
+      ) : select ? (
+        <select id={id} name={name} value={val} onChange={(e) => setVal(e.target.value)}>
+          <option value="">Select…</option>
+          {options.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+      ) : (
+        <input id={id} name={name} type={type} value={val} onChange={(e) => setVal(e.target.value)} onBlur={() => setTouched(true)} required={required}/>
+      )}
+    </div>
+  );
+}
+
+// ─── Footer ─────────────────────────────────────────────────────────────────
+function Footer({ theme, data }) {
+  return (
+    <footer className="ceg-footer">
+      <div className="ceg-container">
+        <div className="ceg-footer-top">
+          <div className="ceg-footer-brand">
+            <img src="assets/logo.avif" alt="Coastal Engineering" className="ceg-footer-logo"/>
+            <p className="ceg-footer-tagline">
+              Marine construction, diving, dredging, engineering, and marine services
+              for the working waterfront.
+            </p>
+            <div className="ceg-footer-certs">
+              {data.CERTS.slice(0, 4).map((c) => (
+                <span key={c.abbr} className="ceg-footer-cert">{c.abbr}</span>
+              ))}
+            </div>
+          </div>
+          <div className="ceg-footer-cols">
+            {Object.entries(data.NAV).map(([k, item]) => (
+              <div key={k} className="ceg-footer-col">
+                <div className="ceg-footer-col-h">{item.label}</div>
+                <ul>
+                  {item.items.slice(0, 5).map((i) => <li key={i}><a href="#">{i}</a></li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="ceg-footer-mid">
+          <div className="ceg-footer-mid-block">
+            <div className="ceg-footer-mid-h">Headquarters</div>
+            <div className="ceg-footer-mid-v">
+              {data.CONTACT.hq}<br/>
+              {data.CONTACT.addressLine1}<br/>
+              {data.CONTACT.addressLine2}
+            </div>
+          </div>
+          <div className="ceg-footer-mid-block">
+            <div className="ceg-footer-mid-h">Contact</div>
+            <div className="ceg-footer-mid-v">
+              <a href={`tel:${data.CONTACT.phone}`}>{data.CONTACT.phone}</a><br/>
+              <a href={`mailto:${data.CONTACT.email}`}>{data.CONTACT.email}</a>
+            </div>
+          </div>
+          <div className="ceg-footer-mid-block">
+            <div className="ceg-footer-mid-h">Hours</div>
+            <div className="ceg-footer-mid-v">
+              {data.CONTACT.hours}<br/>
+              {data.CONTACT.emergency}
+            </div>
+          </div>
+          <div className="ceg-footer-mid-block">
+            <div className="ceg-footer-mid-h">Careers</div>
+            <div className="ceg-footer-mid-v">
+              <a href="#careers">Open positions</a><br/>
+              <a href="#careers">Why Coastal</a><br/>
+              <a href="#careers">Apply via Paylocity</a>
+            </div>
+          </div>
+          <div className="ceg-footer-mid-block ceg-footer-mid-cta ceg-footer-mid-cta--vendor">
+            <div className="ceg-footer-mid-h">Vendor Portal</div>
+            <div className="ceg-footer-mid-v">
+              Submit W-9, certifications, and capability statements.
+            </div>
+            <a href="#vendor-portal" className="ceg-footer-cta-link">
+              Partner with us
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.4"/>
+              </svg>
+            </a>
+          </div>
+          <div className="ceg-footer-mid-block ceg-footer-mid-cta ceg-footer-mid-cta--employee">
+            <div className="ceg-footer-mid-h">Employee Portal</div>
+            <div className="ceg-footer-mid-v">
+              Access timesheets, benefits, payroll, and internal resources.
+            </div>
+            <a href="#employee-portal" className="ceg-footer-cta-link">
+              Sign in
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.4"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div className="ceg-footer-bottom">
+          <div>© 2026 Coastal Engineering Group. All rights reserved.</div>
+          <div className="ceg-footer-legal">
+            <a href="#">Privacy</a>
+            <a href="#">Accessibility</a>
+            <a href="#">SAM.gov UEI</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ─── Mobile menu ────────────────────────────────────────────────────────────
+function MobileMenu({ open, onClose, data }) {
+  const [openSection, setOpenSection] = useState(null);
+  if (!open) return null;
+  return (
+    <div className="ceg-mobile" role="dialog" aria-modal="true">
+      <div className="ceg-mobile-head">
+        <img src="assets/logo.avif" alt="Coastal Engineering" className="ceg-mobile-logo"/>
+        <button className="ceg-mobile-close" onClick={onClose} aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.6"/></svg>
+        </button>
+      </div>
+      <div className="ceg-mobile-body">
+        {Object.entries(data.NAV).map(([k, item]) => (
+          <div key={k} className={`ceg-mobile-section ${openSection === k ? "is-open" : ""}`}>
+            <button className="ceg-mobile-section-h" onClick={() => setOpenSection(openSection === k ? null : k)}>
+              <span>{item.label}</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5"/></svg>
+            </button>
+            {openSection === k && (
+              <ul>
+                {item.items.map((i) => <li key={i}><a href="#" onClick={onClose}>{i}</a></li>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="ceg-mobile-foot">
+        <a href={`tel:${data.CONTACT.phone}`}>{data.CONTACT.phone}</a>
+        <Btn href="#contact" onClick={onClose}>Request a bid</Btn>
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, {
+  applyThemeVars,
+  Eyebrow, Btn, UtilityBar, Nav, Hero, PlaceholderPhoto, MarketPhoto,
+  Divisions, Markets, Projects, Careers, VOSBBand, ClientsStrip, ContactBand, Footer, MobileMenu,
+});
