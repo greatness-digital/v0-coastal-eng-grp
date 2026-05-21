@@ -15,6 +15,14 @@ const FED_DATA = {
     { value: "EM385 Compliant", desc: "USACE/NAVFAC Safety Standard" },
     { value: "USACE CQM", desc: "Construction Quality Management" },
   ],
+  stats: [
+    { value: "VOSB",   label: "Designation",         sub: "SBA & VA recognized" },
+    { value: "Pre-Qual", label: "NAVFAC Status",      sub: "Multiple IDIQs" },
+    { value: "47+",    label: "Federal Projects",     sub: "Completed & active" },
+    { value: "$28M",   label: "Largest Award",        sub: "NAVFAC Mid-Atlantic" },
+    { value: "24/7",   label: "Emergency Response",   sub: "365 days / year" },
+    { value: "27",     label: "Years on the Water",   sub: "Est. 1998" },
+  ],
   advantageCards: [
     {
       title: "VOSB Set-Aside Eligible",
@@ -77,18 +85,24 @@ const FED_DATA = {
       title: "US Naval Academy — Farragut Field Seawall Repair",
       body: "PE-led underwater QC dive team and full-time structural QC specialist for seawall and bulkhead repairs along the Santee River Basin. EM385-compliant operations throughout.",
       tags: ["QA/QC", "Seawall", "NAVFAC"],
+      img: "/assets/diver-helmet.jpg",
+      imgAlt: "Diver preparing for underwater seawall inspection",
     },
     {
       badge: "USACE · Multi-State",
       title: "Low-Flow Port Bulkhead Replacement & Debris Removal",
       body: "Underwater construction and debris removal services for US Army Corps of Engineers. Full documentation package and PE oversight from mobilization through closeout.",
       tags: ["Construction", "USACE", "Bulkhead"],
+      img: "/assets/federal-project-dam.jpg",
+      imgAlt: "Federal dam and waterway infrastructure project",
     },
     {
       badge: "Federal Transit · New York",
       title: "NYC MTA — Inspection, Scanning & ROV Services",
       body: "Multi-discipline underwater inspection, sonar scanning, and ROV services for New York City Metropolitan Transportation Authority bridge and waterway infrastructure.",
       tags: ["Inspection", "ROV", "Scanning"],
+      img: "/assets/federal-hydrographic.jpg",
+      imgAlt: "Hydrographic survey and scanning operations",
     },
   ],
 };
@@ -136,6 +150,23 @@ function FedCredentialBar() {
   );
 }
 
+// ─── Quick-Facts Stats Band ───────────────────────────────────────────────────
+function FedStats() {
+  return (
+    <div className="fed-stats" aria-label="Key qualifications at a glance">
+      <div className="ceg-container fed-stats-grid">
+        {FED_DATA.stats.map((s) => (
+          <div key={s.label} className="fed-stat">
+            <div className="fed-stat-label">{s.label}</div>
+            <div className="fed-stat-value">{s.value}</div>
+            <div className="fed-stat-sub">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Federal Advantage ────────────────────────────────────────────────────────
 function FedAdvantage() {
   return (
@@ -151,13 +182,34 @@ function FedAdvantage() {
             Federal marine projects demand a level of compliance, documentation, and on-site oversight that general contractors can't meet. CEG is structured from the ground up for this environment.
           </p>
         </div>
-        <div className="fed-advantage-grid">
-          {FED_DATA.advantageCards.map((card, i) => (
-            <div key={i} className="fed-advantage-card">
-              <h3 className="fed-advantage-title">{card.title}</h3>
-              <p className="fed-advantage-body">{card.body}</p>
+
+        <div className="fed-advantage-layout">
+          <div className="fed-advantage-photo">
+            <img
+              src="/assets/federal-team.jpg"
+              alt="CEG dive team preparing for federal waterfront project"
+              loading="lazy"
+            />
+          </div>
+          <div className="fed-advantage-stack">
+            {FED_DATA.advantageCards.map((card, i) => (
+              <div key={i} className="fed-advantage-card">
+                <h3 className="fed-advantage-title">{card.title}</h3>
+                <p className="fed-advantage-body">{card.body}</p>
+              </div>
+            ))}
+
+            <div className="fed-callout-band">
+              <div className="fed-callout-band-label">Deep dive</div>
+              <div className="fed-callout-band-h">How VOSB set-asides work on NAVFAC contracts</div>
+              <p className="fed-callout-band-body">
+                VOSB status lets CEG compete on contracts reserved exclusively for veteran-owned
+                firms — and to team as a preferred partner on large NAVFAC procurements where
+                agencies have active small-business participation goals.
+                <a href="#contact"> Request our SAM profile and certifications →</a>
+              </p>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
@@ -222,6 +274,9 @@ function FedProjects() {
         <div className="fed-projects-grid">
           {FED_DATA.projects.map((p, i) => (
             <div key={i} className="fed-project-card">
+              <div className="fed-project-media">
+                <img src={p.img} alt={p.imgAlt} loading="lazy" />
+              </div>
               <span className="fed-project-badge">{p.badge}</span>
               <h3 className="fed-project-title">{p.title}</h3>
               <p className="fed-project-body">{p.body}</p>
@@ -235,6 +290,16 @@ function FedProjects() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="fed-callout-band">
+          <div className="fed-callout-band-label">Need more detail?</div>
+          <div className="fed-callout-band-h">Request our full past-performance package</div>
+          <p className="fed-callout-band-body">
+            We can provide a formatted CPARs summary, project data sheets, and agency
+            references for any active procurement.
+            <a href="#contact"> Contact our opportunity team →</a>
+          </p>
         </div>
       </div>
     </section>
@@ -329,6 +394,7 @@ function FederalApp() {
       <main>
         <FedHero />
         <FedCredentialBar />
+        <FedStats />
         <FedAdvantage />
         <FedCapabilities />
         <FedProjects />

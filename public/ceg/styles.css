@@ -4086,3 +4086,86 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   .fed-btn { width: 100%; }
   .fed-dot { display: none; }
 }
+
+/* ─── Stats Band ─────────────────────────────────────────────────────────── */
+.fed-stats { background: #0b1929; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.fed-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); }
+.fed-stat {
+  padding: 40px 20px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.fed-stat:last-child { border-right: none; }
+.fed-stat-value {
+  font-family: var(--font-barlow, "Barlow", sans-serif);
+  font-size: 34px; font-weight: 900; color: #ffffff;
+  line-height: 1; margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.fed-stat-label {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #5b9bd5; margin-bottom: 5px;
+}
+.fed-stat-sub {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.4;
+}
+@media (max-width: 1060px) {
+  .fed-stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .fed-stat:nth-child(3) { border-right: none; }
+  .fed-stat:nth-child(n+4) { border-top: 1px solid rgba(255,255,255,0.07); }
+}
+@media (max-width: 580px) {
+  .fed-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .fed-stat:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.07); }
+  .fed-stat:nth-child(2n) { border-right: none; }
+  .fed-stat:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.07); }
+  .fed-stat { padding: 28px 16px; }
+  .fed-stat-value { font-size: 26px; }
+}
+
+/* ─── Advantage with photo ───────────────────────────────────────────────── */
+.fed-advantage-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: start;
+}
+.fed-advantage-photo { position: sticky; top: 80px; }
+.fed-advantage-photo img {
+  width: 100%; height: 500px; object-fit: cover; display: block;
+}
+.fed-advantage-stack { display: flex; flex-direction: column; gap: 20px; }
+@media (max-width: 900px) {
+  .fed-advantage-layout { grid-template-columns: 1fr; gap: 40px; }
+  .fed-advantage-photo { position: static; }
+  .fed-advantage-photo img { height: 260px; }
+}
+
+/* ─── Callout block ──────────────────────────────────────────────────────── */
+.fed-callout-band {
+  background: #0f2236; border-left: 4px solid #1c6fbf;
+  padding: 28px 32px; margin: 48px 0 0;
+}
+.fed-callout-band-label {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #5b9bd5; margin-bottom: 8px;
+}
+.fed-callout-band-h {
+  font-family: inherit; font-weight: 800; font-size: 17px;
+  color: #ffffff; margin: 0 0 10px;
+}
+.fed-callout-band-body {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 14px; line-height: 1.65; color: #a8bdd0; margin: 0;
+}
+.fed-callout-band-body a { color: #5b9bd5; font-weight: 600; text-decoration: underline; }
+
+/* ─── Project card with photo ────────────────────────────────────────────── */
+.fed-project-media {
+  height: 180px; overflow: hidden;
+  margin: -32px -28px 20px;
+}
+.fed-project-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s ease;
+}
+.fed-project-card:hover .fed-project-media img { transform: scale(1.04); }
