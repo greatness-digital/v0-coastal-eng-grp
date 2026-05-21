@@ -119,38 +119,6 @@ export default function Home() {
 
   return (
     <>
-      {!ready && !error && (
-        <div
-          aria-hidden
-          style={{
-            position: "fixed",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#ffffff",
-            color: "#0a2540",
-            fontFamily:
-              '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
-            fontSize: 13,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            zIndex: 9999,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <span
-              style={{
-                width: 22,
-                height: 1,
-                background: "#0a2540",
-                display: "inline-block",
-              }}
-            />
-            <span>Loading Coastal Engineering Group</span>
-          </div>
-        </div>
-      )}
       {error && (
         <div
           role="alert"
