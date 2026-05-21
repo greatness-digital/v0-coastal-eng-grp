@@ -256,9 +256,25 @@ const NAV = {
     { label: "Careers",        href: "#careers" },
   ]},
   markets: { label: "Markets", items: MARKETS.map(m => ({ label: m.name, href: `/markets/${m.key}` })) },
-  services: { label: "Services", items: DIVISIONS.map(d => d.name) },
-  projects: { label: "Projects", items: ["Featured Work", "Federal", "State & Local", "Energy", "Commercial"] },
-  insights: { label: "Insights", items: ["News", "Press Releases", "Resilience Reports"] },
+  services: { label: "Services", items: [
+    { label: "Commercial Diving",   href: "/services/diving" },
+    { label: "Marine Engineering",  href: "#" },
+    { label: "Marine Construction", href: "#" },
+    { label: "Dredging",            href: "#" },
+    { label: "Marine Services",     href: "#" },
+  ]},
+  projects: { label: "Projects", items: [
+    { label: "Featured Work",   href: "/projects/featured-work" },
+    { label: "Federal",         href: "#" },
+    { label: "State & Local",   href: "#" },
+    { label: "Energy",          href: "#" },
+    { label: "Commercial",      href: "#" },
+  ]},
+  insights: { label: "Insights", items: [
+    { label: "News",               href: "/insights/news" },
+    { label: "Press Releases",     href: "#" },
+    { label: "Resilience Reports", href: "#" },
+  ]},
 };
 
 const CONTACT = {

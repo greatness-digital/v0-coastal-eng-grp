@@ -203,7 +203,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
               <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" />
             </a>
             <div className="ceg-nav-centered-side ceg-nav-centered-side-r">
-              <a href="#contact" className="ceg-nav-centered-cta">
+              <a href="/request-a-bid" className="ceg-nav-centered-cta">
                 Request a Bid
                 <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
@@ -227,7 +227,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
             </a>
             {navItems}
             {/* Request a Bid — fades in when scrolled */}
-            <Btn href="#contact" variant="primary" arrow={false} className="ceg-nav-sticky-cta">Request a Bid</Btn>
+            <Btn href="/request-a-bid" variant="primary" arrow={false} className="ceg-nav-sticky-cta">Request a Bid</Btn>
           </div>
         </div>
       </>
@@ -319,7 +319,9 @@ function MegaPanel({ navKey, item, data, shared }) {
           <div className="ceg-mega-col ceg-mega-feature">
             <div className="ceg-mega-eyebrow">Featured</div>
             {featured.map((f) => (
-              <a key={f.key || f.name} href="#" className="ceg-mega-feature-card">
+              <a key={f.key || f.name}
+                href={navKey === "services" ? `/services/${f.key}` : navKey === "markets" ? `/markets/${f.key}` : "#"}
+                className="ceg-mega-feature-card">
                 <div className="ceg-mega-feature-title">{f.name}</div>
                 <div className="ceg-mega-feature-blurb">{f.blurb || f.detail}</div>
               </a>
@@ -332,7 +334,7 @@ function MegaPanel({ navKey, item, data, shared }) {
           <div className="ceg-mega-cta-text">
             Have a project on the drawing board? Our opportunity team responds within one business day.
           </div>
-          <Btn href="#contact" arrow>Request a bid</Btn>
+          <Btn href="/request-a-bid" arrow>Request a bid</Btn>
         </div>
       </div>
     </div>
@@ -1359,7 +1361,8 @@ function Footer({ theme, data }) {
                 <ul>
                   {item.items.slice(0, 5).map((entry) => {
                     const label = typeof entry === "string" ? entry : entry.label;
-                    return <li key={label}><a href="#">{label}</a></li>;
+                    const href  = typeof entry === "string" ? "#" : (entry.href || "#");
+                    return <li key={label}><a href={href}>{label}</a></li>;
                   })}
                 </ul>
               </div>
