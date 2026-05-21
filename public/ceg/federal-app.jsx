@@ -394,9 +394,9 @@ function FederalApp() {
       <main>
         <FedHero />
         <FedCredentialBar />
-        <FedStats />
         <FedAdvantage />
         <FedCapabilities />
+        <FedStats />
         <FedProjects />
         <FedTeaming />
         <FedCTA />
