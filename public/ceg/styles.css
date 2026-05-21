@@ -4717,10 +4717,16 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ─── Archive hero ───────────────────────────────────────────────────────── */
 .nws-hero {
-  background: #0b1929; padding: 80px 0 64px;
+  position: relative; background: #0b1929; padding: 80px 0 64px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  background-image: url('/assets/marine-construction.jpg');
+  background-size: cover; background-position: center 40%;
 }
-.nws-hero-inner { max-width: 680px; }
+.nws-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(11,25,41,0.84);
+}
+.nws-hero-inner { position: relative; z-index: 1; }
 
 /* ─── Archive body ───────────────────────────────────────────────────────── */
 .nws-body { background: #f7f9fc; padding-bottom: 80px; }
@@ -4813,16 +4819,9 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ─── Detail content layout ──────────────────────────────────────────────── */
 .nws-detail-content { background: #ffffff; padding: 64px 0 80px; }
-.nws-detail-layout {
-  display: grid; grid-template-columns: 1fr 320px; gap: 56px; align-items: start;
-}
-@media (max-width: 900px) {
-  .nws-detail-layout { grid-template-columns: 1fr; }
-  .nws-detail-sidebar { order: -1; }
-}
 
 /* ─── Article body ───────────────────────────────────────────────────────── */
-.nws-detail-article { max-width: 680px; }
+.nws-detail-article { max-width: 820px; margin: 0 auto; }
 .nws-detail-lede {
   font-family: var(--font-inter, "Inter", sans-serif);
   font-size: 18px; line-height: 1.7; color: #0b1929;
@@ -4838,26 +4837,29 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 .nws-detail-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; padding-top: 32px; border-top: 1px solid #e2e8f0; }
 .nws-detail-back { margin-top: 32px; }
 
-/* ─── Detail sidebar ─────────────────────────────────────────────────────── */
-.nws-detail-sidebar { display: flex; flex-direction: column; gap: 24px; position: sticky; top: 80px; }
-.nws-detail-related { background: #f7f9fc; border: 1px solid #e2e8f0; padding: 24px; }
+/* ─── Related articles (bottom row) ─────────────────────────────────────── */
+.nws-detail-related { background: #f7f9fc; padding: 64px 0 72px; border-top: 1px solid #e2e8f0; }
+.nws-detail-related-inner { max-width: 820px; margin: 0 auto; }
 .nws-detail-sidebar-label {
   font-family: var(--font-inter, "Inter", sans-serif);
   font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: #1c6fbf; margin-bottom: 16px;
+  text-transform: uppercase; color: #1c6fbf; margin-bottom: 24px;
 }
-.nws-detail-related-list { display: flex; flex-direction: column; gap: 16px; }
+.nws-detail-related-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 700px) { .nws-detail-related-list { grid-template-columns: 1fr; } }
 .nws-related-item {
-  display: grid; grid-template-columns: 72px 1fr; gap: 12px;
+  display: flex; flex-direction: column;
+  background: #ffffff; border: 1px solid #e2e8f0;
   text-decoration: none; color: inherit;
-  transition: opacity 0.2s;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
-.nws-related-item:hover { opacity: 0.8; }
-.nws-related-img { width: 72px; height: 56px; overflow: hidden; flex-shrink: 0; }
-.nws-related-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.nws-related-text { display: flex; flex-direction: column; gap: 4px; }
+.nws-related-item:hover { border-color: #1c6fbf; box-shadow: 0 6px 20px rgba(28,111,191,0.1); }
+.nws-related-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+.nws-related-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.nws-related-item:hover .nws-related-img img { transform: scale(1.04); }
+.nws-related-text { display: flex; flex-direction: column; gap: 6px; padding: 16px; flex: 1; }
 .nws-related-title {
   font-family: var(--font-inter, "Inter", sans-serif);
-  font-size: 12px; font-weight: 600; color: #0b1929; line-height: 1.4;
+  font-size: 13px; font-weight: 600; color: #0b1929; line-height: 1.4;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }

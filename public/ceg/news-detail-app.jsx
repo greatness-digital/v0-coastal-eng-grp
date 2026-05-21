@@ -9,7 +9,7 @@ const CATEGORY_COLORS = {
   "Project Update":   { bg: "#b45309", text: "#fff" },
 };
 
-// ─── Related articles sidebar ─────────────────────────────────────────────────
+// ─── Related articles (bottom row) ───────────────────────────────────────────
 function RelatedArticles({ current, all }) {
   const related = all
     .filter(a => a.slug !== current.slug && (
@@ -20,26 +20,30 @@ function RelatedArticles({ current, all }) {
 
   if (!related.length) return null;
   return (
-    <div className="nws-detail-related">
-      <div className="nws-detail-sidebar-label">Related Articles</div>
-      <div className="nws-detail-related-list">
-        {related.map(a => {
-          const cc = CATEGORY_COLORS[a.category] || { bg: "#374151", text: "#fff" };
-          return (
-            <a key={a.slug} href={`/insights/news/${a.slug}`} className="nws-related-item">
-              <div className="nws-related-img">
-                <img src={a.image} alt={a.title} loading="lazy" />
-              </div>
-              <div className="nws-related-text">
-                <span className="nws-cat-badge nws-cat-badge-sm" style={{ background: cc.bg, color: cc.text }}>{a.category}</span>
-                <div className="nws-related-title">{a.title}</div>
-                <div className="nws-meta">{a.date}</div>
-              </div>
-            </a>
-          );
-        })}
+    <section className="nws-detail-related">
+      <div className="ceg-container">
+        <div className="nws-detail-related-inner">
+          <div className="nws-detail-sidebar-label">Related Articles</div>
+          <div className="nws-detail-related-list">
+            {related.map(a => {
+              const cc = CATEGORY_COLORS[a.category] || { bg: "#374151", text: "#fff" };
+              return (
+                <a key={a.slug} href={`/insights/news/${a.slug}`} className="nws-related-item">
+                  <div className="nws-related-img">
+                    <img src={a.image} alt={a.title} loading="lazy" />
+                  </div>
+                  <div className="nws-related-text">
+                    <span className="nws-cat-badge nws-cat-badge-sm" style={{ background: cc.bg, color: cc.text }}>{a.category}</span>
+                    <div className="nws-related-title">{a.title}</div>
+                    <div className="nws-meta">{a.date}</div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -77,11 +81,9 @@ function ArticleDetail({ article, all }) {
         </div>
       </section>
 
-      {/* Content + sidebar */}
+      {/* Article body */}
       <section className="nws-detail-content">
-        <div className="ceg-container nws-detail-layout">
-
-          {/* Article body */}
+        <div className="ceg-container">
           <article className="nws-detail-article">
             <p className="nws-detail-lede">{article.excerpt}</p>
             {article.body.map((para, i) => (
@@ -94,17 +96,11 @@ function ArticleDetail({ article, all }) {
               <a href="/insights/news" className="div-view-all">← Back to News</a>
             </div>
           </article>
-
-          {/* Sidebar */}
-          <aside className="nws-detail-sidebar">
-            <RelatedArticles current={article} all={all} />
-            <div className="prj-detail-sidebar-cta">
-              <p>Have a project to discuss?</p>
-              <a href="#contact" className="fed-btn fed-btn-primary" style={{ width: "100%", justifyContent: "center" }}>Start a Conversation →</a>
-            </div>
-          </aside>
         </div>
       </section>
+
+      {/* Related articles row */}
+      <RelatedArticles current={article} all={all} />
     </>
   );
 }
