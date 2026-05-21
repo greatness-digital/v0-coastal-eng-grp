@@ -4409,7 +4409,7 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 .prj-archive-hero-inner {
   position: relative; z-index: 1;
-  max-width: 700px; padding-bottom: 56px;
+  max-width: 700px; padding-bottom: 88px;
 }
 .prj-archive-h1 {
   font-family: var(--font-barlow, "Barlow", sans-serif);

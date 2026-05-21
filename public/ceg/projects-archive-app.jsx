@@ -102,19 +102,6 @@ function ProjectsArchive() {
               A selection of completed and active projects across commercial, federal, state, and energy markets — each self-performed under a single prime.
             </p>
           </div>
-          <div className="prj-archive-stats">
-            {[
-              { value: "136+", label: "Projects Completed" },
-              { value: "13",   label: "Licensed States" },
-              { value: "VOSB", label: "Federal Set-Aside" },
-              { value: "27 yrs", label: "Est. 1998" },
-            ].map((s) => (
-              <div key={s.label} className="prj-archive-stat">
-                <div className="prj-archive-stat-value">{s.value}</div>
-                <div className="prj-archive-stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
