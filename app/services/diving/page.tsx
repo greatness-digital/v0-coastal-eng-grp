@@ -2,12 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 
-export const metadata = {
-  title: "Commercial Diving Services | ADCI Certified | Coastal Engineering Group",
-  description:
-    "PE-led, ADCI certified commercial diving for underwater inspection, structural repair, bridge inspection, dam inspection, confined space, and hazmat operations. East Coast, 13 licensed states.",
-}
-
 const CDN_REACT     = "https://unpkg.com/react@18.3.1/umd/react.development.js"
 const CDN_REACT_DOM = "https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
 const CDN_BABEL     = "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
