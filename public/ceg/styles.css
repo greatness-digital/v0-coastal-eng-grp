@@ -3951,7 +3951,23 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 @media (max-width: 720px) { .fed-advantage-grid { grid-template-columns: 1fr; } }
 
 /* ─── Federal Capabilities ──────────────────────────────────────────────────── */
-.fed-caps { background: #0b1929; }
+.fed-caps {
+  background: #0b1929;
+  position: relative;
+  overflow: hidden;
+}
+.fed-caps::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/marine-construction.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+.fed-caps > .ceg-container { position: relative; z-index: 1; }
 .fed-caps .fed-section-head { text-align: center; }
 .fed-caps-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
