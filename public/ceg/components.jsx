@@ -383,9 +383,9 @@ function HeroPhoto({ theme, data }) {
           for the working waterfront.
         </h1>
         <p className="ceg-hero-lede">
-          Five integrated divisions — diving, engineering, dredging, construction,
-          and marine services — delivering federal and commercial waterfront work
-          from the Mid-Atlantic up the Eastern Seaboard.
+          Five integrated divisions — construction, engineering, dredging, marine
+          services, and commercial diving — delivering federal and commercial
+          waterfront work from the Mid-Atlantic up the Eastern Seaboard.
         </p>
         <div className="ceg-hero-ctas">
           <Btn href="#projects" variant="primary">View our work</Btn>
@@ -410,10 +410,10 @@ function HeroStats({ theme, data }) {
           Delivering Complex Marine Construction and Underwater Infrastructure Projects
         </h1>
         <p className="ceg-hero-lede">
-          Coastal Engineering delivers marine construction, commercial diving, and underwater infrastructure solutions for transportation, waterfront, municipal, and energy projects throughout the Eastern United States.
+          Coastal Engineering delivers marine construction, engineering, and underwater infrastructure solutions for transportation, waterfront, municipal, and energy projects throughout the Eastern United States.
         </p>
         <div className="ceg-hero-ctas">
-          <Btn href="/contact" variant="hero-accent">Start a Project</Btn>
+          <Btn href="/request-a-bid" variant="hero-accent">Start a Project</Btn>
           <Btn href="/careers" variant="ghost-onbrand" arrow={true}>Build Your Career</Btn>
         </div>
       </div>
@@ -465,8 +465,8 @@ function HeroType({ theme, data }) {
 
           <div className="ceg-hero-type-foot">
             <p className="ceg-hero-lede">
-              Marine construction, commercial diving, dredging, engineering,
-              and a fleet of tugs and barges — under one accountable
+              Marine construction, engineering, dredging, a fleet of tugs and
+              barges, and commercial diving — under one accountable
               veteran-owned company.
             </p>
             <div className="ceg-hero-ctas">
