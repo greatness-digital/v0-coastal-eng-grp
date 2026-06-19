@@ -57,7 +57,7 @@ const ABOUT_DATA = {
     headline: "Ready to discuss your project?",
     lede: "Our team is ready to bring engineering expertise and construction capability to your next marine infrastructure challenge.",
     buttonText: "Start a Conversation",
-    buttonHref: "#contact"
+    buttonHref: "/request-a-bid"
   }
 };
 

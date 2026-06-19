@@ -247,15 +247,30 @@ const STATS = [
   { value: "VOSB", label: "Verified" },
 ];
 
+// Primary navigation. Order is meaningful — Careers sits between Projects
+// and Insights. Top-level items with no `items` array render as direct links
+// (no dropdown), keeping the menu shallow and reachable in one or two clicks.
+//
+// IA notes:
+//  · Markets = the sectors we serve (Federal has a dedicated page; the other
+//    sectors route into the portfolio pre-filtered to that market until their
+//    own landing pages exist).
+//  · Projects = the work portfolio itself (single destination, no sector
+//    mirror of Markets — that overlap was removed).
+//  · Careers = its own page (no longer buried under About).
 const NAV = {
   about: { label: "About", items: [
-    { label: "Our Story",      href: "/about#story" },
-    { label: "Leadership",     href: "/about#leadership" },
-    { label: "Veteran-Owned",  href: "/about#veteran" },
+    { label: "Our Story",        href: "/about#story" },
+    { label: "Leadership",       href: "/about#leadership" },
+    { label: "Veteran-Owned",    href: "/about#veteran" },
     { label: "Safety & Quality", href: "/safety-quality" },
-    { label: "Careers",        href: "#careers" },
   ]},
-  markets: { label: "Markets", items: MARKETS.map(m => ({ label: m.name, href: `/markets/${m.key}` })) },
+  markets: { label: "Markets", items: MARKETS.map(m => ({
+    label: m.name,
+    href: m.key === "federal"
+      ? "/markets/federal"
+      : `/projects/featured-work#market=${encodeURIComponent(m.name)}`,
+  })) },
   services: { label: "Services", items: [
     { label: "Commercial Diving",   href: "/services/diving" },
     { label: "Marine Engineering",  href: "#" },
@@ -263,13 +278,8 @@ const NAV = {
     { label: "Dredging",            href: "#" },
     { label: "Marine Services",     href: "#" },
   ]},
-  projects: { label: "Projects", items: [
-    { label: "Featured Work",   href: "/projects/featured-work" },
-    { label: "Federal",         href: "#" },
-    { label: "State & Local",   href: "#" },
-    { label: "Energy",          href: "#" },
-    { label: "Commercial",      href: "#" },
-  ]},
+  projects: { label: "Projects", href: "/projects/featured-work" },
+  careers:  { label: "Careers",  href: "/careers" },
   insights: { label: "Insights", items: [
     { label: "News",               href: "/insights/news" },
     { label: "Press Releases",     href: "#" },

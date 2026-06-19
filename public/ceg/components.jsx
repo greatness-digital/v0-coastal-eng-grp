@@ -106,7 +106,7 @@ function UtilityBar({ theme, data }) {
         <div className="ceg-util-right">
           <a href="#contact">{data.CONTACT.emergency}</a>
           <span className="ceg-util-sep">·</span>
-          <a href="#careers">Careers</a>
+          <a href="/careers">Careers</a>
           <a href="#partners">Partner Portal</a>
         </div>
       </div>
@@ -159,32 +159,45 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
       className={`ceg-nav-main ${isClickNav ? "is-click-nav" : ""} ${openKey ? "has-open" : ""}`}
       onMouseLeave={isClickNav ? undefined : () => setOpenKey(null)}
     >
-      {Object.entries(data.NAV).map(([key, item]) => (
-        <div
-          key={key}
-          className={`ceg-nav-item ${openKey === key ? "is-open" : ""}`}
-          onMouseEnter={isClickNav ? undefined : () => setOpenKey(key)}
-        >
-          <button
-            className="ceg-nav-trigger"
-            type="button"
-            aria-expanded={openKey === key}
-            aria-haspopup="true"
-            onClick={() => handleTrigger(key)}
+      {Object.entries(data.NAV).map(([key, item]) => {
+        // Direct-link items (no `items`) render as a plain link — no dropdown,
+        // no chevron. Keeps Projects / Careers a single click away.
+        if (!item.items) {
+          return (
+            <div key={key} className="ceg-nav-item">
+              <a className="ceg-nav-trigger ceg-nav-trigger-link" href={item.href}>
+                <span>{item.label}</span>
+              </a>
+            </div>
+          );
+        }
+        return (
+          <div
+            key={key}
+            className={`ceg-nav-item ${openKey === key ? "is-open" : ""}`}
+            onMouseEnter={isClickNav ? undefined : () => setOpenKey(key)}
           >
-            <span>{item.label}</span>
-            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden>
-              <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.4" />
-            </svg>
-          </button>
-          {/* Per-item panels only when NOT in click-nav (shared panel) mode */}
-          {!isClickNav && openKey === key && (
-            isMega ? <MegaPanel navKey={key} item={item} data={data} /> : <SimplePanel item={item} navKey={key} data={data} />
-          )}
-        </div>
-      ))}
+            <button
+              className="ceg-nav-trigger"
+              type="button"
+              aria-expanded={openKey === key}
+              aria-haspopup="true"
+              onClick={() => handleTrigger(key)}
+            >
+              <span>{item.label}</span>
+              <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden>
+                <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </button>
+            {/* Per-item panels only when NOT in click-nav (shared panel) mode */}
+            {!isClickNav && openKey === key && (
+              isMega ? <MegaPanel navKey={key} item={item} data={data} /> : <SimplePanel item={item} navKey={key} data={data} />
+            )}
+          </div>
+        );
+      })}
       {/* Shared, nav-anchored mega panel for click-nav (Drydock) */}
-      {isClickNav && openKey && data.NAV[openKey] && (
+      {isClickNav && openKey && data.NAV[openKey] && data.NAV[openKey].items && (
         <MegaPanel navKey={openKey} item={data.NAV[openKey]} data={data} shared />
       )}
     </nav>
@@ -256,7 +269,7 @@ function Nav({ theme, data, conceptKey, onMobileOpen }) {
         <div className="ceg-container ceg-nav-row">
           {navItems}
           <div className="ceg-nav-right">
-            <Btn href="#contact" variant="primary" arrow={false}>Request a Bid</Btn>
+            <Btn href="/request-a-bid" variant="primary" arrow={false}>Request a Bid</Btn>
             <button className="ceg-nav-burger" onClick={onMobileOpen} aria-label="Open menu">
               <span /><span /><span />
             </button>
@@ -320,7 +333,13 @@ function MegaPanel({ navKey, item, data, shared }) {
             <div className="ceg-mega-eyebrow">Featured</div>
             {featured.map((f) => (
               <a key={f.key || f.name}
-                href={navKey === "services" ? `/services/${f.key}` : navKey === "markets" ? `/markets/${f.key}` : "#"}
+                href={
+                  navKey === "services"
+                    ? `/services/${f.key}`
+                    : navKey === "markets"
+                      ? (f.key === "federal" ? "/markets/federal" : `/projects/featured-work#market=${encodeURIComponent(f.name)}`)
+                      : "#"
+                }
                 className="ceg-mega-feature-card">
                 <div className="ceg-mega-feature-title">{f.name}</div>
                 <div className="ceg-mega-feature-blurb">{f.blurb || f.detail}</div>
@@ -370,7 +389,7 @@ function HeroPhoto({ theme, data }) {
         </p>
         <div className="ceg-hero-ctas">
           <Btn href="#projects" variant="primary">View our work</Btn>
-          <Btn href="#contact" variant="ghost">Request a bid</Btn>
+          <Btn href="/request-a-bid" variant="ghost">Request a bid</Btn>
         </div>
         </div>
       </div>
@@ -452,7 +471,7 @@ function HeroType({ theme, data }) {
             </p>
             <div className="ceg-hero-ctas">
               <Btn href="#projects" variant="primary">View projects</Btn>
-              <Btn href="#contact" variant="ghost">Request a bid</Btn>
+              <Btn href="/request-a-bid" variant="ghost">Request a bid</Btn>
             </div>
           </div>
 
@@ -907,7 +926,7 @@ function Capabilities({ theme, data }) {
           ))}
 
           {/* CAP-06: CTA Card */}
-          <a href="#contact" className="ceg-cap-card ceg-cap-card-cta">
+          <a href="/request-a-bid" className="ceg-cap-card ceg-cap-card-cta">
             <div className="ceg-cap-cta-eyebrow">Ready to Get Started?</div>
             <h3 className="ceg-cap-cta-title">Start a Project</h3>
             <p className="ceg-cap-cta-body">Tell us about your project. We'll respond within 24 hours.</p>
@@ -1159,29 +1178,10 @@ function Projects({ theme, data }) {
 // ─── Careers ───────────��────────────────������──────────────────────────────
 // Talent is a top business priority per Kevin — promote it on the homepage.
 // JMT-leaning: pitch + benefits grid + open-roles teaser.
-function Careers({ theme, data }) {
-  const c = data.CAREERS;
-  return (
-    <section id="careers" className="ceg-section ceg-careers">
-      <div className="ceg-container">
-        <div className="ceg-careers-grid">
-          <div className="ceg-careers-text">
-            <Eyebrow mark>Careers at Coastal</Eyebrow>
-            <h2 className="ceg-h2 on-brand">{c.pitch}</h2>
-            <p className="ceg-careers-lede">{c.lede}</p>
-            <div className="ceg-careers-ctas">
-              <Btn href="#open-roles" variant="onbrand">Open positions</Btn>
-              <Btn href="#why-coastal" variant="ghost-onbrand">Why Coastal</Btn>
-            </div>
-          </div>
-          <div className="ceg-careers-aside">
-            <PlaceholderPhoto kind="diver" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+// NOTE: A duplicate `Careers` definition lived here previously. It was removed
+// to avoid two functions with the same name (the second silently won). The
+// canonical homepage Careers section is defined below, and the CAREERS data
+// (pitch / lede / benefits / open roles) now powers the dedicated /careers page.
 
 function VOSBBand({ theme, data }) {
   return (
@@ -1357,14 +1357,20 @@ function Footer({ theme, data }) {
           <div className="ceg-footer-cols">
             {Object.entries(data.NAV).map(([k, item]) => (
               <div key={k} className="ceg-footer-col">
-                <div className="ceg-footer-col-h">{item.label}</div>
-                <ul>
-                  {item.items.slice(0, 5).map((entry) => {
-                    const label = typeof entry === "string" ? entry : entry.label;
-                    const href  = typeof entry === "string" ? "#" : (entry.href || "#");
-                    return <li key={label}><a href={href}>{label}</a></li>;
-                  })}
-                </ul>
+                {item.items ? (
+                  <div className="ceg-footer-col-h">{item.label}</div>
+                ) : (
+                  <div className="ceg-footer-col-h"><a href={item.href}>{item.label}</a></div>
+                )}
+                {item.items && (
+                  <ul>
+                    {item.items.slice(0, 5).map((entry) => {
+                      const label = typeof entry === "string" ? entry : entry.label;
+                      const href  = typeof entry === "string" ? "#" : (entry.href || "#");
+                      return <li key={label}><a href={href}>{label}</a></li>;
+                    })}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
@@ -1396,9 +1402,9 @@ function Footer({ theme, data }) {
           <div className="ceg-footer-mid-block">
             <div className="ceg-footer-mid-h">Careers</div>
             <div className="ceg-footer-mid-v">
-              <a href="#careers">Open positions</a><br/>
-              <a href="#careers">Why Coastal</a><br/>
-              <a href="#careers">Apply via Paylocity</a>
+              <a href="/careers">Open positions</a><br/>
+              <a href="/careers">Why Coastal</a><br/>
+              <a href="https://recruiting.paylocity.com" target="_blank" rel="noopener noreferrer">Apply via Paylocity</a>
             </div>
           </div>
           <div className="ceg-footer-mid-block ceg-footer-mid-cta ceg-footer-mid-cta--vendor">
@@ -1456,27 +1462,39 @@ function MobileMenu({ open, onClose, data }) {
         </button>
       </div>
       <div className="ceg-mobile-body">
-        {Object.entries(data.NAV).map(([k, item]) => (
-          <div key={k} className={`ceg-mobile-section ${openSection === k ? "is-open" : ""}`}>
-            <button className="ceg-mobile-section-h" onClick={() => setOpenSection(openSection === k ? null : k)}>
-              <span>{item.label}</span>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5"/></svg>
-            </button>
-            {openSection === k && (
-              <ul>
-                {item.items.map((entry) => {
-                  const label = typeof entry === "string" ? entry : entry.label;
-                  const href  = typeof entry === "string" ? "#" : entry.href;
-                  return <li key={label}><a href={href} onClick={onClose}>{label}</a></li>;
-                })}
-              </ul>
-            )}
-          </div>
-        ))}
+        {Object.entries(data.NAV).map(([k, item]) => {
+          // Direct-link items (no `items`) render as a flat link, not an accordion.
+          if (!item.items) {
+            return (
+              <div key={k} className="ceg-mobile-section ceg-mobile-section-link">
+                <a className="ceg-mobile-section-h" href={item.href} onClick={onClose}>
+                  <span>{item.label}</span>
+                </a>
+              </div>
+            );
+          }
+          return (
+            <div key={k} className={`ceg-mobile-section ${openSection === k ? "is-open" : ""}`}>
+              <button className="ceg-mobile-section-h" onClick={() => setOpenSection(openSection === k ? null : k)}>
+                <span>{item.label}</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5"/></svg>
+              </button>
+              {openSection === k && (
+                <ul>
+                  {item.items.map((entry) => {
+                    const label = typeof entry === "string" ? entry : entry.label;
+                    const href  = typeof entry === "string" ? "#" : entry.href;
+                    return <li key={label}><a href={href} onClick={onClose}>{label}</a></li>;
+                  })}
+                </ul>
+              )}
+            </div>
+          );
+        })}
       </div>
       <div className="ceg-mobile-foot">
         <a href={`tel:${data.CONTACT.phone}`}>{data.CONTACT.phone}</a>
-        <Btn href="#contact" onClick={onClose}>Request a Bid</Btn>
+        <Btn href="/request-a-bid" onClick={onClose}>Request a Bid</Btn>
       </div>
     </div>
     </>
@@ -1539,7 +1557,7 @@ function WhyCEG({ theme, data }) {
               <p className="ceg-why-subhead">
                 Most projects require separate contracts for engineering and construction. Coastal Engineering Group delivers both — under one roof, on one timeline.
               </p>
-              <a href="#contact" className="ceg-btn ceg-btn-primary ceg-why-cta">Start a Project →</a>
+              <a href="/request-a-bid" className="ceg-btn ceg-btn-primary ceg-why-cta">Start a Project →</a>
             </div>
             <img
               src="/assets/why-ceg-photo.jpg"
@@ -1867,7 +1885,7 @@ function FinalCTA({ data }) {
           From underwater inspection to full marine construction — Coastal Engineering Group delivers integrated solutions across 13 licensed states. Tell us what you&apos;re working on.
         </p>
         <div className="ceg-final-cta-btns">
-          <a href="#contact" className="ceg-final-cta-btn ceg-final-cta-btn-primary">Start a Project →</a>
+          <a href="/request-a-bid" className="ceg-final-cta-btn ceg-final-cta-btn-primary">Start a Project →</a>
           <a href={`tel:${phone}`} className="ceg-final-cta-btn ceg-final-cta-btn-secondary">Call {phone}</a>
         </div>
         <div className="ceg-final-cta-trust">
