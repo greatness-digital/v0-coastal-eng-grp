@@ -77,6 +77,54 @@ function AboutHero() {
   );
 }
 
+// ─── At a Glance ───────────────────────────────────────────────────────────────
+// Consolidated who / what / where snapshot so a visitor gets the essentials
+// without hunting across the Story, Veteran, and Leadership sections. Pulls
+// credentials and key stats straight from shared data so they stay in sync.
+function AboutGlance() {
+  const data = window.CEG_DATA;
+  return (
+    <section id="glance" className="ceg-section ceg-about-glance">
+      <div className="ceg-container">
+        <div className="ceg-about-glance-grid">
+          <div className="ceg-about-glance-col">
+            <span className="ceg-about-glance-k">What we do</span>
+            <p>
+              Self-perform marine construction, engineering, dredging, and marine
+              services — with commercial diving as a specialized in-house capability,
+              all under one accountable team.
+            </p>
+          </div>
+          <div className="ceg-about-glance-col">
+            <span className="ceg-about-glance-k">Where we work</span>
+            <p>
+              Federal, state, energy, and commercial waterfronts from the
+              Mid-Atlantic up the Eastern Seaboard — with professional engineers
+              licensed across 13 states.
+            </p>
+          </div>
+          <div className="ceg-about-glance-col">
+            <span className="ceg-about-glance-k">Credentials</span>
+            <div className="ceg-about-glance-certs">
+              {data.CERTS.map((c) => (
+                <span key={c.abbr} className="ceg-about-cert" title={c.full}>{c.abbr}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="ceg-about-glance-stats">
+          {data.STATS.map((s, i) => (
+            <div key={i} className="ceg-about-glance-stat">
+              <span className="ceg-about-glance-stat-v">{s.value}</span>
+              <span className="ceg-about-glance-stat-l">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Our Story ───────────────────────────────────────────────────────────────
 function OurStory() {
   return (
@@ -210,9 +258,10 @@ function AboutApp() {
       <window.Nav theme={theme} data={data} conceptKey="drydock" onMobileOpen={() => setMobileOpen(true)} />
       <main>
         <AboutHero />
+        <AboutGlance />
         <OurStory />
-        <Leadership />
         <VeteranOwned />
+        <Leadership />
         <AboutCTA />
       </main>
       <window.Footer theme={theme} data={data} />

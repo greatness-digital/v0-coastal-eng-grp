@@ -1,14 +1,17 @@
 // Shared content data for all three concepts
 // Sourced from meeting notes + coastalengineeringllc.com
 
+// Order is intentional: marine construction and engineering lead, with
+// commercial diving presented as one specialized capability among the rest
+// (not the headline identity). Badges renumber to match the display order.
 const CAPABILITIES = [
   {
-    key: "diving",
+    key: "construction",
     badge: "CAP-01",
-    title: "Commercial Diving",
-    body: "PE-certified divers performing underwater inspections, structural repairs, and confined-space operations. Our divers aren't just certified — they're licensed engineers.",
-    link: "Explore Diving →",
-    icon: "diving",
+    title: "Marine Construction",
+    body: "Heavy marine construction including seawalls, piers, underwater concrete, welding, and structural repairs. Built to perform in demanding coastal and freshwater environments.",
+    link: "Explore Construction →",
+    icon: "construction",
   },
   {
     key: "engineering",
@@ -19,16 +22,8 @@ const CAPABILITIES = [
     icon: "engineering",
   },
   {
-    key: "construction",
-    badge: "CAP-03",
-    title: "Marine Construction",
-    body: "Heavy marine construction including seawalls, piers, underwater concrete, welding, and structural repairs. Built to perform in demanding coastal and freshwater environments.",
-    link: "Explore Construction →",
-    icon: "construction",
-  },
-  {
     key: "dredging",
-    badge: "CAP-04",
+    badge: "CAP-03",
     title: "Dredging & Debris Removal",
     body: "Precision dredging for navigation channels, lake restoration, and sediment management. Careful, methodical operations protecting sensitive aquatic environments.",
     link: "Explore Dredging →",
@@ -36,21 +31,33 @@ const CAPABILITIES = [
   },
   {
     key: "marine-services",
-    badge: "CAP-05",
+    badge: "CAP-04",
     title: "Marine Services & Equipment",
     body: "ROV inspection, tugboats, barges, and crane rentals supporting marine construction operations up and down the East Coast. Full capability, when and where you need it.",
     link: "Explore Marine Services →",
     icon: "marine",
   },
-];
-
-const DIVISIONS = [
   {
     key: "diving",
-    name: "Commercial Diving",
-    short: "Diving",
-    blurb: "ADCI-certified inspection, repair, and salvage operations across federal and commercial waterfronts.",
-    services: ["Underwater Inspection", "Pier & Wharf Repair", "Salvage & Recovery", "Hull Cleaning", "NDT & Welding"],
+    badge: "CAP-05",
+    title: "Commercial Diving",
+    body: "PE-certified divers performing underwater inspections, structural repairs, and confined-space operations. Our divers aren't just certified — they're licensed engineers.",
+    link: "Explore Diving →",
+    icon: "diving",
+  },
+];
+
+// Same intentional order as CAPABILITIES — construction/engineering first,
+// diving as one specialized division among the rest. The services mega-menu
+// features the first three (DIVISIONS.slice(0, 3)) and the divisions tabs
+// default to index 0, so this order also drives what surfaces first there.
+const DIVISIONS = [
+  {
+    key: "construction",
+    name: "Marine Construction",
+    short: "Construction",
+    blurb: "Heavy civil construction over and below the waterline — bridges, piers, wharfs, and seawalls.",
+    services: ["Pile Driving", "Bulkheads & Seawalls", "Bridge Substructures", "Pier & Wharf Construction"],
   },
   {
     key: "engineering",
@@ -67,18 +74,18 @@ const DIVISIONS = [
     services: ["Maintenance Dredging", "Capital Dredging", "Environmental Dredging", "Beach Renourishment"],
   },
   {
-    key: "construction",
-    name: "Marine Construction",
-    short: "Construction",
-    blurb: "Heavy civil construction over and below the waterline — bridges, piers, wharfs, and seawalls.",
-    services: ["Pile Driving", "Bulkheads & Seawalls", "Bridge Substructures", "Pier & Wharf Construction"],
-  },
-  {
     key: "marine-services",
     name: "Marine Services",
     short: "Marine Services",
     blurb: "Tugs, barges, and crane rentals supporting our own work and third-party marine contractors.",
     services: ["Tugboat Services", "Deck Barges", "Crane Barges", "Equipment Rental"],
+  },
+  {
+    key: "diving",
+    name: "Commercial Diving",
+    short: "Diving",
+    blurb: "ADCI-certified inspection, repair, and salvage operations across federal and commercial waterfronts.",
+    services: ["Underwater Inspection", "Pier & Wharf Repair", "Salvage & Recovery", "Hull Cleaning", "NDT & Welding"],
   },
 ];
 
@@ -260,9 +267,10 @@ const STATS = [
 //  · Careers = its own page (no longer buried under About).
 const NAV = {
   about: { label: "About", items: [
+    { label: "Overview",         href: "/about#glance" },
     { label: "Our Story",        href: "/about#story" },
     { label: "Leadership",       href: "/about#leadership" },
-    { label: "Veteran-Owned",    href: "/about#veteran" },
+    { label: "Veteran-Owned",    href: "/about#veteran-owned" },
     { label: "Safety & Quality", href: "/safety-quality" },
   ]},
   markets: { label: "Markets", items: MARKETS.map(m => ({
@@ -272,11 +280,11 @@ const NAV = {
       : `/projects/featured-work#market=${encodeURIComponent(m.name)}`,
   })) },
   services: { label: "Services", items: [
-    { label: "Commercial Diving",   href: "/services/diving" },
-    { label: "Marine Engineering",  href: "#" },
     { label: "Marine Construction", href: "#" },
+    { label: "Marine Engineering",  href: "#" },
     { label: "Dredging",            href: "#" },
     { label: "Marine Services",     href: "#" },
+    { label: "Commercial Diving",   href: "/services/diving" },
   ]},
   projects: { label: "Projects", href: "/projects/featured-work" },
   careers:  { label: "Careers",  href: "/careers" },

@@ -17,7 +17,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Coastal Engineering Group — Heavy Marine Construction",
   description:
-    "Veteran-owned, ADCI-certified marine contractor delivering integrated heavy-civil work across diving, engineering, dredging, construction, and marine services for NAVFAC, USACE, and the nation's port authorities.",
+    "Veteran-owned, ADCI-certified marine contractor delivering integrated heavy-civil work across construction, engineering, dredging, marine services, and commercial diving for NAVFAC, USACE, and the nation's port authorities.",
   generator: "v0.app",
   icons: {
     icon: [
