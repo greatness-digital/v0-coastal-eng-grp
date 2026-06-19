@@ -4323,6 +4323,16 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   max-width: 680px; margin-bottom: 40px;
 }
 
+/* Shared service-page hero — per-service photo via an inline-styled child,
+   suppressing the diving page's hardcoded ::before image. The .div-hero::after
+   gradient scrim still applies and paints over this photo. */
+.svc-hero::before { display: none; }
+.svc-hero-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 30%;
+  opacity: 0.25; z-index: 0; pointer-events: none;
+}
+
 /* ─── Stat Band ──────────────────────────────────────────────────────────── */
 .div-stat-band { background: #1c6fbf; padding: 28px 0; }
 .div-stat-band-inner {

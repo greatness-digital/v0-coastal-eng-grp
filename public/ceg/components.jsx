@@ -1345,7 +1345,7 @@ function Footer({ theme, data }) {
           <div className="ceg-footer-brand">
             <img src="/assets/logo-horizontal.png" alt="Coastal Engineering Group" className="ceg-footer-logo"/>
             <p className="ceg-footer-tagline">
-              Marine construction, diving, dredging, engineering, and marine services
+              Marine construction, engineering, dredging, marine services, and commercial diving
               for the working waterfront.
             </p>
             <div className="ceg-footer-certs">
