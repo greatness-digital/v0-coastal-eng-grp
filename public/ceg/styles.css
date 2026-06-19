@@ -3132,29 +3132,38 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 
 /* ─── At a Glance ─────────────────────────────────────────────────────────── */
 .ceg-about-glance {
-  background: #f8fafc;
-  padding: 72px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: var(--surface, #f3f1eb);
+  padding: 80px 0;
+  border-bottom: 1px solid var(--rule, #c9c4b5);
 }
 .ceg-about-glance-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
+  gap: 56px;
 }
 .ceg-about-glance-k {
-  display: block;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent, #a8421c);
-  margin-bottom: 12px;
-  font-weight: 700;
+  color: var(--brand, #13386a);
+  margin-bottom: 16px;
+}
+.ceg-about-glance-k::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--brand, #13386a);
 }
 .ceg-about-glance-col p {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
   font-size: 1.02rem;
   line-height: 1.7;
-  color: var(--ink, #161a20);
+  color: var(--ink-soft, #2e3540);
   margin: 0;
 }
 .ceg-about-glance-certs {
@@ -3163,13 +3172,14 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   gap: 8px;
 }
 .ceg-about-cert {
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.04em;
-  padding: 6px 10px;
-  border-radius: 6px;
-  background: #fff;
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  padding: 7px 12px;
+  border-radius: 4px;
+  background: var(--bg, #fbfaf7);
+  border: 1px solid var(--rule, #c9c4b5);
   color: var(--ink, #161a20);
   cursor: default;
 }
@@ -3178,30 +3188,35 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   grid-template-columns: repeat(5, 1fr);
   gap: 24px;
   margin-top: 56px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 44px;
+  border-top: 1px solid var(--rule, #c9c4b5);
 }
 .ceg-about-glance-stat {
   text-align: center;
 }
 .ceg-about-glance-stat-v {
   display: block;
-  font-family: var(--font-display, var(--font-barlow), sans-serif);
-  font-size: 2.1rem;
+  font-family: var(--font-barlow, "Barlow", system-ui, sans-serif);
+  font-size: clamp(28px, 3vw, 40px);
   font-weight: 800;
-  color: var(--accent, #a8421c);
+  letter-spacing: -0.02em;
+  color: var(--brand, #13386a);
   line-height: 1;
 }
 .ceg-about-glance-stat-l {
   display: block;
-  margin-top: 8px;
-  font-size: 0.82rem;
-  color: var(--ink-soft, #2e3540);
+  margin-top: 10px;
+  font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute, #5a6473);
 }
 @media (max-width: 900px) {
   .ceg-about-glance-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
   .ceg-about-glance-stats {
     grid-template-columns: repeat(2, 1fr);
