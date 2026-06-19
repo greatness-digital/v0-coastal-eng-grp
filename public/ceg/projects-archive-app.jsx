@@ -78,10 +78,22 @@ function ProjectCard({ p }) {
   );
 }
 
+// Read an initial market filter from the URL hash (e.g. #market=Energy), so the
+// Markets nav dropdown can deep-link straight into the relevant portfolio view.
+// Falls back to "All" if the hash is missing or names a market with no projects.
+function initialMarketFromHash(projects) {
+  if (typeof window === "undefined") return "All";
+  const m = /[#&]market=([^&]+)/.exec(window.location.hash || "");
+  if (!m) return "All";
+  const want = decodeURIComponent(m[1]);
+  const known = new Set(projects.map((p) => p.market));
+  return known.has(want) ? want : "All";
+}
+
 // ─── Archive page ─────────────────────────────────────────────────────────────
 function ProjectsArchive() {
   const data = window.CEG_DATA;
-  const [activeFilter, setActiveFilter] = usePA("All");
+  const [activeFilter, setActiveFilter] = usePA(() => initialMarketFromHash(data.PROJECTS));
 
   const filtered = activeFilter === "All"
     ? data.PROJECTS

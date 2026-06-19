@@ -648,3 +648,75 @@
   .concept-drydock .dd-dispatch-meta { grid-template-columns: 1fr 1fr; }
   .concept-drydock .dd-client-list { grid-template-columns: 1fr; }
 }
+
+/* ─── Direct-link nav items (Projects, Careers) ──────────────────────────────
+   Plain links in the primary nav — match the dropdown trigger styling but
+   carry no chevron, so they read as single-destination items. */
+.ceg-nav-trigger-link { text-decoration: none; cursor: pointer; }
+.ceg-mobile-section-link .ceg-mobile-section-h { display: flex; text-decoration: none; }
+
+/* ─── Careers page ───────────────────────────────────────────────────────────── */
+.page-careers .careers-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+.careers-block-head { margin-bottom: 34px; max-width: 640px; }
+.careers-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+.careers-benefit-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 26px 24px;
+}
+.careers-benefit-h {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.careers-benefit-v {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+  margin: 0;
+}
+.careers-roles-section { background: var(--surface-alt); }
+.careers-roles { border-top: 1px solid var(--rule); }
+.careers-role-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 6px;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  transition: padding-left .15s ease, background .15s ease;
+}
+.careers-role-row:hover { padding-left: 18px; background: var(--surface); }
+.careers-role-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.careers-role-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ink-mute);
+}
+.careers-role-cta { font-weight: 600; color: var(--brand); white-space: nowrap; }
+.careers-roles-foot { margin-top: 26px; font-size: 15px; color: var(--ink-mute); }
+.careers-roles-foot a { color: var(--brand); font-weight: 600; text-decoration: none; }
+@media (max-width: 600px) {
+  .careers-role-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
