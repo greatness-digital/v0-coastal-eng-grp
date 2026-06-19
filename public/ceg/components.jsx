@@ -389,7 +389,7 @@ function HeroPhoto({ theme, data }) {
         </p>
         <div className="ceg-hero-ctas">
           <Btn href="#projects" variant="primary">View our work</Btn>
-          <Btn href="#contact" variant="ghost">Request a bid</Btn>
+          <Btn href="/request-a-bid" variant="ghost">Request a bid</Btn>
         </div>
         </div>
       </div>
@@ -471,7 +471,7 @@ function HeroType({ theme, data }) {
             </p>
             <div className="ceg-hero-ctas">
               <Btn href="#projects" variant="primary">View projects</Btn>
-              <Btn href="#contact" variant="ghost">Request a bid</Btn>
+              <Btn href="/request-a-bid" variant="ghost">Request a bid</Btn>
             </div>
           </div>
 
@@ -926,7 +926,7 @@ function Capabilities({ theme, data }) {
           ))}
 
           {/* CAP-06: CTA Card */}
-          <a href="#contact" className="ceg-cap-card ceg-cap-card-cta">
+          <a href="/request-a-bid" className="ceg-cap-card ceg-cap-card-cta">
             <div className="ceg-cap-cta-eyebrow">Ready to Get Started?</div>
             <h3 className="ceg-cap-cta-title">Start a Project</h3>
             <p className="ceg-cap-cta-body">Tell us about your project. We'll respond within 24 hours.</p>
@@ -1557,7 +1557,7 @@ function WhyCEG({ theme, data }) {
               <p className="ceg-why-subhead">
                 Most projects require separate contracts for engineering and construction. Coastal Engineering Group delivers both — under one roof, on one timeline.
               </p>
-              <a href="#contact" className="ceg-btn ceg-btn-primary ceg-why-cta">Start a Project →</a>
+              <a href="/request-a-bid" className="ceg-btn ceg-btn-primary ceg-why-cta">Start a Project →</a>
             </div>
             <img
               src="/assets/why-ceg-photo.jpg"
@@ -1885,7 +1885,7 @@ function FinalCTA({ data }) {
           From underwater inspection to full marine construction — Coastal Engineering Group delivers integrated solutions across 13 licensed states. Tell us what you&apos;re working on.
         </p>
         <div className="ceg-final-cta-btns">
-          <a href="#contact" className="ceg-final-cta-btn ceg-final-cta-btn-primary">Start a Project →</a>
+          <a href="/request-a-bid" className="ceg-final-cta-btn ceg-final-cta-btn-primary">Start a Project →</a>
           <a href={`tel:${phone}`} className="ceg-final-cta-btn ceg-final-cta-btn-secondary">Call {phone}</a>
         </div>
         <div className="ceg-final-cta-trust">

@@ -166,7 +166,7 @@ function DivHero() {
             Engineers — combining underwater certification with engineering authority to assess,
             design, and repair in a single mobilization.
           </p>
-          <a href="#contact" className="fed-btn fed-btn-primary">Request a Dive Team →</a>
+          <a href="/request-a-bid" className="fed-btn fed-btn-primary">Request a Dive Team →</a>
         </div>
       </div>
     </section>
@@ -306,13 +306,12 @@ function DivProjects() {
                     <span key={j} className="div-project-tag">{t}</span>
                   ))}
                 </div>
-                <a href="#contact" className="fed-project-link">View Project →</a>
               </div>
             </div>
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: 40 }}>
-          <a href="#contact" className="div-view-all">View All Projects →</a>
+          <a href="/projects/featured-work" className="div-view-all">View All Projects →</a>
         </div>
       </div>
     </section>
@@ -330,7 +329,7 @@ function DivCTA() {
             ADCI certified. PE-led. Deployed across 13 states. Tell us your project and we'll respond within 24 hours.
           </p>
           <div className="fed-cta-btns">
-            <a href="#contact" className="fed-btn fed-btn-white">Start a Project →</a>
+            <a href="/request-a-bid" className="fed-btn fed-btn-white">Start a Project →</a>
             <a href="tel:8453283178" className="fed-btn fed-btn-outline-white">Call 845-328-3178</a>
           </div>
           <div className="fed-cta-trust">

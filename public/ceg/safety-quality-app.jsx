@@ -281,7 +281,7 @@ function SQCTA() {
             Federal, state, or private — we provide PE-led quality assurance that meets NAVFAC, USACE, and project-specific requirements.
           </p>
           <div className="sq-cta-btns">
-            <a href="#contact" className="ceg-btn sq-btn-primary">Start a Project →</a>
+            <a href="/request-a-bid" className="ceg-btn sq-btn-primary">Start a Project →</a>
             <a href="tel:8453283178" className="ceg-btn sq-btn-secondary">Call 845-328-3178</a>
           </div>
         </div>
