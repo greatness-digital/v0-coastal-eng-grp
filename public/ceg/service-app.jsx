@@ -321,12 +321,13 @@ function SvcCerts({ certs }) {
 }
 
 // Pulls real projects out of shared data so cards link to genuine case studies.
-function SvcProjects({ head, slugs }) {
+function SvcProjects({ head, slugs, photo }) {
   const all = (window.CEG_DATA && window.CEG_DATA.PROJECTS) || [];
   const projects = slugs.map((s) => all.find((p) => p.slug === s)).filter(Boolean);
   if (!projects.length) return null;
   return (
     <section id="projects" className="fed-section div-projects">
+      {photo && <div className="svc-projects-photo" aria-hidden="true" style={{ backgroundImage: `url('${photo}')` }} />}
       <div className="ceg-container">
         <div className="fed-section-head">
           <div className="ceg-eyebrow fed-eyebrow">
@@ -428,7 +429,7 @@ function ServiceApp() {
         <SvcWhy why={d.why} />
         <SvcServices head={d.servicesHead} services={d.services} />
         <SvcCerts certs={d.certs} />
-        <SvcProjects head={d.projectsHead} slugs={d.projectSlugs} />
+        <SvcProjects head={d.projectsHead} slugs={d.projectSlugs} photo={d.heroImg} />
         <SvcCTA cta={d.cta} />
       </main>
       <window.Footer theme={theme} data={data} />
