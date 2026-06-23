@@ -4519,6 +4519,16 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 .div-projects > .ceg-container { position: relative; z-index: 1; }
 
+/* Stat band: left-align each column's content (flush the first to the
+   container edge) rather than centering. */
+.page-service .div-stat-band-inner { justify-content: flex-start; }
+.page-service .div-stat-band-item { text-align: left; align-items: flex-start; padding: 0 40px; }
+.page-service .div-stat-band-item:first-child { padding-left: 0; }
+@media (max-width: 640px) {
+  .page-service .div-stat-band-item,
+  .page-service .div-stat-band-item:first-child { padding: 0; }
+}
+
 /* ─── Projects ───────────────────────────────────────────────────────────── */
 .div-projects { background: #0b1929; }
 .div-project-card { background: #0f2236; border-color: rgba(255,255,255,0.07); }
