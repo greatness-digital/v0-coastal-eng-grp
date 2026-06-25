@@ -254,6 +254,26 @@ const STATS = [
   { value: "VOSB", label: "Verified" },
 ];
 
+// States where Coastal Engineering's Professional Engineers are licensed.
+// Drives the "Where We Work" section and the count shown on service pages
+// (so the number always matches the list). Ordered north-to-south along the
+// seaboard, inland last.
+const LICENSED_STATES = [
+  { abbr: "ME", name: "Maine" },
+  { abbr: "NY", name: "New York" },
+  { abbr: "CT", name: "Connecticut" },
+  { abbr: "NJ", name: "New Jersey" },
+  { abbr: "PA", name: "Pennsylvania" },
+  { abbr: "DE", name: "Delaware" },
+  { abbr: "MD", name: "Maryland" },
+  { abbr: "VA", name: "Virginia" },
+  { abbr: "NC", name: "North Carolina" },
+  { abbr: "SC", name: "South Carolina" },
+  { abbr: "GA", name: "Georgia" },
+  { abbr: "FL", name: "Florida" },
+  { abbr: "OH", name: "Ohio" },
+];
+
 // Primary navigation. Order is meaningful — Careers sits between Projects
 // and Insights. Top-level items with no `items` array render as direct links
 // (no dropdown), keeping the menu shallow and reachable in one or two clicks.
@@ -280,10 +300,10 @@ const NAV = {
       : `/projects/featured-work#market=${encodeURIComponent(m.name)}`,
   })) },
   services: { label: "Services", items: [
-    { label: "Marine Construction", href: "#" },
-    { label: "Marine Engineering",  href: "#" },
-    { label: "Dredging",            href: "#" },
-    { label: "Marine Services",     href: "#" },
+    { label: "Marine Construction", href: "/services/construction" },
+    { label: "Marine Engineering",  href: "/services/engineering" },
+    { label: "Dredging",            href: "/services/dredging" },
+    { label: "Marine Services",     href: "/services/marine-services" },
     { label: "Commercial Diving",   href: "/services/diving" },
   ]},
   projects: { label: "Projects", href: "/projects/featured-work" },
@@ -324,4 +344,4 @@ const CAREERS = {
   ],
 };
 
-window.CEG_DATA = { CAPABILITIES, DIVISIONS, MARKETS, PROJECTS, STATES_WORKED, CERTS, CLIENTS, STATS, NAV, CONTACT, CAREERS };
+window.CEG_DATA = { CAPABILITIES, DIVISIONS, MARKETS, PROJECTS, STATES_WORKED, CERTS, CLIENTS, STATS, LICENSED_STATES, NAV, CONTACT, CAREERS };

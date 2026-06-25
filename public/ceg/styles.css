@@ -4323,6 +4323,25 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
   max-width: 680px; margin-bottom: 40px;
 }
 
+/* Shared service-page hero — per-service photo via an inline-styled child,
+   suppressing the diving page's hardcoded ::before image. The photo sits more
+   visible than the diving hero, and the scrim is left-weighted so the headline
+   stays legible while the image (crane, equipment, etc.) reads on the right. */
+.svc-hero::before { display: none; }
+.svc-hero-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 35%;
+  opacity: 0.55; z-index: 0; pointer-events: none;
+}
+.svc-hero::after {
+  background: linear-gradient(
+    to right,
+    rgba(11,25,41,0.88) 0%,
+    rgba(11,25,41,0.62) 48%,
+    rgba(11,25,41,0.22) 100%
+  );
+}
+
 /* ─── Stat Band ──────────────────────────────────────────────────────────── */
 .div-stat-band { background: #1c6fbf; padding: 28px 0; }
 .div-stat-band-inner {
@@ -4448,21 +4467,120 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 
 /* ─── Certifications Strip ───────────────────────────────────────────────── */
-.div-cert-strip { background: #ffffff; padding: 40px 0; border-top: 1px solid #e2e8f0; }
+.div-cert-strip {
+  background: #ffffff; padding: 72px 0;
+  border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
+}
 .div-cert-label {
   font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 500; font-size: 11px; letter-spacing: 0.18em;
+  font-weight: 600; font-size: 11px; letter-spacing: 0.18em;
   text-transform: uppercase; color: #1c6fbf;
-  text-align: center; margin-bottom: 20px;
+  text-align: center; margin: 0 0 28px;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.div-cert-label::before,
+.div-cert-label::after {
+  content: ""; width: 28px; height: 1px; background: #cbd9e8;
 }
 .div-cert-pills {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+  max-width: 880px; margin: 0 auto;
 }
 .div-cert-pill {
   font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 500; font-size: 13px; color: #0b1929;
-  border: 1.5px solid #0b1929; padding: 7px 16px;
-  white-space: nowrap;
+  font-weight: 600; font-size: 13px; color: #13386a;
+  background: #f0f6fc; border: 1px solid #d6e4f0; border-radius: 6px;
+  padding: 9px 18px; white-space: nowrap;
+  transition: border-color 0.18s, background 0.18s;
+}
+.div-cert-pill:hover { background: #e3eefa; border-color: #9bbce0; }
+
+/* ─── Service-page overrides (shared template, 6 capabilities) ────────────── */
+/* Even the capability grid to two rows of three so there are no empty cells. */
+.page-service .div-services-grid { grid-template-columns: repeat(3, 1fr); }
+.page-service .div-service-card:nth-child(-n+3) .div-tooltip { bottom: auto; top: calc(100% + 10px); }
+.page-service .div-service-card:nth-child(n+4) .div-tooltip { top: auto; bottom: calc(100% + 10px); }
+@media (max-width: 900px) {
+  .page-service .div-services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .page-service .div-services-grid { grid-template-columns: 1fr; }
+}
+
+/* Faded division photo behind the recent-projects band, fading out to the right
+   like the About story and other sections. */
+.page-service .div-projects { position: relative; overflow: hidden; }
+.svc-projects-photo {
+  position: absolute; top: 0; left: 0; width: 58%; height: 100%;
+  background-size: cover; background-position: center;
+  opacity: 0.16; z-index: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 35%, transparent 82%);
+  mask-image: linear-gradient(to right, #000 0%, #000 35%, transparent 82%);
+}
+.div-projects > .ceg-container { position: relative; z-index: 1; }
+
+/* ─── Service-page SEO sections (Overview / Where We Work / FAQ) ───────────── */
+.svc-overview { background: #ffffff; }
+.svc-prose { max-width: 820px; }
+.svc-prose .ceg-eyebrow { margin-bottom: 18px; }
+.svc-prose .fed-h2 { margin-bottom: 24px; }
+.svc-prose-p {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 1.05rem; line-height: 1.75; color: #3a4a5c; margin: 0 0 18px;
+}
+.svc-prose-p:last-child { margin-bottom: 0; }
+
+.svc-where { background: #f7f9fc; border-top: 1px solid #e2e8f0; }
+.svc-where-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; max-width: 920px; margin: 0 auto;
+}
+.svc-where-item {
+  display: flex; align-items: center; gap: 12px;
+  background: #ffffff; border: 1px solid #d6e4f0; border-radius: 8px;
+  padding: 14px 16px;
+}
+.svc-where-abbr {
+  font-family: var(--font-barlow, "Barlow", sans-serif);
+  font-weight: 800; font-size: 14px; color: #13386a;
+  background: #eaf2fb; border-radius: 5px; padding: 4px 8px; min-width: 38px; text-align: center;
+}
+.svc-where-name {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 14px; color: #2e3540;
+}
+
+.svc-faq { background: #ffffff; border-top: 1px solid #e2e8f0; }
+.svc-faq-list { max-width: 820px; margin: 0 auto; }
+.svc-faq-item {
+  border-bottom: 1px solid #e2e8f0; padding: 4px 0;
+}
+.svc-faq-q {
+  font-family: var(--font-barlow, "Barlow", sans-serif);
+  font-weight: 700; font-size: 1.05rem; color: #13386a;
+  list-style: none; cursor: pointer; padding: 20px 36px 20px 0; position: relative;
+}
+.svc-faq-q::-webkit-details-marker { display: none; }
+.svc-faq-q::after {
+  content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-inter, "Inter", sans-serif); font-weight: 400;
+  font-size: 24px; color: #1c6fbf; line-height: 1;
+}
+.svc-faq-item[open] .svc-faq-q::after { content: "\2212"; }
+.svc-faq-a {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 15px; line-height: 1.7; color: #3a4a5c;
+  margin: 0 0 20px; padding-right: 36px;
+}
+
+/* Stat band: left-align each column's content (flush the first to the
+   container edge) rather than centering. */
+.page-service .div-stat-band-inner { justify-content: flex-start; }
+.page-service .div-stat-band-item { text-align: left; align-items: flex-start; padding: 0 40px; }
+.page-service .div-stat-band-item:first-child { padding-left: 0; }
+@media (max-width: 640px) {
+  .page-service .div-stat-band-item,
+  .page-service .div-stat-band-item:first-child { padding: 0; }
 }
 
 /* ─── Projects ───────────────────────────────────────────────────────────── */
