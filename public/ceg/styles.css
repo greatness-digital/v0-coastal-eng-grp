@@ -4519,6 +4519,60 @@ a.ceg-contact-info-val:hover { color: var(--brand); }
 }
 .div-projects > .ceg-container { position: relative; z-index: 1; }
 
+/* ─── Service-page SEO sections (Overview / Where We Work / FAQ) ───────────── */
+.svc-overview { background: #ffffff; }
+.svc-prose { max-width: 820px; }
+.svc-prose .ceg-eyebrow { margin-bottom: 18px; }
+.svc-prose .fed-h2 { margin-bottom: 24px; }
+.svc-prose-p {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 1.05rem; line-height: 1.75; color: #3a4a5c; margin: 0 0 18px;
+}
+.svc-prose-p:last-child { margin-bottom: 0; }
+
+.svc-where { background: #f7f9fc; border-top: 1px solid #e2e8f0; }
+.svc-where-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; max-width: 920px; margin: 0 auto;
+}
+.svc-where-item {
+  display: flex; align-items: center; gap: 12px;
+  background: #ffffff; border: 1px solid #d6e4f0; border-radius: 8px;
+  padding: 14px 16px;
+}
+.svc-where-abbr {
+  font-family: var(--font-barlow, "Barlow", sans-serif);
+  font-weight: 800; font-size: 14px; color: #13386a;
+  background: #eaf2fb; border-radius: 5px; padding: 4px 8px; min-width: 38px; text-align: center;
+}
+.svc-where-name {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 14px; color: #2e3540;
+}
+
+.svc-faq { background: #ffffff; border-top: 1px solid #e2e8f0; }
+.svc-faq-list { max-width: 820px; margin: 0 auto; }
+.svc-faq-item {
+  border-bottom: 1px solid #e2e8f0; padding: 4px 0;
+}
+.svc-faq-q {
+  font-family: var(--font-barlow, "Barlow", sans-serif);
+  font-weight: 700; font-size: 1.05rem; color: #13386a;
+  list-style: none; cursor: pointer; padding: 20px 36px 20px 0; position: relative;
+}
+.svc-faq-q::-webkit-details-marker { display: none; }
+.svc-faq-q::after {
+  content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-inter, "Inter", sans-serif); font-weight: 400;
+  font-size: 24px; color: #1c6fbf; line-height: 1;
+}
+.svc-faq-item[open] .svc-faq-q::after { content: "\2212"; }
+.svc-faq-a {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-size: 15px; line-height: 1.7; color: #3a4a5c;
+  margin: 0 0 20px; padding-right: 36px;
+}
+
 /* Stat band: left-align each column's content (flush the first to the
    container edge) rather than centering. */
 .page-service .div-stat-band-inner { justify-content: flex-start; }

@@ -64,6 +64,22 @@ const SERVICE_PAGES = {
     certs: ["VOSB", "USACE CQM", "EM385", "OSHA 10/30", "ISO 9001", "ASCE Waterfront", "AWS Welding", "PE-Stamped"],
     projectSlugs: ["mayport-naval-station-wharf-repair", "port-newark-container-terminal", "greenwood-lake-dam-rehabilitation"],
     projectsHead: { eyebrow: "Recent Work", h2: "Built to Perform Under Load" },
+    intro: {
+      eyebrow: "Overview",
+      h2: "Heavy Marine Construction, Self-Performed",
+      body: [
+        "Coastal Engineering Group is a veteran-owned heavy marine construction contractor working the waterfronts of the U.S. East Coast. We build and rehabilitate the structures that hold the coast in place — piers and wharfs, seawalls and bulkheads, bridge substructures, and underwater concrete — over and below the waterline.",
+        "What sets our marine construction apart is integration. Our field crews work under licensed Professional Engineers, and we self-perform the core work with our own equipment rather than subcontracting it out. Design intent carries straight through to the field, and one accountable team owns the project from the drawing board to the as-built — removing the handoffs and change orders that drive marine work over budget.",
+      ],
+    },
+    whereCopy: "Coastal Engineering Group self-performs marine construction for federal, state, energy, and commercial clients across the Eastern Seaboard. Our Professional Engineers are licensed in:",
+    faqs: [
+      { q: "What does a marine construction contractor do?", a: "A marine construction contractor builds and rehabilitates structures over and below the waterline — piers, wharfs, seawalls, bulkheads, bridge substructures, and underwater concrete. Coastal Engineering Group self-performs this work with its own crews and equipment, directed by licensed Professional Engineers." },
+      { q: "What areas does Coastal Engineering Group serve?", a: "Coastal Engineering Group works federal, state, energy, and commercial waterfronts from the Mid-Atlantic up the Eastern Seaboard, with Professional Engineers licensed across the East Coast from Maine to Florida." },
+      { q: "Do you self-perform marine construction or subcontract it?", a: "We self-perform our core marine construction with our own crews, equipment, and PE oversight — eliminating the handoffs, change orders, and split accountability of multi-prime delivery." },
+      { q: "What types of marine structures do you build?", a: "Pile foundations, steel and concrete bulkheads and seawalls, piers and wharfs, bridge substructures, underwater structural concrete and pile jackets, and cofferdams for dry below-waterline work." },
+      { q: "Are you qualified for federal marine construction work?", a: "Yes. Coastal Engineering Group is a Veteran-Owned Small Business with USACE CQM and EM385 compliance, and a track record on NAVFAC and USACE waterfront projects." },
+    ],
     cta: { h2: "Have a Marine Construction Project?", lede: "Self-performed, PE-overseen, and deployed across 13 states. Tell us your scope and we'll respond within 24 hours.", trust: ["VOSB", "PE Oversight", "USACE CQM", "EM385", "100% Safety Record"] },
   },
 
@@ -103,6 +119,21 @@ const SERVICE_PAGES = {
     certs: ["PE — 13 States", "VOSB", "ASCE", "ASDSO", "NHI / FHWA", "ISO 9001", "QA/QC", "NBIS"],
     projectSlugs: ["port-newark-container-terminal", "greenwood-lake-dam-rehabilitation", "delaware-river-bridge-inspection"],
     projectsHead: { eyebrow: "Recent Work", h2: "Design Grounded in Field Reality" },
+    intro: {
+      eyebrow: "Overview",
+      h2: "Engineering That Knows How It Gets Built",
+      body: [
+        "Coastal Engineering Group is a marine and coastal engineering firm serving the U.S. East Coast. We provide PE-stamped structural design, condition assessment, and rehabilitation engineering for piers, wharfs, bulkheads, seawalls, bridges, and coastal resilience infrastructure.",
+        "Because our engineers work alongside the crews who build the work, our drawings reflect what can actually be constructed in the water column — not just what's theoretically sound. From above- and below-water condition assessment through PE-stamped construction documents, we deliver design grounded in field reality and ready to procure.",
+      ],
+    },
+    whereCopy: "Coastal Engineering Group delivers PE-stamped marine and coastal engineering across the Eastern Seaboard. Our Professional Engineers are licensed in:",
+    faqs: [
+      { q: "What does a marine engineering firm do?", a: "A marine engineering firm designs and assesses waterfront structures — piers, wharfs, bulkheads, seawalls, and bridge substructures — and produces PE-stamped construction documents. Coastal Engineering Group pairs that design work with in-house self-perform construction." },
+      { q: "Are your engineering deliverables PE-stamped?", a: "Yes. Drawings and reports are signed and sealed by licensed Professional Engineers, with PE registration across the Eastern Seaboard." },
+      { q: "Can you both design and build a marine project?", a: "Yes. Because our engineers work alongside our construction crews, we can assess the structure, design the fix, and build it — a continuous chain of accountability from inspection to as-built." },
+      { q: "What engineering services do you provide?", a: "Structural design, above- and below-water condition assessment, rehabilitation design, permitting support, coastal resilience planning, and dam safety and spillway engineering." },
+    ],
     cta: { h2: "Need PE-Stamped Marine Engineering?", lede: "Licensed in 13 states, with self-perform crews to build what we design. Tell us your project and we'll respond within 24 hours.", trust: ["PE — 13 States", "VOSB", "ASCE", "ASDSO", "ISO 9001"] },
   },
 
@@ -142,6 +173,21 @@ const SERVICE_PAGES = {
     certs: ["VOSB", "USACE", "EM385", "OSHA 10/30", "Environmental Compliance", "Turbidity Monitoring", "Hydrographic Survey"],
     projectSlugs: ["freshwater-utility-cable-relocation", "greenwood-lake-dam-rehabilitation", "atlantic-shores-offshore-wind"],
     projectsHead: { eyebrow: "Recent Work", h2: "Methodical, Documented, Protective" },
+    intro: {
+      eyebrow: "Overview",
+      h2: "Precision Dredging & Sediment Management",
+      body: [
+        "Coastal Engineering Group provides mechanical and hydraulic dredging and sediment management across the U.S. East Coast — restoring navigation channels and berths, dredging contaminated sediment, renourishing beaches, removing debris, and restoring lakes and ponds.",
+        "Dredging done carelessly damages the very environment it's meant to maintain. We plan operations around the aquatic ecosystem — controlled placement, turbidity monitoring, and containment that keep impact to a minimum — and document conditions throughout with hydrographic pre- and post-surveys.",
+      ],
+    },
+    whereCopy: "Coastal Engineering Group performs dredging and sediment work for federal, state, and commercial clients across the Eastern Seaboard. Our Professional Engineers are licensed in:",
+    faqs: [
+      { q: "What kinds of dredging does Coastal Engineering Group perform?", a: "Maintenance and capital dredging of channels and berths, environmental dredging of contaminated sediment, beach renourishment, debris removal, and lake and pond restoration — using mechanical or hydraulic methods matched to the site." },
+      { q: "How do you protect the environment during dredging?", a: "Our operations use turbidity monitoring, silt curtains, and controlled dredge-and-place methods, with disposal coordinated to permitted facilities, to keep impact on habitat and water quality to a minimum." },
+      { q: "Do you handle federal navigation-channel dredging?", a: "Yes — we have federal navigation and USACE channel experience, with hydrographic pre- and post-surveys documenting authorized depths and quantities." },
+      { q: "What areas does your dredging service cover?", a: "Federal, state, and commercial waterways across the Eastern Seaboard, from the Mid-Atlantic to the Southeast." },
+    ],
     cta: { h2: "Have a Dredging or Sediment Project?", lede: "Mechanical and hydraulic capability with environmental QC built in. Tell us your scope and we'll respond within 24 hours.", trust: ["VOSB", "USACE", "EM385", "Environmental QC", "100% Safety Record"] },
   },
 
@@ -181,6 +227,21 @@ const SERVICE_PAGES = {
     certs: ["VOSB", "USCG", "EM385", "OSHA 10/30", "Licensed Captains", "Marine Insurance"],
     projectSlugs: ["atlantic-shores-offshore-wind", "freshwater-utility-cable-relocation", "mayport-naval-station-wharf-repair"],
     projectsHead: { eyebrow: "Recent Work", h2: "Marine Support That Keeps Schedule" },
+    intro: {
+      eyebrow: "Overview",
+      h2: "The Fleet Behind the Work",
+      body: [
+        "Coastal Engineering Group owns and operates the marine equipment its projects depend on — tugs, deck barges, crane barges, and supporting plant — and makes that fleet available to other marine contractors up and down the U.S. East Coast.",
+        "Marine construction is only as reliable as the equipment supporting it. Owning the fleet means schedule control instead of scrambling for third-party charters, and experienced licensed captains who coordinate directly with project operations, port authorities, and weather windows.",
+      ],
+    },
+    whereCopy: "Coastal Engineering Group mobilizes marine equipment and vessel support up and down the U.S. East Coast. Our Professional Engineers are licensed in:",
+    faqs: [
+      { q: "What marine services and equipment do you provide?", a: "Tugboat services, deck barges, crane barges, marine equipment rental, marine logistics and port coordination, and vessel-based ROV support along the East Coast." },
+      { q: "Can other contractors charter your marine equipment?", a: "Yes. Contractors without their own marine assets can charter our tugs, barges, and crane platforms — with experienced, licensed captains and crews available." },
+      { q: "Do you own your marine fleet?", a: "Yes. Owning and operating the fleet means our marine support moves on our schedule rather than waiting on third-party charter availability." },
+      { q: "Where do you provide marine support?", a: "Up and down the U.S. East Coast, with mobilization across the Eastern Seaboard." },
+    ],
     cta: { h2: "Need Tugs, Barges, or Crane Support?", lede: "Owned fleet, licensed captains, East Coast mobilization. Tell us your project and we'll respond within 24 hours.", trust: ["VOSB", "USCG", "Licensed Captains", "EM385", "100% Safety Record"] },
   },
 };
@@ -387,6 +448,79 @@ function SvcCTA({ cta }) {
   );
 }
 
+// ─── Overview (crawlable intro prose) ────────────────────────────────────────
+function SvcOverview({ intro }) {
+  if (!intro) return null;
+  return (
+    <section className="fed-section svc-overview">
+      <div className="ceg-container">
+        <div className="svc-prose">
+          <div className="ceg-eyebrow fed-eyebrow-blue">
+            <span className="ceg-eyebrow-mark" />
+            <span>{intro.eyebrow}</span>
+          </div>
+          <h2 className="fed-h2 fed-dark">{intro.h2}</h2>
+          {intro.body.map((p, i) => (<p key={i} className="svc-prose-p">{p}</p>))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Where We Work (geo relevance) ───────────────────────────────────────────
+function SvcWhere({ copy }) {
+  const states = (window.CEG_DATA && window.CEG_DATA.LICENSED_STATES) || [];
+  if (!copy || !states.length) return null;
+  return (
+    <section className="fed-section svc-where">
+      <div className="ceg-container">
+        <div className="fed-section-head">
+          <div className="ceg-eyebrow fed-eyebrow-blue">
+            <span className="ceg-eyebrow-mark" />
+            <span>Where We Work</span>
+          </div>
+          <h2 className="fed-h2 fed-dark">Licensed Across {states.length} States</h2>
+          <p className="fed-subhead-muted">{copy}</p>
+        </div>
+        <div className="svc-where-grid">
+          {states.map((s) => (
+            <div key={s.abbr} className="svc-where-item">
+              <span className="svc-where-abbr">{s.abbr}</span>
+              <span className="svc-where-name">{s.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── FAQ (native accordion, mirrors FAQPage JSON-LD) ─────────────────────────
+function SvcFaq({ faqs }) {
+  if (!faqs || !faqs.length) return null;
+  return (
+    <section className="fed-section svc-faq">
+      <div className="ceg-container">
+        <div className="fed-section-head">
+          <div className="ceg-eyebrow fed-eyebrow-blue">
+            <span className="ceg-eyebrow-mark" />
+            <span>FAQ</span>
+          </div>
+          <h2 className="fed-h2 fed-dark">Frequently Asked Questions</h2>
+        </div>
+        <div className="svc-faq-list">
+          {faqs.map((f, i) => (
+            <details key={i} className="svc-faq-item">
+              <summary className="svc-faq-q">{f.q}</summary>
+              <p className="svc-faq-a">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── App Root ────────────────────────────────────────────────────────────────
 function ServiceApp() {
   const theme = window.CEG_THEMES.drydock;
@@ -426,10 +560,13 @@ function ServiceApp() {
       <main>
         <SvcHero d={d} />
         <SvcStatBand stats={d.stats} />
+        <SvcOverview intro={d.intro} />
         <SvcWhy why={d.why} />
         <SvcServices head={d.servicesHead} services={d.services} />
         <SvcCerts certs={d.certs} />
+        <SvcWhere copy={d.whereCopy} />
         <SvcProjects head={d.projectsHead} slugs={d.projectSlugs} photo={d.heroImg} />
+        <SvcFaq faqs={d.faqs} />
         <SvcCTA cta={d.cta} />
       </main>
       <window.Footer theme={theme} data={data} />
